@@ -7,6 +7,7 @@ function connect() {
     r.connect(config.rethinkdb, function(err, conn) {
         if (err) throw err;
         connection = conn;
+        console.log('connected');
     })
 };
 
