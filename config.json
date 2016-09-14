@@ -1,5 +1,12 @@
 {
   "app":{
     "port": "8888"
+  },
+  "rethinkdb":{
+    "host": "localhost",
+    "port" : "28015",
+    "db": "emap",
+    "address":"localhost:28015",
+    "tableList":["node"]
   }
 }

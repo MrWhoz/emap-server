@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/MrWhoz/emap-server#readme",
   "dependencies": {
+    "asyncawait": "^1.0.6",
+    "babel": "^6.5.2",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-polyfill": "^6.13.0",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "debug": "^2.2.0",
