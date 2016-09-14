@@ -5,5 +5,8 @@ router.get('/', function(req,res,next){
   res.render('index');
   node.connect();
 })
-
+router.get('/add', function(req,res,next){
+  res.render('index');
+  node.add();
+})
 module.exports = router;
