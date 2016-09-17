@@ -6,11 +6,17 @@ var node = require('../models/node.js');
 
 router.get('/', function(req,res,next){
   res.render('index');
-  node.connect();
+  var n1 = node.getNodeNodeId(2);
 })
 router.get('/add', function(req,res,next){
   res.render('index');
+  var nodeData ={
+    "nodeID" : req.query.node,
+    "s1" : req.query.s1,
+    "s2" : req.query.s2,
+    "s3" : req.query.s3
+  };
   console.log(req.query.node);
-  node.add();
+  node.addNodeData(nodeData);
 })
 module.exports = router;
