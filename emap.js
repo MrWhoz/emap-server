@@ -5,7 +5,7 @@ var debug = require('debug')('http')
   , name = 'My App';
 
 
-var port = normalizePort(config.app.port || '3000');
+var port = normalizePort(config.app.port || '8888');
 app.set('port',port);
 var server = http.createServer(app);
 server.listen(port);

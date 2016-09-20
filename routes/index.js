@@ -35,7 +35,6 @@ router.get('/add', function(req,res,next){
   };
   console.log(req.query.node);
   node.addNodeData(nodeData);
-
 });
 
 module.exports = router;
