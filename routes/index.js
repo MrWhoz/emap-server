@@ -6,8 +6,25 @@ var node = require('../models/node.js');
 
 router.get('/', function(req,res,next){
   res.render('index');
-  var n1 = node.getNodeNodeId(2);
-})
+});
+
+router.get('/getinfo', async function(req,res,next){
+    if(req.query.id){
+      var data = await node.getNodeInfoByID(req.query.id);
+    }
+    else if(req.query.phone){
+      var data = await node.getNodeInfoByPhone(req.query.phone);
+    }
+    res.send(data);
+});
+
+router.get('/getdata', async function(req,res,next){
+    if(req.query.id){
+      var data = await node.getNodeDataByID(req.query.id);
+    }
+    res.send(data);
+});
+
 router.get('/add', function(req,res,next){
   res.render('index');
   var nodeData ={
@@ -18,5 +35,7 @@ router.get('/add', function(req,res,next){
   };
   console.log(req.query.node);
   node.addNodeData(nodeData);
-})
+
+});
+
 module.exports = router;
