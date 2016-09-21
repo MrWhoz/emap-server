@@ -8,6 +8,27 @@ router.get('/', function(req,res,next){
   res.render('index');
 });
 
+/* GET Contact page. */
+router.get('/contact', function(req, res) {
+    res.render('contact', { title: 'Contact' });
+});
+
+/* GET Graph page. */
+router.get('/graph', function(req, res) {
+    res.render('graph', { title: 'Graph' });
+});
+
+/* GET Stastic page. */
+router.get('/Stastic', function(req, res) {
+    res.render('Stastic', { title: 'Stastic' });
+});
+
+/* GET Home page. */
+router.get('/home', function(req, res) {
+    res.render('home', { title: 'Home' });
+});
+
+
 router.get('/getinfo', async function(req,res,next){
     if(req.query.id){
       var data = await node.getNodeInfoByID(req.query.id);
