@@ -3,7 +3,7 @@ var router = express.Router();
 var node = require('../models/node.js');
 
 //https://api.thingspeak.com/update?api_key=G1JJIY5JTMO7MLXE&field3=10&field1=10&field2=16
-
+//TODO
 router.get('/', function(req,res,next){
   res.render('index');
 });
