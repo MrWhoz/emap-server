@@ -13,7 +13,7 @@ async function addNodeData(nodeData) {
     console.log(nodeData);
     var connection = await connect();
     var data = {
-        id: nodeData.nodeID,
+        node_id: nodeData.nodeID,
         time: new Date(),
         data: {
             co: nodeData.s1,
@@ -22,7 +22,6 @@ async function addNodeData(nodeData) {
         }
     }
     let result = await r.db(dbName).table("nodeData").insert(data).run(connection);
-
 }
 
 async function getNodeInfoByID(id) {
@@ -47,7 +46,7 @@ async function getNodeInfoByPhone(phone) {
 async function getNodeDataByID(id) {
     var connection = await connect();
     var node = await r.db(dbName).table("nodeData").filter({
-        nodeID: id
+        node_id: id
     }).run(connection);
     node = await node.toArray();
     return node || false;

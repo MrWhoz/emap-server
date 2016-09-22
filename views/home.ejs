@@ -1,0 +1,43 @@
+<% layout('layout') -%>
+<link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
+
+<h3 style="padding-left: 20px">My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+    var markers = []; 
+      function initMap() {
+        var myLatLng = {lat: 10.773283, lng: 106.667639};
+        var myLatLng1 = {lat: 10.763268, lng: 106.677639};
+        var myLatLng2 = {lat: 10.753883, lng: 106.687639};
+        var myLatLng3 = {lat: 10.783183, lng: 106.647639};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          
+        });
+        var marker1 = new google.maps.Marker({
+          position: myLatLng1,
+          map: map,
+          
+        });
+        var marker2 = new google.maps.Marker({
+          position: myLatLng2,
+          map: map,
+          
+        });
+        var marker3 = new google.maps.Marker({
+          position: myLatLng3,
+          map: map,
+          
+        });
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
+    </script>

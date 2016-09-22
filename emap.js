@@ -4,8 +4,8 @@ var debug = require('debug')('http')
   , http = require('http')
   , name = 'My App';
 
-
-var port = normalizePort(config.app.port || '3000');
+//fdasfasf
+var port = normalizePort(config.app.port || '8888');
 app.set('port',port);
 var server = http.createServer(app);
 server.listen(port);
