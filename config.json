@@ -1,6 +1,6 @@
 {
   "app":{
-    "port": "8888"
+    "port": "4444"
   },
   "rethinkdb":{
     "host": "localhost",
