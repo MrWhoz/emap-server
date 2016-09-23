@@ -1,55 +1,88 @@
-<!DOCTYPE html >
-<!--
-Template Name: Prestigious
-Author: <a href="http://www.os-templates.com/">OS Templates</a>
-Author URI: http://www.os-templates.com/
-Licence: Free to use under our free template licence terms
-Licence URI: http://www.os-templates.com/template-terms
--->
-<html >
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- HEAD SECTION -->
 <head>
-<title>Thesis</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link rel="stylesheet" href="/css/layout.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Thesis</title>
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--BOOTSTRAP MAIN STYLES -->
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <!--FONTAWESOME MAIN STYLE -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <!--SLIDESHOW STYLE -->
+    <!-- <link href="assets/css/style-slide.css" rel="stylesheet" /> -->
+    <!-- <link href="assets/css/custom.css" rel="stylesheet" /> -->
+    <!--CUSTOM STYLE -->
+    <link href="/css/layoutStyle.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body id="top">
-<div class="wrapper col1">
-  <div id="topbar">
-    <p style="color: white;">Tel: xxxxx xxxxxxxxxx | Mail: info@domain.com</p>
-    
-    <br class="clear" />
-  </div>
-</div>
-<div class="wrapper col2">
-  <div id="header">
-    <div id="topnav">
-      <ul>
-        <!-- class = "active" -->
+    <!--END HEAD SECTION -->
+<body>   
+     <!-- NAV SECTION -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/home">LOGO HERE</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/home">HOME</a></li>
+                    <li><a href="/graph">GRAPH</a></li>
+                     <li><a href="/stastic">STASTIC</a></li>
+                    <li><a href="/contact">CONTACT</a></li>                    
+                    
+                    <!-- <li><a href="#offer"><i class="color-red"> Today's OFFER</i></a></li> -->
+                </ul>
+            </div>
+           
+        </div>
+    </div>
+     
+    <!--END FOOTER SECTION --> 
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY LIBRARY -->
+    <script src="/js/jquery.js"></script>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="/js/bootstrap.min.js"></script>
+     <!-- SLIDESHOW LIBRARY -->
+  <!--    <script src="assets/js/modernizr.custom.79639.js"></script> -->
+    <script src="/js/jquery.ba-cond.min.js"></script>
+    <!-- <script src="assets/js/jquery.slitslider.js"></script> -->
+       <!-- CUSTOM SCRIPT-->   
+    <!-- <script src="assets/js/custom.js"></script> -->
+    <%- body %>
+
+
+    <div id="footer">
+        <div class="container">
+            <div class="row ">
+                © 2014 www.yourdomain.com | All Right Reserved              
         
-        <li><a href="/contact">Contact</a><span>Test Text Here</span>
-         
-        </li>
-        <li><a href="/stastic">Stastic</a><span>text</span></li>
-        <li><a href="/graph">Graph</a><span>Demo</span></li>
-        <li ><a href="/home">Homepage</a><span>text</span></li>
-      </ul>
+            </div>
+            
+        </div>
+       
     </div>
-    <div id="logo">
-      <h1><a href="/">Emap</a></h1>
-      <p>Thesis</p>
-    </div>
-    <br class="clear" />
-  </div>
-</div>
-<%- body %>
-
-<div class="wrapper col6" style="position: fixed; bottom: 0; background-color: #1B1515">
-  <div id="copyright">
-    <p class="fl_left">Copyright &copy; 2014 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-    <br class="clear" />
-  </div>
-</div>
-
 </body>
 </html>

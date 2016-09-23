@@ -1,10 +1,10 @@
 <% layout('layout') -%>
 <link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
 
-<h3 style="padding-left: 20px">My Google Maps Demo</h3>
+<!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
     <div id="floating-panel">
-      <input onclick="addmarker();" type=button value="Add Markers">
-      <input onclick="stopAdd();" type=button value="Stop Add Markers">
+      <input id="addmarker" onclick="addmarker();"  type=button value="Add Markers">
+      <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
       <input onclick="configMarkers();" type=button value="Config Markers">
     </div>
     <div id="map"></div>
@@ -83,6 +83,7 @@
       }
 
       function addmarker(){
+        document.getElementById("addmarker").style.color = "blue";
     
         map.addListener('click', function(event) {    
         
@@ -96,6 +97,7 @@
       }
       // Stop add markers
       function stopAdd(){
+        document.getElementById("addmarker").style.color = "black";
         google.maps.event.clearListeners(map, 'click');
       }
 
