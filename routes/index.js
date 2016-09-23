@@ -65,7 +65,6 @@ router.get('/add', function(req,res,next){
     "s2" : req.query.s2,
     "s3" : req.query.s3
   };
-
   node.addNodeData(nodeData);
 });
 
