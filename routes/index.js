@@ -46,15 +46,26 @@ router.get('/getdata', async function(req,res,next){
     res.send(data);
 });
 
+router.get('/initnew', async function(req,res,next){
+    let data = {
+      "node_id" : req.query.node,
+      "location" : req.query.loc,
+      "phone" : req.query.phone,
+      status : 0
+    };
+    console.log(data);
+    node.addNode(data);
+})
+
 router.get('/add', function(req,res,next){
   res.render('index');
   var nodeData ={
-    "nodeID" : req.query.node,
+    "node_id" : req.query.node,
     "s1" : req.query.s1,
     "s2" : req.query.s2,
     "s3" : req.query.s3
   };
-  console.log(req.query.node);
+
   node.addNodeData(nodeData);
 });
 
