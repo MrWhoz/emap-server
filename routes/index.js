@@ -28,6 +28,11 @@ router.get('/home', function(req, res) {
     res.render('home', { title: 'Home' });
 });
 
+/* GET ConfigMarkers page. */
+router.get('/configmarkers', function(req, res) {
+    res.render('configmarkers', { title: 'Config' });
+});
+
 
 router.get('/getinfo', async function(req,res,next){
     if(req.query.id){
