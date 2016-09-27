@@ -85,8 +85,8 @@ router.post('/updatenode', async function(req, res, next) {
 });
 
 router.post('/replace', async function(req, res, next) {
-    if (req.body.node1 && req.body.node2) {
-        var result = await node.swap(req.body.node1, req.body.node2);
+    if (req.query.node && req.query.node_new) {
+        var result = await node.replaceNode(req.query.node_new, req.query.node);
     }
     res.send(result);
 });
