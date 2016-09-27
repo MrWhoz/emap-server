@@ -18,10 +18,11 @@ async function addNode(data) {
         location: data.location,
         phone: data.phone,
         data_id: duuid,
-        status :0
+        status: 1
     }
-    console.log('db', data);
+    console.log('add node', data);
     let result = await r.db(dbName).table("nodeList").insert(data).run(connection);
+    if (result) return result;
 }
 
 async function addNodeData(nodeData) {
@@ -37,6 +38,31 @@ async function addNodeData(nodeData) {
         }
     }
     let result = await r.db(dbName).table("nodeData").insert(data).run(connection);
+    if (result) return result;
+}
+
+async function updateNode(data) {
+    var node = await getNodeInfoByID(data.node_id);
+    if (node) {
+        var sResult = await changeNodeStatus(data.node_id, 0);
+        if (sResult) {
+            var nNode = await addNode(data);
+            if(nNode) return 'ok';
+        } else {
+            return 0;
+        }
+    }
+};
+
+async function changeNodeStatus(node_id, status) {
+    var result = await r.db(dbName).table("nodeList").filter({
+        node_id: node_id
+    }).update({
+        status: status
+    }).run(connection);
+    if (result) {
+        return 1;
+    } else return 0;
 }
 
 async function getNodeInfoByID(id) {
@@ -58,9 +84,9 @@ async function getNodeInfoByPhone(phone) {
     return node[0] || false;
 }
 
-async function getdataIDByNodeID(node_id){
-  let nodeinfo = await getNodeInfoByID(node_id);
-  return nodeinfo.data_id;
+async function getdataIDByNodeID(node_id) {
+    let nodeinfo = await getNodeInfoByID(node_id);
+    return nodeinfo.data_id;
 }
 /// get data by node_id not data_id
 
@@ -80,5 +106,7 @@ module.exports = {
     getNodeInfoByID,
     getNodeInfoByPhone,
     getNodeDataByID,
-    addNode
+    addNode,
+    updateNode,
+    changeNodeStatus
 };
