@@ -93,7 +93,6 @@ async function changeNodeStatus(node_id, status) {
 
 async function getNodeInfoByID(id) {
     var connection = await connect();
-    console.log('this is ID :', id);
     var node = await r.db(dbName).table("nodeList").filter({
         node_id: id,
         status: 1
@@ -101,7 +100,14 @@ async function getNodeInfoByID(id) {
     node = await node.toArray();
     return node[0] || false;
 }
-
+async function getNodeList(status) {
+    var connection = await connect();
+    var node = await r.db(dbName).table("nodeList").filter({
+        status: status
+    }).run(connection);
+    node = await node.toArray();
+    return node || false;
+}
 async function getNodeByIDStatus(id, status) {
     // TODO get lastest node
     var connection = await connect();
@@ -148,5 +154,6 @@ module.exports = {
     updateNode,
     replaceNode,
     changeNodeStatus,
-    getNodeByIDStatus
+    getNodeByIDStatus,
+    getNodeList
 };

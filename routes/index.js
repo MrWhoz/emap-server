@@ -43,12 +43,15 @@ router.get('/configmarkers', function(req, res) {
     });
 });
 
-
+// GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
     if (req.query.id) {
         var data = await node.getNodeInfoByID(req.query.id);
     } else if (req.query.phone) {
         var data = await node.getNodeInfoByPhone(req.query.phone);
+    } else if (req.query.list) {
+        let status = parseInt(req.query.status)
+        var data = await node.getNodeList(status);
     }
     res.send(data);
 });
@@ -61,7 +64,7 @@ router.get('/getdata', async function(req, res, next) {
 });
 
 router.get('/initnew', async function(req, res, next) {
-  // TODO : change get to post method, discuss about using device or web/app to config this
+    // TODO : change get to post method, discuss about using device or web/app to config this
     let data = {
         "node_id": req.query.node,
         "location": req.query.loc,
@@ -90,7 +93,7 @@ router.post('/replace', async function(req, res, next) {
     }
     res.send(result);
 });
-
+// GET add node data /add?node=[node]&s1=[sensor1]&s2=[sensor2]&s3=[sensor3]
 router.get('/add', function(req, res, next) {
     res.render('index');
     let nodeData = {
