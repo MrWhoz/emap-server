@@ -65,26 +65,33 @@ router.get('/getdata', async function(req, res, next) {
 
 router.get('/initnew', async function(req, res, next) {
     // TODO : change get to post method, discuss about using device or web/app to config this
+    var lat = parseFloat(req.query.lat);
+    var lng = parseFloat(req.query.lng);
     let data = {
-        "node_id": req.query.node,
-        "location": req.query.loc,
-        "phone": req.query.phone,
+        node_id: req.query.node,
+        lat: lat,
+        lng: lng,
+        phone: req.query.phone,
         status: 0
     };
-    console.log(data);
-    node.addNode(data);
+    let result = await node.addNode(data);
+    res.send(result);
 })
 
 router.post('/updatenode', async function(req, res, next) {
     if (req.query.node) {
+        var lat = parseFloat(req.query.lat);
+        var lng = parseFloat(req.query.lng);
         let data = {
-            "node_id": req.query.node,
-            "location": req.query.loc,
-            "phone": req.query.phone
+            node_id: req.query.node,
+            lat: lat,
+            lng: lng,
+            phone: req.query.phone
         }
-        var result = await node.updateNode(data);
-    };
-    res.send(result);
+        let result = await node.updateNode(data);
+        res.send('result');
+    } else
+        res.send('error');
 });
 
 router.post('/replace', async function(req, res, next) {
@@ -94,15 +101,14 @@ router.post('/replace', async function(req, res, next) {
     res.send(result);
 });
 // GET add node data /add?node=[node]&s1=[sensor1]&s2=[sensor2]&s3=[sensor3]
-router.get('/add', function(req, res, next) {
-    res.render('index');
+router.get('/add', async function(req, res, next) {
     let nodeData = {
         "node_id": req.query.node,
         "s1": req.query.s1,
         "s2": req.query.s2,
         "s3": req.query.s3
     };
-    node.addNodeData(nodeData);
+    res.send(await node.addNodeData(nodeData));
 });
 
 module.exports = router;

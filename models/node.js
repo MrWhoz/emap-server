@@ -20,7 +20,10 @@ async function addNode(data) {
     var data = {
         node_id: data.node_id,
         time: new Date(),
-        location: data.location,
+        location: {
+            lat: data.lat,
+            lng: data.lng
+        },
         phone: data.phone,
         data_id: duuid,
         status: 1
@@ -42,7 +45,10 @@ async function replaceNode(node_id_new, node_id_old) {
         let data = {
             node_id: node.node_id,
             phone: node.phone,
-            location: node_old.location,
+            location: {
+                lat: node_old.location.lat,
+                lng: node_old.location.lng
+            },
             status: 1,
             data_id: node_old.data_id
         }
