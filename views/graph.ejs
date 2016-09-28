@@ -1,91 +1,36 @@
 <% layout('layout') -%>
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+    
+    
 
-<script type="text/javascript">
-	var myVariable;
-	var count;
-	
-	var co = [];
-	var dust = [];
-	var temp = [];
-	var xaxis = [];
-	// Get Json Data from URL 
-	$.ajax({
-	    type:     "GET",
-	    url:      "http://localhost:8888/getdata?id=22", // <-- Here
-	    dataType: "json",
-	    success: function(data){
-	    	
-	        myVariable = data;
-	        count = Object.keys(myVariable).length;
-  			// console.log(count);
-  			console.log(myVariable[0].data.co);
-  			for(var i=0;i<count;i++){
-  				co.push(Number(myVariable[i].data.co));
-  				dust.push(Number(myVariable[i].data.dust));
-  				temp.push(Number(myVariable[i].data.temp));
-  				xaxis.push(Number(i+1));
+<link rel="stylesheet" href="css/styleGraph.css">
 
-  			}
+  
+
+<div class="center">
+
+  <select name="sources" id="sources" class="custom-select sources" placeholder="Choose Node ID">
+    <option value="20">Node 20</option>
+    <option value="21">Node 21</option>
+    <option value="22">Node 22</option>
+  </select>
+  </div>
+
+
+
+<div class="botContent">
+ <button class="btn btn-success" style="width: 100%; height: 50px;" onclick="action()">Ok</button>
+ </div>
+
+
+<script src="js/Graph.js"></script>
+    <script type="text/javascript">
+    	function action(){
+    		var e = document.getElementById("sources");
+    		var strUser = e.options[e.selectedIndex].value;
+    		// alert(strUser);
+    		window.location.href = "/GraphID?id="+strUser;
+    	}
+    </script>
+    
  
-  			drowchart();
-	    }
-	    
-	});
-	
-	// Drow chart
-function drowchart(){	
-	// alert(xaxis);
-	$(function () {
-		
-    $('#container').highcharts({
-        title: {
-            text: 'TEST',
-            x: -20 //center
-        },
-        subtitle: {
-            text: '',
-            x: -20
-        },
-        xAxis: {
-            categories: xaxis
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'CO',
-            data: co
-        }, {
-            name: 'TEMP',
-            data: temp
-        }, {
-            name: 'DUST',
-            data: dust
-        }]
-    });
-});
-}
-
-</script>
-
-<div id="container" style="min-width: 310px; width:80% ; float: left ; height: 400px; margin: 50px auto"></div>
-

@@ -111,4 +111,10 @@ router.get('/add', async function(req, res, next) {
     res.send(await node.addNodeData(nodeData));
 });
 
+// Graph with nodeID
+
+router.get('/GraphID', function(req,res){
+    console.log(req.query);
+    res.render('test',{qs:req.query});
+})
 module.exports = router;
