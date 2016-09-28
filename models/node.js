@@ -11,7 +11,12 @@ async function connect() {
 
 async function addNode(data) {
     var connection = await connect();
-    var duuid = uuid.v4();
+    var duuid;
+
+    if (data.data_id) {
+        duuid = data.data_id;
+    } else duuid = uuid.v4();
+
     var data = {
         node_id: data.node_id,
         time: new Date(),
@@ -28,17 +33,18 @@ async function addNode(data) {
 async function replaceNode(node_id_new, node_id_old) {
     var node_old = await getNodeInfoByID(node_id_old);
     var node = await getNodeInfoByID(node_id_new);
-    console.log('node');
     if (node_old) {
-        let sResult_old = await changeNodeStatus(node_id_old, 0);
-        let sResult = await changeNodeStatus(node_id, 0);
+        await changeNodeStatus(node_id_old, 0);
+        if (node.status)
+            await changeNodeStatus(node_id_new, 0);
         //
-        console.log(node);
+        console.log('this is node old', node_old);
         let data = {
             node_id: node.node_id,
             phone: node.phone,
-            loc: node_old.loc,
-            status: 1
+            location: node_old.location,
+            status: 1,
+            data_id: node_old.data_id
         }
         console.log(data);
         let result = await addNode(data);
@@ -96,6 +102,17 @@ async function getNodeInfoByID(id) {
     return node[0] || false;
 }
 
+async function getNodeByIDStatus(id, status) {
+    // TODO get lastest node
+    var connection = await connect();
+    console.log('this is ID :', id);
+    var node = await r.db(dbName).table("nodeList").filter({
+        node_id: id,
+        status: status
+    }).run(connection);
+    node = await node.toArray();
+    return node[0] || false;
+}
 async function getNodeInfoByPhone(phone) {
     var connection = await connect();
     var node = await r.db(dbName).table("nodeList").filter({
@@ -130,5 +147,6 @@ module.exports = {
     addNode,
     updateNode,
     replaceNode,
-    changeNodeStatus
+    changeNodeStatus,
+    getNodeByIDStatus
 };
