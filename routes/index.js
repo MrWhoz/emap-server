@@ -50,6 +50,13 @@ router.get('/configmarkers/addnode', function(req, res) {
     });
 });
 
+/* GET ConfigNode page. */
+router.get('/configmarkers/confignode', function(req, res) {
+    res.render('confignode', {
+        title: 'Config Node'
+    });
+});
+
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
 
