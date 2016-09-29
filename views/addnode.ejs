@@ -3,7 +3,7 @@
 <div class="container">
   <h2>Adding New Node: input</h2>
   <p>The form below contains four input elements</p>
-  <form>
+ 
     <div class="form-group">
       <label for="nodeid">NodeID:</label>
       <input type="text" class="form-control" style="width: 50%" id="nodeid">
@@ -21,18 +21,18 @@
       <input type="text" class="form-control" style="width: 50%" id="phone">
     </div>
     <button class="btn btn-success" onclick="addnewnode()">OK</button>
-  </form>
+  
 </div>
 </div>
 <script type="text/javascript">
 	function addnewnode(){
-		// var nodeid = document.getElementById("nodeid").value;
-		// var lat = document.getElementById("lat").value;
-		// var lat1 = parseFloat(lat);
-		// var lng = document.getElementById("lng").value;
-		// var lng1 = parseFloat(lng);
-		// var phone = document.getElementById("phone").value;
-		window.location.replace("/initnew?node=29&lat=145&lng=109&phone=98786");
+		var nodeid = document.getElementById("nodeid").value;
+		var lat = document.getElementById("lat").value;
+		
+		var lng = document.getElementById("lng").value;
+		
+		var phone = document.getElementById("phone").value;
+		window.location.replace("/initnew?node="+nodeid+"&lat="+lat+"&lng="+lng+"&phone="+phone);
 		
 		
 	}
