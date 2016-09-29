@@ -43,6 +43,13 @@ router.get('/configmarkers', function(req, res) {
     });
 });
 
+/* GET Add Node page. */
+router.get('/configmarkers/addnode', function(req, res) {
+    res.render('addnode', {
+        title: 'Add Node'
+    });
+});
+
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
     if (req.query.id) {
