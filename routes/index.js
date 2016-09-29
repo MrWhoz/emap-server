@@ -45,6 +45,8 @@ router.get('/configmarkers', function(req, res) {
 
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
+
+	res.header("Access-Control-Allow-Origin", "*");
     if (req.query.id) {
         var data = await node.getNodeInfoByID(req.query.id);
     } else if (req.query.phone) {
@@ -57,6 +59,7 @@ router.get('/getinfo', async function(req, res, next) {
 });
 
 router.get('/getdata', async function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
     if (req.query.id) {
         var data = await node.getNodeDataByID(req.query.id);
     }
@@ -102,6 +105,8 @@ router.post('/replace', async function(req, res, next) {
 });
 // GET add node data /add?node=[node]&s1=[sensor1]&s2=[sensor2]&s3=[sensor3]
 router.get('/add', async function(req, res, next) {
+
+	res.header("Access-Control-Allow-Origin", "*");
     let nodeData = {
         "node_id": req.query.node,
         "s1": req.query.s1,
