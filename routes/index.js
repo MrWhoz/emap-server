@@ -108,7 +108,8 @@ router.get('/initnew', async function(req, res, next) {
         status: 0
     };
     let result = await node.addNode(data);
-    res.send(result);
+    // res.send(result);
+    res.redirect('/home');
 })
 
 router.get('/updatenode', async function(req, res, next) {
@@ -145,6 +146,7 @@ router.get('/add', async function(req, res, next) {
         "s3": req.query.s3
     };
     res.send(await node.addNodeData(nodeData));
+    res.redirect('/home');
 });
 
 // Graph with nodeID
