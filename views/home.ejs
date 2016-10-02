@@ -1,5 +1,8 @@
 <% layout('layout') -%>
 <link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
+    </script>
 
 <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
     <div id="floating-panel">
@@ -11,58 +14,98 @@
 
     <script>
     var map;
-    var markers = []; 
-      function initMap() {
-        var markers = [];
-        var myLatLng = [{lat: 10.773283, lng: 106.667639},
-                        {lat: 10.763268, lng: 106.677639},
-                        {lat: 10.753883, lng: 106.687639},
-                        {lat: 10.783183, lng: 106.647639}]
+    var markers = [];
+    var NodeID = [];
+    var lat = [];
+    var lng = []; 
+    var temp;
+    // get data
 
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: myLatLng[0]
-        });
-
-        // Create markers
-
-        for(var i=0;i<4;i++){
-          var marker = new google.maps.Marker({
-          position: myLatLng[i],
-          map: map,
+    $.ajax({
+      type:     "GET",
+      url:      "http://localhost:8888/getinfo?list=1&status=1", // <-- Here
+      dataType: "json",
+      success: function(data){
+        
+          myVariable = data;
+          count = Object.keys(myVariable).length;
+        // console.log(count);
+        for(var i=0;i<count;i++){
+          NodeID.push(Number(myVariable[i].node_id));
+          lat.push(Number(myVariable[i].location.lat));
+          lng.push(Number(myVariable[i].location.lng));
           
-          });
-          markers.push(marker);
-        }
 
-        // Circle overlay
-
-        for(var i=0;i<4;i++){
-          var circle = new google.maps.Circle({
-            map: map,
-            radius: 1200,    // 10 miles in metres
-            fillColor: '#AA0000'
-          });
-          circle.bindTo('center', markers[i], 'position');
         }
+       
+        temp = lat.length;
+        initMap();
+      }
+      
+    });
+    function initMap() {
+        var markers = [];
+     
+        // console.log(temp);
+
+        var j = [];
+        var t = [];
+        var z = [];
+        for(var i = 0;i<temp;i++){
+          j.push(parseFloat(lat[i]));
+          t.push(parseFloat(lng[i]));
+          z.push(parseInt(NodeID[i]));
+        }
+        // console.log(j);
+
+        if(temp>1){
+          var lat_lng = {lat: j[0], lng: t[0]}; 
+          map = new google.maps.Map(document.getElementById('map'), {    
+            zoom: 14,    
+            center: lat_lng,    
+            mapTypeId: google.maps.MapTypeId.roadmap  
+          });  
+          addMarker(lat_lng,z[0]); 
+          for(var i =1; i<temp;i++){
+            var lat_lng = {lat: j[i], lng: t[i]}; 
+            addMarker(lat_lng,z[i]); 
+          }
+        }else{
+        var lat_lng = {lat: 10.773283, lng: 106.657639};    
+        
+        map = new google.maps.Map(document.getElementById('map'), {    
+          zoom: 14,    
+          center: lat_lng,    
+          mapTypeId: google.maps.MapTypeId.roadmap  
+        });    
+        
+      // // This event listener will call addMarker() when the map is clicked.    
+      // map.addListener('click', function(event) {    
+      //   addMarker(event.latLng);    
+      // });    
+        
+      // Adds a marker at the center of the map.    
+        addMarker(lat_lng,1);    
+      }
+       
 
         
       }
-
-      function addMarker(location) {    
+      function addMarker(location,nodeid) {    
         var marker = new google.maps.Marker({    
-          position: location,    
-          map: map
+        position: location,    
+        map: map
 
         });
-        var temp = markers.length;
+        var temp = markers.length;    
+        addInfoWindow(marker, "Node "+nodeid);
 
         markers.push(marker); 
         if(temp==0){
           for(var i=0;i<markers.length;i++){
             var circle = new google.maps.Circle({
               map: map,
-              radius: 1200,    // 10 miles in metres
+              radius: 1200,    
               fillColor: '#AA0000'
             });
             circle.bindTo('center', markers[i], 'position');
@@ -71,26 +114,42 @@
           for(var i=temp;i<markers.length;i++){
             var circle = new google.maps.Circle({
               map: map,
-              radius: 1200,    // 10 miles in metres
+              radius: 1200,    
               fillColor: '#AA0000'
             });
             circle.bindTo('center', markers[i], 'position');
           }
         }
-
   
 
+      }  
+
+      function addInfoWindow(marker, message) {
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: message
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+            });
       }
+
+      
 
       function addmarker(){
         document.getElementById("addmarker").style.color = "blue";
     
         map.addListener('click', function(event) {    
+          var i = temp;
+
+          i++;
+          temp ++;
         
        
         var lat = event.latLng.lat();
         var len = event.latLng.lng();
-        addMarker(event.latLng);
+        addMarker(event.latLng,i);
         // alert(event.latLng.lat());
         });  
 
@@ -101,16 +160,12 @@
         google.maps.event.clearListeners(map, 'click');
       }
 
-      function configMarkers(){
-        window.location.href = "test.php";
-      }
+     
 
       function configMarkers(){
         window.location.href = "/configmarkers";
       }
     </script>
 
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
-    </script>
+    
     

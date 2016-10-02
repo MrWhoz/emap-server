@@ -128,7 +128,7 @@ router.get('/updatenode', async function(req, res, next) {
         res.send('error');
 });
 
-router.post('/replace', async function(req, res, next) {
+router.get('/replace', async function(req, res, next) {
     if (req.query.node && req.query.node_new) {
         var result = await node.replaceNode(req.query.node_new, req.query.node);
     }
