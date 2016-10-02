@@ -57,6 +57,14 @@ router.get('/configmarkers/confignode', function(req, res) {
     });
 });
 
+/* GET updatenode page. */
+router.get('/configmarkers/confignode/update', function(req, res) {
+    res.render('update', {
+        title: 'Update Node'
+    });
+});
+
+
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
 
@@ -80,6 +88,14 @@ router.get('/getdata', async function(req, res, next) {
     res.send(data);
 });
 
+//------------------------
+
+// router.get('/getalldata', function(req,res){
+//     console.log(req.query);
+//     var data = await node.getAllNodeInfo();
+//     res.send(data);
+// })
+
 router.get('/initnew', async function(req, res, next) {
     // TODO : change get to post method, discuss about using device or web/app to config this
     var lat = parseFloat(req.query.lat);
@@ -95,7 +111,7 @@ router.get('/initnew', async function(req, res, next) {
     res.send(result);
 })
 
-router.post('/updatenode', async function(req, res, next) {
+router.get('/updatenode', async function(req, res, next) {
     if (req.query.node) {
         var lat = parseFloat(req.query.lat);
         var lng = parseFloat(req.query.lng);
@@ -106,7 +122,8 @@ router.post('/updatenode', async function(req, res, next) {
             phone: req.query.phone
         }
         let result = await node.updateNode(data);
-        res.send('result');
+        // res.send('result');
+        res.redirect('/configmarkers/confignode');
     } else
         res.send('error');
 });
