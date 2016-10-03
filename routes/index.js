@@ -68,7 +68,7 @@ router.get('/configmarkers/confignode/update', function(req, res) {
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
 
-	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*");
     if (req.query.id) {
         var data = await node.getNodeInfoByID(req.query.id);
     } else if (req.query.phone) {
@@ -81,7 +81,7 @@ router.get('/getinfo', async function(req, res, next) {
 });
 
 router.get('/getdata', async function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*");
     if (req.query.id) {
         var data = await node.getNodeDataByID(req.query.id);
     }
@@ -102,8 +102,10 @@ router.get('/initnew', async function(req, res, next) {
     var lng = parseFloat(req.query.lng);
     let data = {
         node_id: req.query.node,
-        lat: lat,
-        lng: lng,
+        location: {
+            lat: lat,
+            lng: lng
+        },
         phone: req.query.phone,
         status: 0
     };
@@ -118,8 +120,10 @@ router.get('/updatenode', async function(req, res, next) {
         var lng = parseFloat(req.query.lng);
         let data = {
             node_id: req.query.node,
-            lat: lat,
-            lng: lng,
+            location: {
+                lat: lat,
+                lng: lng
+            },
             phone: req.query.phone
         }
         let result = await node.updateNode(data);
@@ -138,7 +142,7 @@ router.get('/replace', async function(req, res, next) {
 // GET add node data /add?node=[node]&s1=[sensor1]&s2=[sensor2]&s3=[sensor3]
 router.get('/add', async function(req, res, next) {
 
-	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*");
     let nodeData = {
         "node_id": req.query.node,
         "s1": req.query.s1,
@@ -151,8 +155,10 @@ router.get('/add', async function(req, res, next) {
 
 // Graph with nodeID
 
-router.get('/GraphID', function(req,res){
+router.get('/GraphID', function(req, res) {
     console.log(req.query);
-    res.render('test',{qs:req.query});
+    res.render('test', {
+        qs: req.query
+    });
 })
 module.exports = router;

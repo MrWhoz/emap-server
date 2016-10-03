@@ -21,8 +21,8 @@ async function addNode(data) {
         node_id: data.node_id,
         time: new Date(),
         location: {
-            lat: data.lat,
-            lng: data.lng
+            lat: data.location.lat,
+            lng: data.location.lng
         },
         phone: data.phone,
         data_id: duuid,
