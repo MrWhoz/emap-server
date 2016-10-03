@@ -1,0 +1,40 @@
+<% layout('layout') -%>
+<div style="margin:70px auto">
+<div class="container">
+  <h2>Replacing Node: input</h2>
+  <p>The form below contains one input elements</p>
+ 
+    <div class="form-group">
+      <label for="oldnodeid">Old NodeID:</label>
+      <input type="text" class="form-control" style="width: 50%" id="oldnodeid">
+    </div>
+    <div class="form-group">
+      <label for="lat">New NodeID</label>
+      <input type="text" class="form-control" style="width: 50%" id="newnodeid">
+    </div>
+    
+    <button class="btn btn-success" onclick="replacingnode()">Replace</button>
+  
+</div>
+</div>
+<script type="text/javascript">
+	  var i = localStorage.getItem("temp");
+    console.log(i);
+    var array = i.split(',');
+    console.log(array);
+    document.getElementById('oldnodeid').value = array[0];
+    document.getElementById('oldnodeid').disabled = true;
+    
+    // console.log(i[0]);
+
+    function replacingnode(){
+      var newnodeid = document.getElementById("newnodeid").value;
+
+      // var lat = document.getElementById("lat").value;
+    
+      // var lng = document.getElementById("lng").value;
+    
+      // var phone = document.getElementById("phone").value;
+      window.location.replace("/replace?node="+array[0]+"&node_new="+newnodeid);
+    }
+</script>

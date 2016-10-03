@@ -64,6 +64,13 @@ router.get('/configmarkers/confignode/update', function(req, res) {
     });
 });
 
+/* GET replacenode page. */
+router.get('/configmarkers/confignode/replace', function(req, res) {
+    res.render('replace', {
+        title: 'Replace Node'
+    });
+});
+
 
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
@@ -137,7 +144,7 @@ router.get('/replace', async function(req, res, next) {
     if (req.query.node && req.query.node_new) {
         var result = await node.replaceNode(req.query.node_new, req.query.node);
     }
-    res.send(result);
+    res.redirect('/configmarkers/confignode');
 });
 // GET add node data /add?node=[node]&s1=[sensor1]&s2=[sensor2]&s3=[sensor3]
 router.get('/add', async function(req, res, next) {
