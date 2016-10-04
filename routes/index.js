@@ -147,6 +147,8 @@ router.get('/replace', async function(req, res, next) {
     res.redirect('/configmarkers/confignode');
 });
 // GET add node data /add?node=[node]&s1=[sensor1]&s2=[sensor2]&s3=[sensor3]
+
+//TODO s4
 router.get('/add', async function(req, res, next) {
 
     res.header("Access-Control-Allow-Origin", "*");
@@ -154,7 +156,8 @@ router.get('/add', async function(req, res, next) {
         "node_id": req.query.node,
         "s1": req.query.s1,
         "s2": req.query.s2,
-        "s3": req.query.s3
+        "s3": req.query.s3,
+        "s4": req.query.s4
     };
     res.send(await node.addNodeData(nodeData));
     res.redirect('/home');

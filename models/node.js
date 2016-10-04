@@ -58,6 +58,8 @@ async function replaceNode(node_id_new, node_id_old) {
     } else return 'error';
 }
 
+// TODO: add sensor 4
+
 async function addNodeData(nodeData) {
     let node_info = await getNodeInfoByID(nodeData.node_id);
     var data = {
@@ -66,7 +68,8 @@ async function addNodeData(nodeData) {
         data: {
             co: nodeData.s1,
             temp: nodeData.s2,
-            dust: nodeData.s3
+            dust: nodeData.s3,
+            gas: nodeData.s4
         }
     }
     let result = await r.db(dbName).table("nodeData").insert(data).run(connection);
@@ -145,7 +148,7 @@ async function getNodeDataByID(node_id) {
     let data_id = await getdataIDByNodeID(node_id);
     var node = await r.db(dbName).table("nodeData").filter({
         data_id: data_id
-    }).run(connection);
+    }).orderBy('time').run(connection);
     node = await node.toArray();
     return node || false;
 }
