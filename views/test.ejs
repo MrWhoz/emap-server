@@ -1,6 +1,6 @@
 <% layout('layout') -%>
-<% if(qs.id != 22) {%>
-<p style="margin-top:50px">Eror</p>
+<% if(0) {%>
+
 <% } else{ %>
 
 
@@ -11,18 +11,19 @@
 <script type="text/javascript">
 	var myVariable;
 	var count;
-	
+
 	var co = [];
 	var dust = [];
+	var gas = [];
 	var temp = [];
 	var xaxis = [];
-	// Get Json Data from URL 
+	// Get Json Data from URL
+
 	$.ajax({
 	    type:     "GET",
-	    url:      "http://localhost:8888/getdata?id=<%=qs.id%>", // <-- Here
+	    url:      "http://localhost:8888/getdata?id=<%=qs.id%>", // TODO : fix localhost url
 	    dataType: "json",
 	    success: function(data){
-	    	
 	        myVariable = data;
 	        count = Object.keys(myVariable).length;
   			// console.log(count);
@@ -31,20 +32,21 @@
   				co.push(Number(myVariable[i].data.co));
   				dust.push(Number(myVariable[i].data.dust));
   				temp.push(Number(myVariable[i].data.temp));
+					gas.push(Number(myVariable[i].data.gas));
   				xaxis.push(Number(i+1));
 
   			}
- 
+
   			drowchart();
 	    }
-	    
+
 	});
-	
+
 	// Drow chart
-function drowchart(){	
+function drowchart(){
 	// alert(xaxis);
 	$(function () {
-		
+
     $('#container').highcharts({
         title: {
             text: 'TEST',
@@ -85,6 +87,9 @@ function drowchart(){
         }, {
             name: 'DUST',
             data: dust
+        }, {
+            name: 'GAS',
+            data: gas
         }]
     });
 });
@@ -94,4 +99,3 @@ function drowchart(){
 
 <div id="container" style="min-width: 310px; width:80% ; float: left ; height: 400px; margin: 50px auto"></div>
 <%}%>
-
