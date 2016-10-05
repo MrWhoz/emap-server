@@ -8,38 +8,61 @@
     <h3>Fill out the form below to learn more!</h3>
   </div>
   <div class="row1 body">
-    <form action="#">
+    <div class="form">
       <ul>
         
         <li>
           <p class="left" style="font-size: 160%">
             <label for="first_name">first name</label>
-            <input type="text" name="first_name" placeholder="John" />
+            <input type="text" name="first_name" placeholder="John" id="firstname"/>
           </p>
           <p class="pull-right">
             <label for="last_name" style="font-size: 160%">last name</label>
-            <input type="text" name="last_name" placeholder="Smith" />      
+            <input id="lastname" type="text" name="last_name" placeholder="Smith" style="font-size: 160%"/>      
           </p>
         </li>
         
         <li>
           <p>
             <label for="email" style="font-size: 160%">email <span class="req">*</span></label>
-            <input type="email" name="email" placeholder="john.smith@gmail.com" />
+            <input type="email" id="to" name="email" placeholder="john.smith@gmail.com" style="font-size: 140%" />
           </p>
         </li>        
         <li><div class="divider"></div></li>
         <li>
           <label for="comments" style="font-size: 160%">comments</label>
-          <textarea cols="46" rows="3" name="comments"></textarea>
+          <textarea id="content" cols="46" rows="6" name="comments" style="font-size: 160%"></textarea>
         </li>
         
         <li style="font-size: 130%">
-          <input class="btn btn-submit" type="submit" value="Submit" />
+          <input class="btn btn-submit" id="send_email" type="submit" value="Submit" />
           <small style="font-size: 130%">or press <strong>enter</strong></small>
         </li>
         
       </ul>
-    </form>  
+    </div>
+     <span id="message" style="margin: 0 auto; font-size: 160%"></span>
   </div>
+
 </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var to,subject,text;
+    $("#send_email").click(function(){  
+      to="Mail from" + $("#to").val();
+      subject = to;
+      text=$("#content").val();
+      $("#message").text("Sending E-mail...Please wait!");
+      $.get("/send",{to:to,subject:subject,text:text},function(data){
+        if(data=='sent')
+        {
+          $("#message").empty().html("Email is been sent from "+$("#to").val()+" .Please check inbox!");
+        }
+      });
+
+    });
+  });
+  
+</script>

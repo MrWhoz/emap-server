@@ -2,6 +2,19 @@ var express = require('express');
 var router = express.Router();
 var node = require('../models/node.js');
 
+var nodemailer = require('nodemailer');
+var smtpTransport = require("nodemailer-smtp-transport");
+
+var smtpTransport = nodemailer.createTransport(smtpTransport({
+    host : "smtp.gmail.com",
+    secureConnection : false,
+    port: 587,
+    auth : {
+        user : "manhcuong3010a9@gmail.com",
+        pass : "manhcuong1"
+    }
+}));
+
 //https://api.thingspeak.com/update?api_key=G1JJIY5JTMO7MLXE&field3=10&field1=10&field2=16
 //TODO
 router.get('/', function(req, res, next) {
@@ -172,4 +185,23 @@ router.get('/add', async function(req, res, next) {
 //         qs: req.query
 //     });
 // })
+
+router.get('/send',function(req,res){
+    var mailOptions={
+        to : 'manhcuong3010a9@gmail.com',
+        subject : req.query.subject,
+        text : req.query.text
+    }
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
+            res.end("error");
+        }else{
+            console.log("Message sent: " + response.message);
+            res.end("sent");
+        }
+    });
+});
+
 module.exports = router;
