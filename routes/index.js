@@ -18,7 +18,8 @@ router.get('/contact', function(req, res) {
 /* GET Graph page. */
 router.get('/graph', function(req, res) {
     res.render('graph', {
-        title: 'Graph'
+        title: 'Graph',
+        qs: req.query
     });
 });
 
@@ -165,10 +166,10 @@ router.get('/add', async function(req, res, next) {
 
 // Graph with nodeID
 
-router.get('/GraphID', function(req, res) {
-    console.log(req.query);
-    res.render('test', {
-        qs: req.query
-    });
-})
+// router.get('/GraphID', function(req, res) {
+//     console.log(req.query);
+//     res.render('test', {
+//         qs: req.query
+//     });
+// })
 module.exports = router;

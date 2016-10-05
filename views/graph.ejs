@@ -2,55 +2,52 @@
 
 
 
-<style type="text/css">
-  select option {
-    background: rgba(0,0,0,0.3);
-    color:#fff;
-    text-shadow:0 1px 0 rgba(0,0,0,0.4);
-  }
-  select{
-    background: rgba(0,0,0,0.3);
-    color:#fff;
-    text-shadow:0 1px 0 rgba(0,0,0,0.4);
-  }
-</style>
+    <style type="text/css">
+        select option {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        select {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+    </style>
 
 
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
     <link rel="stylesheet" href="css/styleGraph.css">
     <script type="text/javascript">
-    var NodeID = [];
-      $.ajax({
-      type:     "GET",
-      url:      "/getinfo?list=1&status=1", // <-- Here
-      dataType: "json",
-      success: function(data){
-        
-          myVariable = data;
-          count = Object.keys(myVariable).length;
-        // console.log(count);
-        for(var i=0;i<count;i++){
-          NodeID.push(Number(myVariable[i].node_id));
-        }
-      
-        initfunction(NodeID);
-        console.log(NodeID);
-      }
-      
-  });
+        var NodeID = [];
+        $.ajax({
+            type: "GET",
+            url: "/getinfo?list=1&status=1", // <-- Here
+            dataType: "json",
+            success: function(data) {
+
+                myVariable = data;
+                count = Object.keys(myVariable).length;
+                // console.log(count);
+                for (var i = 0; i < count; i++) {
+                    NodeID.push(Number(myVariable[i].node_id));
+                }
+
+                initfunction(NodeID);
+                console.log(NodeID);
+            }
+
+        });
     </script>
 
 
     <div class="container">
-        <p style="padding-top: 70px; font-size: 130%; font-style: italic;">NodeId:</p>
-        
-            <!-- TODO load data from list-done -->
-            <select name="sources" id="sources" style="width: 200px; height: 50px;" placeholder="Choose Node" onclick="action()">
+        <p style="padding-top: 70px; font-size: 130%;">Node ID: </p>
+        <select name="sources" id="sources" style="width: 200px; height: 50px;" placeholder="Choose Node" onchange="action()">
             </select>
-            <button class="btn btn-success" style="width: 120px; height: 50px" onclick="action()">Ok</button>
-     
         <div id="chart" style="min-width: 310px; width:80% ; float: left ; height: 400px; margin: 50px auto"></div>
 
     </div>
@@ -59,10 +56,10 @@
 
     <script src="js/Graph.js"></script>
     <script type="text/javascript">
-        function initfunction(node){
-          console.log(node.length);
+        function initfunction(node) {
+            console.log(node.length);
             var select = document.getElementById("sources");
-            for(var i = 0, l = node.length; i < l; i++){
+            for (var i = 0, l = node.length; i < l; i++) {
                 var option = node[i];
                 var el = document.createElement("option");
                 el.textContent = option;
