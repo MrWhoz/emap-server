@@ -1,61 +1,13 @@
 <% layout('layout') -%>
+<script type="text/javascript">
+<% if(qs.id){ %>
+var globalvar = 1;
+<% }else { %>
 
+var globalvar = 0;
+<% } %>
 
-
-    <style type="text/css">
-        select option {
-            background: rgba(0, 0, 0, 0.3);
-            color: #fff;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-        }
-
-        select {
-            background: rgba(0, 0, 0, 0.3);
-            color: #fff;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-        }
-    </style>
-
-
-
-    <script src="js/highcharts.js"></script>
-    <script src="js/exporting.js"></script>
-    <link rel="stylesheet" href="css/styleGraph.css">
-    <script type="text/javascript">
-        var NodeID = [];
-        $.ajax({
-            type: "GET",
-            url: "/getinfo?list=1&status=1", // <-- Here
-            dataType: "json",
-            success: function(data) {
-
-                myVariable = data;
-                count = Object.keys(myVariable).length;
-                // console.log(count);
-                for (var i = 0; i < count; i++) {
-                    NodeID.push(Number(myVariable[i].node_id));
-                }
-
-                initfunction(NodeID);
-                console.log(NodeID);
-            }
-
-        });
-    </script>
-
-
-    <div class="container">
-        <p style="padding-top: 70px; font-size: 130%; font-style: italic; width:20%; float: left; line-height: 50px; text-align: center;">NodeId:</p>
-         <select name="sources" id="sources" style="width: 200px; height: 50px; float: left; width: 15%; margin-top: 70px;" placeholder="Choose Node" onclick="action()">
-            </select>
-        <div id="chart" style="min-width: 310px; width:80% ; float: left ; height: 400px; margin: 50px auto"></div>
-
-    </div>
-
-
-
-    <script src="js/Graph.js"></script>
-    <script type="text/javascript">
+        // create Node options
         function initfunction(node) {
             console.log(node.length);
             var select = document.getElementById("sources");
@@ -66,38 +18,75 @@
                 el.value = option;
                 select.appendChild(el);
             }
+            <% if(qs.id){ %>
+                $('#sources').val("<%=qs.id%>");
+                
+            <% } %>
         }
 
-        function action() {
-            var e = document.getElementById("sources");
-            var strUser = e.options[e.selectedIndex].value;
-            var myVariable;
-            var count;
-            var co = [];
-            var dust = [];
-            var gas = [];
-            var temp = [];
-            var xaxis = [];
+        // Drow chart
+
+        // Check if have req.quety
+        window.onload = function () {
+
+            //-- create options
+
+            var NodeID = [];
             $.ajax({
                 type: "GET",
-                url: "/getdata?id=" + strUser, // TODO : fix localhost url-- done
+                url: "/getinfo?list=1&status=1", // <-- Here
                 dataType: "json",
                 success: function(data) {
+
                     myVariable = data;
                     count = Object.keys(myVariable).length;
                     // console.log(count);
-                    console.log(myVariable[0].data.co);
                     for (var i = 0; i < count; i++) {
-                        co.push(Number(myVariable[i].data.co));
-                        dust.push(Number(myVariable[i].data.dust));
-                        temp.push(Number(myVariable[i].data.temp));
-                        gas.push(Number(myVariable[i].data.gas));
-                        xaxis.push(Number(i + 1));
+                        NodeID.push(Number(myVariable[i].node_id));
                     }
-                    drowchart();
+
+                    initfunction(NodeID);
+                    console.log(NodeID);
                 }
+
             });
 
+            //---------------------------------------
+                var count;
+                var co = [];
+                var dust = [];
+                var gas = [];
+                var temp = [];
+                var xaxis = [];
+            if(globalvar==1){
+              
+                // alert("succes");
+                globalvar = 0;
+                // $("div.id_100 select").val("<%=qs.id%>");
+                $('#sources').val("<%=qs.id%>");
+                $.ajax({
+                    type: "GET",
+                    url: "/getdata?id=" + <%=qs.id%>, 
+                    dataType: "json",
+                    success: function(data) {
+                        myVariable = data;
+                        count = Object.keys(myVariable).length;
+                        // console.log(count);
+                        console.log(myVariable[0].data.co);
+                        for (var i = 0; i < count; i++) {
+                            co.push(Number(myVariable[i].data.co));
+                            dust.push(Number(myVariable[i].data.dust));
+                            temp.push(Number(myVariable[i].data.temp));
+                            gas.push(Number(myVariable[i].data.gas));
+                            xaxis.push(Number(i + 1));
+                        }
+                        drowchart();
+                    }
+                });
+
+            // No req.query
+                
+            }
             function drowchart() {
                 // alert(xaxis);
                 $(function() {
@@ -150,4 +139,141 @@
                 });
             }
         }
+
+        //--------------------------------------
+        $(function(){
+            $("#sources").on("change",function(){
+                var e = document.getElementById("sources");
+                var strUser = e.options[e.selectedIndex].value;
+                var myVariable;
+                var count;
+                var co = [];
+                var dust = [];
+                var gas = [];
+                var temp = [];
+                var xaxis = [];
+
+            // check if have req.query
+           
+               
+
+            // No req.query
+          
+                $.ajax({
+                    type: "GET",
+                    url: "/getdata?id=" + strUser, 
+                    dataType: "json",
+                    success: function(data) {
+                        myVariable = data;
+                        count = Object.keys(myVariable).length;
+                        // console.log(count);
+                        console.log(myVariable[0].data.co);
+                        for (var i = 0; i < count; i++) {
+                            co.push(Number(myVariable[i].data.co));
+                            dust.push(Number(myVariable[i].data.dust));
+                            temp.push(Number(myVariable[i].data.temp));
+                            gas.push(Number(myVariable[i].data.gas));
+                            xaxis.push(Number(i + 1));
+                        }
+                    drowchart();
+                    }
+                });
+
+            
+            function drowchart() {
+                // alert(xaxis);
+                $(function() {
+
+                    $('#chart').highcharts({
+                        title: {
+                            text: 'TEST',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: xaxis
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Temperature (°C)'
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
+                        },
+                        tooltip: {
+                            valueSuffix: '°C'
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 0
+                        },
+                        series: [{
+                            name: 'CO',
+                            data: co
+                        }, {
+                            name: 'TEMP',
+                            data: temp
+                        }, {
+                            name: 'DUST',
+                            data: dust
+                        }, {
+                            name: 'GAS',
+                            data: gas
+                        }]
+                    });
+                });
+            }
+            });
+        });
+        
+</script>
+    <style type="text/css">
+        select option {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        select {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+    </style>
+
+
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <link rel="stylesheet" href="css/styleGraph.css">
+   <!--  <script type="text/javascript">
+        
+    </script> -->
+
+
+    <div class="container">
+        <p style="padding-top: 70px; font-size: 130%; font-style: italic; width:20%; float: left; line-height: 50px; text-align: center;">NodeId:</p>
+        <div class="id_100">
+            <select name="sources" id="sources" style="width: 200px; height: 50px; float: left; width: 15%; margin-top: 70px;">
+            </select>
+        </div>
+        <div id="chart" style="min-width: 310px; width:80% ; float: left ; height: 400px; margin: 50px auto"></div>
+
+    </div>
+
+
+
+    <script src="js/Graph.js"></script>
+   <!--  <script type="text/javascript">
+
+        
     </script>
+ -->
