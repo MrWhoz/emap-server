@@ -23,7 +23,7 @@
 
     $.ajax({
       type:     "GET",
-      url:      "http://localhost:8888/getinfo?list=1&status=1", // <-- Here
+      url:      "/getinfo?list=1&status=1", // <-- Here
       dataType: "json",
       success: function(data){
         
@@ -98,7 +98,7 @@
 
         });
         var temp = markers.length;    
-        addInfoWindow(marker, "Node "+nodeid);
+        addInfoWindow(marker,nodeid);
 
         markers.push(marker); 
         if(temp==0){
@@ -125,9 +125,11 @@
       }  
 
       function addInfoWindow(marker, message) {
+            var temp = "/graph?id="+ message;
 
             var infoWindow = new google.maps.InfoWindow({
-                content: message
+                content: "Node: " + message + '<br/>' + '<a href="'+temp+'">' + "View Graph" + '</a>' + '<br/>' + '<a href="#">' + "View Stastic" + '</a>'
+                // stastic later----------------
             });
 
             google.maps.event.addListener(marker, 'click', function () {

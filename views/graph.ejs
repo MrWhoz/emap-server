@@ -93,7 +93,7 @@ var globalvar = 0;
 
                     $('#chart').highcharts({
                         title: {
-                            text: 'TEST',
+                            text: 'Node: '+ <%=qs.id%>,
                             x: -20 //center
                         },
                         subtitle: {
@@ -186,7 +186,7 @@ var globalvar = 0;
 
                     $('#chart').highcharts({
                         title: {
-                            text: 'TEST',
+                            text: 'Node: ' + strUser,
                             x: -20 //center
                         },
                         subtitle: {
@@ -263,6 +263,7 @@ var globalvar = 0;
         <p style="padding-top: 70px; font-size: 130%; font-style: italic; width:20%; float: left; line-height: 50px; text-align: center;">NodeId:</p>
         <div class="id_100">
             <select name="sources" id="sources" style="width: 200px; height: 50px; float: left; width: 15%; margin-top: 70px;">
+                <option value="">Chose Node ID</option>
             </select>
         </div>
         <div id="chart" style="min-width: 310px; width:80% ; float: left ; height: 400px; margin: 50px auto"></div>
