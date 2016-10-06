@@ -121,7 +121,9 @@ h3 {
   background-image: linear-gradient(to right, #ee9cb4, #4f6fad);
 }
 .form ul li .req {
-  color: #ee9cb4;
+  color: red;
+  font-size: 90%;
+  font-style: italic;
 }
 .form label {
   display: block;

@@ -1,8 +1,9 @@
 <% layout('layout') -%>
 <link rel="stylesheet" href="/css/styleContact.css" type="text/css" />
+
 <link rel="stylesheet" href="/css/normalizeContact.css" type="text/css" />
 <div style="margin-top:80px"></div>
-<div class="container1">
+<div class="container1" >
   <div class="row1 header">
     <h1>CONTACT US &nbsp;</h1>
     <h3>Fill out the form below to learn more!</h3>
@@ -13,7 +14,7 @@
         
         <li>
           <p class="left" style="font-size: 160%">
-            <label for="first_name">first name</label>
+            <label for="first_name" class="slideInUp">first name</label>
             <input type="text" name="first_name" placeholder="John" id="firstname"/>
           </p>
           <p class="pull-right">
@@ -24,7 +25,7 @@
         
         <li>
           <p>
-            <label for="email" style="font-size: 160%">email <span class="req">*</span></label>
+            <label for="email" style="font-size: 160%">email <span class="req" id="validation">*</span></label>
             <input type="email" id="to" name="email" placeholder="john.smith@gmail.com" style="font-size: 140%" />
           </p>
         </li>        
@@ -35,7 +36,7 @@
         </li>
         
         <li style="font-size: 130%">
-          <input class="btn btn-submit" id="send_email" type="submit" value="Submit" />
+          <input class="btn btn-submit" id="send_email" type="submit" style="color: #fbf2f2"  value="Submit" />
           <small style="font-size: 130%">or press <strong>enter</strong></small>
         </li>
         
@@ -49,18 +50,33 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+
+    // Validation E-mail
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+
     var to,subject,text;
     $("#send_email").click(function(){  
-      to="Mail from" + $("#to").val();
-      subject = to;
-      text=$("#content").val();
-      $("#message").text("Sending E-mail...Please wait!");
-      $.get("/send",{to:to,subject:subject,text:text},function(data){
+      if(validateEmail($("#to").val())){
+        document.getElementById("validation").innerHTML = "";
+        to="Mail from" + $("#to").val();
+        subject = to;
+        text=$("#content").val();
+        $("#message").text("Sending E-mail...Please wait!");
+        $.get("/send",{to:to,subject:subject,text:text},function(data){
         if(data=='sent')
         {
-          $("#message").empty().html("Email is been sent from "+$("#to").val()+" .Please check inbox!");
+          $("#message").empty().html("Email is been sent from "+ '<i style="color:red">'+$("#to").val()+'</i>'+" .Please check inbox!");
         }
       });
+    }else{
+      document.getElementById("validation").innerHTML = "Please enter valid E-mail!"
+    }
+      
 
     });
   });

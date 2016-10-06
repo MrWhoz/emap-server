@@ -14,6 +14,7 @@ var globalvar = 0;
             for (var i = 0, l = node.length; i < l; i++) {
                 var option = node[i];
                 var el = document.createElement("option");
+               
                 el.textContent = option;
                 el.value = option;
                 select.appendChild(el);
@@ -24,7 +25,7 @@ var globalvar = 0;
             <% } %>
         }
 
-        // Drow chart
+        
 
         // Check if have req.quety
         window.onload = function () {
@@ -32,6 +33,11 @@ var globalvar = 0;
             //-- create options
 
             var NodeID = [];
+            var lat = [];
+            var lng = [];
+            var nodeid = [];
+            var phone = [];
+            var Nodeinfo;
             $.ajax({
                 type: "GET",
                 url: "/getinfo?list=1&status=1", // <-- Here
@@ -84,9 +90,37 @@ var globalvar = 0;
                     }
                 });
 
-            // No req.query
+
+                $.ajax({
+                    type: "GET",
+                    url: "/getinfo?id=" + <%=qs.id%>, 
+                    dataType: "json",
+                    success: function(data) {
+                        Nodeinfo = data;
+                       
+                        // console.log(count);
+                       
+                      
+                            nodeid.push(Number(Nodeinfo.node_id));
+                            phone.push(Number(Nodeinfo.phone));
+                            lat.push(Number(Nodeinfo.location.lat));
+                            lng.push(Number(Nodeinfo.location.lng));
+                           
+                      
+                    InsertInfo(nodeid,phone,lat,lng);
+                    }
+                });
+           
                 
             }
+
+            function InsertInfo(x,y,z,t){
+                document.getElementById("NodeInfomation").innerHTML = '<i style="color:red">' + "Node_Id: " +'</i>' + x + '<br/>' +
+                '<i style="color:red">' + "Location_lat: " + '</i>' +  z + '<br/>' +
+                '<i style="color:red">' + "Location_lng: " + '</i>' +  t + '<br/>' +
+                '<i style="color:red">' + "Phone: " + '</i>' +  y + '<br/>'
+            } 
+
             function drowchart() {
                 // alert(xaxis);
                 $(function() {
@@ -145,13 +179,17 @@ var globalvar = 0;
             $("#sources").on("change",function(){
                 var e = document.getElementById("sources");
                 var strUser = e.options[e.selectedIndex].value;
-                var myVariable;
+                var myVariable,Nodeinfo;
                 var count;
                 var co = [];
                 var dust = [];
                 var gas = [];
                 var temp = [];
                 var xaxis = [];
+                var lat = [];
+                var lng = [];
+                var nodeid = [];
+                var phone = [];
 
             // check if have req.query
            
@@ -178,6 +216,36 @@ var globalvar = 0;
                     drowchart();
                     }
                 });
+
+                //Get Info Node
+
+                $.ajax({
+                    type: "GET",
+                    url: "/getinfo?id=" + strUser, 
+                    dataType: "json",
+                    success: function(data) {
+                        Nodeinfo = data;
+                       
+                        // console.log(count);
+                       
+                      
+                            nodeid.push(Number(Nodeinfo.node_id));
+                            phone.push(Number(Nodeinfo.phone));
+                            lat.push(Number(Nodeinfo.location.lat));
+                            lng.push(Number(Nodeinfo.location.lng));
+                           
+                      
+                    InsertInfo(nodeid,phone,lat,lng);
+                    }
+                });
+
+            //---Function Insert Info
+            function InsertInfo(x,y,z,t){
+                document.getElementById("NodeInfomation").innerHTML = '<i style="color:red">' + "Node_Id: " +'</i>' + x + '<br/>' +
+                '<i style="color:red">' + "Location_lat: " + '</i>' +  z + '<br/>' +
+                '<i style="color:red">' + "Location_lng: " + '</i>' +  t + '<br/>' +
+                '<i style="color:red">' + "Phone: " + '</i>' +  y + '<br/>'
+            }
 
             
             function drowchart() {
@@ -259,16 +327,27 @@ var globalvar = 0;
     </script> -->
 
 
-    <div class="container">
-        <p style="padding-top: 70px; font-size: 130%; font-style: italic; width:20%; float: left; line-height: 50px; text-align: center;">NodeId:</p>
-        <div class="id_100">
-            <select name="sources" id="sources" style="width: 200px; height: 50px; float: left; width: 15%; margin-top: 70px;">
-                <option value="">Chose Node ID</option>
-            </select>
+    <div class="box123">
+        <div class="top">
+            <div class="left">NodeId:</div>
+            <div class="id_100">
+                <select name="sources" id="sources">
+                    <option value="">Chose Node ID</option>
+                </select>
+            </div>
         </div>
-        <div id="chart" style="min-width: 310px; width:80% ; float: left ; height: 400px; margin: 50px auto"></div>
-
+        
+   
+    
+        <div class="bot">
+        <div class="bleft"><!-- <p style="color: red">Node Info: </p> -->
+            <span id="NodeInfomation"></span>
+        </div>
+            <div id="chart" class="bright"></div>
+        </div>
     </div>
+
+    
 
 
 
