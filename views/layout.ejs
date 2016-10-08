@@ -21,12 +21,11 @@
     <link href="/css/bootstrap.css" rel="stylesheet" />
     <!--FONTAWESOME MAIN STYLE -->
     <link href="/css/font-awesome.min.css" rel="stylesheet" />
-    <!--SLIDESHOW STYLE -->
-    <!-- <link href="assets/css/style-slide.css" rel="stylesheet" /> -->
-    <!-- <link href="assets/css/custom.css" rel="stylesheet" /> -->
     <!--CUSTOM STYLE -->
     <link href="/css/layoutStyle.css" rel="stylesheet" />
-  
+    <!-- Login Form -->
+    <link href="/css/login.css" rel="stylesheet" />
+    <link href="/css/userprofile.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -34,7 +33,23 @@
     <![endif]-->
 </head>
     <!--END HEAD SECTION -->
-<body>   
+<body>
+    <script type="text/javascript">
+    window.onload = function () {
+        if(typeof(Storage) !== "undefined"){
+            document.getElementById("user").innerHTML = sessionStorage.user;
+            // document.getElementById("modalbox").id = "1";
+            $('#modalbox').attr('data-target','#myModal1');
+            document.getElementById("userprofile").innerHTML = sessionStorage.user + " Profile";
+           
+           
+        }
+        if(sessionStorage.user == "0"){
+             document.getElementById("user").innerHTML = "Login";
+             $('#modalbox').attr('data-target','#myModal');
+        }
+    };
+    </script>
      <!-- NAV SECTION -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -52,8 +67,11 @@
                     <li><a href="/graph">GRAPH</a></li>
                      <li><a href="/stastic">STASTIC</a></li>
                     <li><a href="/contact">CONTACT</a></li>                    
+                    <!-- Login -->
+                
+                        <li data-toggle="modal" data-target="#myModal" id="modalbox" ><a href="#"><i class="color-red" id="user">Login</i></a></li>
+                  
                     
-                    <!-- <li><a href="#offer"><i class="color-red"> Today's OFFER</i></a></li> -->
                 </ul>
             </div>
            
@@ -72,6 +90,8 @@
     <!-- <script src="assets/js/jquery.slitslider.js"></script> -->
        <!-- CUSTOM SCRIPT-->   
     <!-- <script src="assets/js/custom.js"></script> -->
+    <!-- Login Script -->
+     
     <%- body %>
 
 
@@ -85,5 +105,134 @@
         </div>
        
     </div>
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Login/Register</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="formlogin">
+                        <form class="register-form">
+                          <input type="text" placeholder="name"/>
+                          <input type="password" placeholder="password"/>
+                          <input type="text" placeholder="email address"/>
+                          <button>create</button>
+                          <p class="message">Already registered? <a href="#">Sign In</a></p>
+                        </form>
+                        <form class="login-form">
+                          <input type="text" placeholder="username" id="username" />
+                          <input type="password" placeholder="password" id="password" />
+                          <button onclick="checklogin()">login</button>
+                          <p class="message">Not registered? <a href="#">Create an account</a></p>
+                        </form>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="refresh()">Ok</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- User Profile -->
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id = "userprofile"></h4>
+                </div>
+                <div class="modal-body">
+                    <h1 class="title-pen"> User Profile <span>UI</span></h1>
+                            <div class="user-profile">
+                                <img class="avatar" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTF_erFD1SeUnxEpvFjzBCCDxLvf-wlh9ZuPMqi02qGnyyBtPWdE-3KoH3s" alt="Ash" />
+                                <div class="username">Will Smith</div>
+                                <div class="bio">
+                                    Senior UI Designer
+                                </div>
+                                <div class="description">
+                                    I use to design websites and applications
+                                    for the web.
+                                </div>
+                                <div class="data">
+                                    <i class="fa fa-heart-o" aria-hidden="true">1-</i>Likes
+                                    <span>|</span>
+                                    <i class="fa fa-eye" aria-hidden="true">1-</i>Follows
+                                    <span>|</span>
+                                    <i class="fa fa-users" aria-hidden="true">1-</i>Friends
+                                </div>
+                                
+                            </div>
+                            <i class="fa fa-check-square-o" aria-hidden="true" style="float:right; font-size:150%; padding-right:10%;" data-toggle="modal" data-target="#myModal3">Edit</i>
+                            <footer>
+                                
+                                <h1>
+                                    inspired by
+                                    <a href="https://dribbble.com/shots/1033074-User-Profile">
+                                        <span class="entypo-dribbble"></span> shot
+                                    </a>
+                                </h1>
+                                <div style="margin: 0 auto">
+                                <div style="width: 70px; margin: 0 auto">
+                                <button class="btn btn-danger" style="width: 100%" onclick="logout()">Log out</button>
+                                </div>
+                                </div>
+                            </footer>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+    <script type="text/javascript">
+
+        function refresh(){
+            location.reload();
+        }
+        function checklogin(){
+
+            // Test - Using Ajax later for User Infomations
+            var x,y;
+            x = $("#username").val();
+            console.log(x);
+            y = $("#password").val();
+            // check(x,y);
+
+            if ((x == "cuong") && (y=="cuong")){
+                alert("login success! Click button OK in Modal to refresh page!");
+                sessionStorage.setItem('user',"cuong");
+               
+                
+
+            }else{
+                alert("Error Username or Password!");
+            }
+
+        }
+        // function check(x,y){
+            
+        // }
+
+        //Log out
+        function logout(){
+            // sessionStorage.clear();
+            sessionStorage.setItem('user',"0")
+            alert(sessionStorage.user);
+            location.reload();
+        }
+    </script>
 </body>
 </html>

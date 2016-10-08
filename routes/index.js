@@ -43,10 +43,11 @@ router.get('/Stastic', function(req, res) {
     });
 });
 
-/* GET Home page. */
+/* GET Home page. Req user*/
 router.get('/home', function(req, res) {
     res.render('home', {
         title: 'Home'
+       
     });
 });
 
