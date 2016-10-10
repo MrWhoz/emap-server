@@ -1,7 +1,11 @@
 var express = require('express');
+var session = require('express-session');
+
+var sess;
+// -----
 var router = express.Router();
 var node = require('../models/node.js');
-
+router.use(session({secret:'ssshhhh'}));
 var nodemailer = require('nodemailer');
 var smtpTransport = require("nodemailer-smtp-transport");
 
@@ -17,6 +21,9 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
 
 //https://api.thingspeak.com/update?api_key=G1JJIY5JTMO7MLXE&field3=10&field1=10&field2=16
 //TODO
+
+
+
 router.get('/', function(req, res, next) {
     res.render('index');
 });
@@ -206,3 +213,4 @@ router.get('/send',function(req,res){
 });
 
 module.exports = router;
+
