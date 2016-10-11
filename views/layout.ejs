@@ -35,19 +35,19 @@
     <!--END HEAD SECTION -->
 <body>
     <script type="text/javascript">
-    window.onload = function () {
-        if(typeof(Storage) !== "undefined"){
-            document.getElementById("user").innerHTML = sessionStorage.user;
-            // document.getElementById("modalbox").id = "1";
-            $('#modalbox').attr('data-target','#myModal1');
-            document.getElementById("userprofile").innerHTML = sessionStorage.user + " Profile";
+    // window.onload = function () {
+    //     if(typeof(Storage) !== "undefined"){
+    //         document.getElementById("user").innerHTML = sessionStorage.user;
+    //         // document.getElementById("modalbox").id = "1";
+    //         $('#modalbox').attr('data-target','#myModal1');
+    //         document.getElementById("userprofile").innerHTML = sessionStorage.user + " Profile";
            
            
-        }
-        if(sessionStorage.user == "0"){
-             document.getElementById("user").innerHTML = "Login";
-             $('#modalbox').attr('data-target','#myModal');
-        }
+    //     }
+    //     if(sessionStorage.user == "0"){
+    //          document.getElementById("user").innerHTML = "Login";
+    //          $('#modalbox').attr('data-target','#myModal');
+    //     }
     };
     </script>
      <!-- NAV SECTION -->
@@ -128,7 +128,7 @@
                         <form class="login-form">
                           <input type="text" placeholder="username" id="username" />
                           <input type="password" placeholder="password" id="password" />
-                          <button onclick="checklogin()">login</button>
+                          <button id="submit">login</button>
                           <p class="message">Not registered? <a href="#">Create an account</a></p>
                         </form>
                       </div>
@@ -183,7 +183,7 @@
                                 </h1>
                                 <div style="margin: 0 auto">
                                 <div style="width: 70px; margin: 0 auto">
-                                <button class="btn btn-danger" style="width: 100%" onclick="logout()">Log out</button>
+                                <button class="btn btn-danger" style="width: 100%"><a href="/logout" style="color: white;">Log out</a></button>
                                 </div>
                                 </div>
                             </footer>
@@ -198,41 +198,58 @@
 
     <script src="/js/login.js"></script>
     <script type="text/javascript">
+        $(document).ready(function(){
+            var email,pass;
+            $("#submit").click(function(){
+                username=$("#username").val();
+                password=$("#password").val();
+                /*
+                * Perform some validation here.
+                */
+                $.post("/login",{username:username,password:password},function(data){        
+                    if(data==='done')           
+                    {
+                        window.location.href="/stastic";
+                    }
+                });
+                
+            });
+        });
 
-        function refresh(){
-            location.reload();
-        }
-        function checklogin(){
+        // function refresh(){
+        //     location.reload();
+        // }
+        // function checklogin(){
 
-            // Test - Using Ajax later for User Infomations
-            var x,y;
-            x = $("#username").val();
-            console.log(x);
-            y = $("#password").val();
-            // check(x,y);
+        //     // Test - Using Ajax later for User Infomations
+        //     var x,y;
+        //     x = $("#username").val();
+        //     console.log(x);
+        //     y = $("#password").val();
+        //     // check(x,y);
 
-            if ((x == "cuong") && (y=="cuong")){
-                alert("login success! Click button OK in Modal to refresh page!");
-                sessionStorage.setItem('user',"cuong");
+        //     if ((x == "cuong") && (y=="cuong")){
+        //         alert("login success! Click button OK in Modal to refresh page!");
+        //         sessionStorage.setItem('user',"cuong");
                
                 
 
-            }else{
-                alert("Error Username or Password!");
-            }
+        //     }else{
+        //         alert("Error Username or Password!");
+        //     }
 
-        }
+        // }
         // function check(x,y){
             
         // }
 
         //Log out
-        function logout(){
-            // sessionStorage.clear();
-            sessionStorage.setItem('user',"0")
-            alert(sessionStorage.user);
-            location.reload();
-        }
+        // function logout(){
+        //     // sessionStorage.clear();
+        //     sessionStorage.setItem('user',"0")
+        //     alert(sessionStorage.user);
+        //     location.reload();
+        // }
     </script>
 </body>
 </html>

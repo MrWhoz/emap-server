@@ -44,8 +44,8 @@ router.get('/graph', function(req, res) {
 });
 
 /* GET Stastic page. */
-router.get('/Stastic', function(req, res) {
-    res.render('Stastic', {
+router.get('/stastic', function(req, res) {
+    res.render('stastic', {
         title: 'Stastic'
     });
 });
@@ -90,6 +90,12 @@ router.get('/configmarkers/confignode/update', function(req, res) {
 router.get('/configmarkers/confignode/replace', function(req, res) {
     res.render('replace', {
         title: 'Replace Node'
+    });
+});
+
+router.get('/admin', function(req, res) {
+    res.render('admin', {
+        title: 'test'
     });
 });
 

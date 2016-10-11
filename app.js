@@ -32,65 +32,46 @@ app.get('/check',function(req,res){
       res.render('check');
     }
 });
+
+
 // check session 
 app.post('/login',function(req,res){
   sess = req.session;
-  sess.email = req.body.email;
+  sess.email = req.body.username;
   res.end('done');
 });
-app.get('/admin',function(req,res){
+app.use(function(req, res, next){
+   
+    res.locals.session = "hi";
+    next();
+});
+app.get('/stastic',function(req,res){
   sess=req.session;
   if(sess.email){
-    res.set('cuong',sess.email);
-    res.write('<h1>Hello '+sess.email+'</h1>');
-    res.end('<a href="/logout">Logout</a>');
+    res.render('stastic', {
+        title: 'test', temp:sess.email
+    });
+    
+
   }else{
-    res.write('<h1>Please login first.</h1>');
-    res.end('<a href="/check">Login</a>');
+    // res.write('<h1>Please login first.</h1>');
+    // res.end('<a href="/check">Login</a>');
+    res.render('stastic', {
+        title: 'test',
+        temp: 'nouser'
+    });
   }
-})
+});
 
-
-// var middleware = {
-
-//     render: function (view) {
-//         return function (req, res, next) {
-//             res.render(view);
-//         }
-//     },
-
-//     globalLocals: function (req, res, next) {
-//         res.locals({ 
-//             siteTitle: "My Website's Title",
-//             pageTitle: "The Root Splash Page",
-//             author: "Cory Gross",
-//             description: "My app's description",
-//         });
-//         next();
-//     },
-
-//     index: function (req, res, next) {
-//         res.locals({
-//             indexSpecificData: someData
-//         });
-//         next();
-//     }
-
-// };
-
-
-// app.use(middleware.globalLocals);
-// app.get('/stastic', middleware.index, middleware.render('stastic'));
 app.get('/logout',function(req,res){
   req.session.destroy(function(err){
     if(err){
       console.log(err);
     }else{
-      res.redirect('/');
+      res.redirect('/stastic');
     }
   })
 });
-
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname,'public')));
@@ -115,6 +96,7 @@ app.get('/url', function (req, res) {
   });
 });
 
+//--------
 
 
 
