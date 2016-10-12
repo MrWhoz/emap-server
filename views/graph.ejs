@@ -1,5 +1,8 @@
 <% layout('layout') -%>
 <script type="text/javascript">
+//------
+
+
 <% if(qs.id){ %>
 var globalvar = 1;
 <% }else { %>
@@ -29,6 +32,14 @@ var globalvar = 0;
 
         // Check if have req.quety
         window.onload = function () {
+            <% if(temp!='nouser') {%>
+    console.log("<%=temp%>");
+    document.getElementById("user").innerHTML = "<%=temp%>";
+    $('#modalbox').attr('data-target','#myModal1');
+        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+  <%} else{%>
+    console.log("error");
+  <%}%>
 
             //-- create options
 

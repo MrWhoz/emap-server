@@ -48,7 +48,7 @@
     //          document.getElementById("user").innerHTML = "Login";
     //          $('#modalbox').attr('data-target','#myModal');
     //     }
-    };
+    // };
     </script>
      <!-- NAV SECTION -->
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -209,7 +209,7 @@
                 $.post("/login",{username:username,password:password},function(data){        
                     if(data==='done')           
                     {
-                        window.location.href="/stastic";
+                        window.location.href="/home";
                     }
                 });
                 

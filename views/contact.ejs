@@ -2,6 +2,18 @@
 <link rel="stylesheet" href="/css/styleContact.css" type="text/css" />
 
 <link rel="stylesheet" href="/css/normalizeContact.css" type="text/css" />
+<script type="text/javascript">
+window.onload = function () {
+  <% if(temp!='nouser') {%>
+    console.log("<%=temp%>");
+    document.getElementById("user").innerHTML = "<%=temp%>";
+    $('#modalbox').attr('data-target','#myModal1');
+        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+  <%} else{%>
+    console.log("error");
+  <%}%>
+};
+</script>
 <div style="margin-top:80px"></div>
 <div class="container1" >
   <div class="row1 header">

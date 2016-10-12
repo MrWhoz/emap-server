@@ -3,6 +3,18 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
     </script>
+    <script type="text/javascript">
+window.onload = function () {
+  <% if(temp!='nouser') {%>
+    console.log("<%=temp%>");
+    document.getElementById("user").innerHTML = "<%=temp%>";
+    $('#modalbox').attr('data-target','#myModal1');
+        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+  <%} else{%>
+    console.log("error");
+  <%}%>
+};
+</script>
 
 <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
     <div id="floating-panel">
