@@ -1,34 +1,66 @@
 var app = require('./app');
-var config = require('./config')
-var debug = require('debug')('http')
-  , http = require('http')
-  , name = 'My App';
+var config = require('./config');
+var dbName = config.rethinkdb.db;
+var debug = require('debug')('http'),
+    http = require('http'),
+    name = 'My App';
 
+r = require('rethinkdb');
 //fdasfasf
 var port = normalizePort(config.app.port || '8888');
-app.set('port',port);
+app.set('port', port);
 var server = http.createServer(app);
 server.listen(port);
 //server.on('error', onError);
+var io = require('socket.io')(server);
+io.on('connection', function(socket) {
+    // connected
+    console.log('new socketio connection');
+});
 server.on('listening', onListening);
 
-function normalizePort(val){
-  var port = parseInt(val,10);
+function sendSocket() {
 
-  if(isNaN(port)){
-    return val;
-  };
-  if(port >= 0){
-    return port;
-  }
-  return false;
 }
 
-function onListening(){
-  var addr = server.address();
-  var bind = typeof addr === 'string' ?
-  'pipe' + addr:
-  'port' + addr.port;
-  debug('Listening on ' + bind);
-  console.log('Listening on ' + bind);
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        return val;
+    };
+    if (port >= 0) {
+        return port;
+    }
+    return false;
 }
+
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string' ?
+        'pipe' + addr :
+        'port' + addr.port;
+    debug('Listening on ' + bind);
+    console.log('Listening on ' + bind);
+};
+var connection = null;
+r.connect({
+    host: 'localhost',
+    port: 28015
+}, function(err, conn) {
+    if (err) throw err;
+    connection = conn;
+    r.db(dbName).table('nodeData').filter({}).changes().run(connection).then(function(cursor) {
+        cursor.each(function(err, item) {
+            io.sockets.emit('rdata', item);
+            console.log('update');
+        });
+    });
+})
+
+// function sendSdata(item){
+//   io.sockets.emit('rdata',item);
+//
+// }
+
+// exports.sendSdata = sendSdata;

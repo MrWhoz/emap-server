@@ -150,8 +150,10 @@ async function getNodeDataByID(node_id) {
         data_id: data_id
     }).orderBy('time').run(connection);
     node = await node.toArray();
+
     return node || false;
 }
+
 
 module.exports = {
     connect,

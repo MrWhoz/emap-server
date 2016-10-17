@@ -1,6 +1,6 @@
 var express = require('express');
 var session = require('express-session');
-
+var sockio = require("socket.io");
 var sess;
 // -----
 var router = express.Router();
@@ -54,7 +54,7 @@ router.get('/stastic', function(req, res) {
 router.get('/home', function(req, res) {
     res.render('home', {
         title: 'Home'
-       
+
     });
 });
 
@@ -219,4 +219,3 @@ router.get('/send',function(req,res){
 });
 
 module.exports = router;
-

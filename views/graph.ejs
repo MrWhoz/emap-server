@@ -1,14 +1,17 @@
 <% layout('layout') -%>
-<script type="text/javascript">
-//------
+
+    <script src="js/socket.io.js"></script>
+    <script type="text/javascript">
+        //------
 
 
-<% if(qs.id){ %>
-var globalvar = 1;
-<% }else { %>
+        <% if(qs.id){ %>
+        var globalvar = 1;
+        <% }else { %>
 
-var globalvar = 0;
-<% } %>
+        var globalvar = 0;
+        <% } %>
+        var socket = io();
 
         // create Node options
         function initfunction(node) {
@@ -17,29 +20,29 @@ var globalvar = 0;
             for (var i = 0, l = node.length; i < l; i++) {
                 var option = node[i];
                 var el = document.createElement("option");
-               
+
                 el.textContent = option;
                 el.value = option;
                 select.appendChild(el);
             }
             <% if(qs.id){ %>
-                $('#sources').val("<%=qs.id%>");
-                
+            $('#sources').val("<%=qs.id%>");
+
             <% } %>
         }
 
-        
+
 
         // Check if have req.quety
-        window.onload = function () {
+        window.onload = function() {
             <% if(temp!='nouser') {%>
-    console.log("<%=temp%>");
-    document.getElementById("user").innerHTML = "<%=temp%>";
-    $('#modalbox').attr('data-target','#myModal1');
-        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
-  <%} else{%>
-    console.log("error");
-  <%}%>
+            console.log("<%=temp%>");
+            document.getElementById("user").innerHTML = "<%=temp%>";
+            $('#modalbox').attr('data-target', '#myModal1');
+            document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+            <%} else{%>
+            console.log("error");
+            <%}%>
 
             //-- create options
 
@@ -69,21 +72,22 @@ var globalvar = 0;
             });
 
             //---------------------------------------
-                var count;
-                var co = [];
-                var dust = [];
-                var gas = [];
-                var temp = [];
-                var xaxis = [];
-            if(globalvar==1){
-              
+            var count;
+            var co = [];
+            var dust = [];
+            var gas = [];
+            var temp = [];
+            var xaxis = [];
+
+            if (globalvar == 1) {
+
                 // alert("succes");
                 globalvar = 0;
                 // $("div.id_100 select").val("<%=qs.id%>");
                 $('#sources').val("<%=qs.id%>");
                 $.ajax({
                     type: "GET",
-                    url: "/getdata?id=" + <%=qs.id%>, 
+                    url: "/getdata?id=" + <%=qs.id%>,
                     dataType: "json",
                     success: function(data) {
                         myVariable = data;
@@ -104,33 +108,33 @@ var globalvar = 0;
 
                 $.ajax({
                     type: "GET",
-                    url: "/getinfo?id=" + <%=qs.id%>, 
+                    url: "/getinfo?id=" + <%=qs.id%>,
                     dataType: "json",
                     success: function(data) {
                         Nodeinfo = data;
-                       
+
                         // console.log(count);
-                       
-                      
-                            nodeid.push(Number(Nodeinfo.node_id));
-                            phone.push(Number(Nodeinfo.phone));
-                            lat.push(Number(Nodeinfo.location.lat));
-                            lng.push(Number(Nodeinfo.location.lng));
-                           
-                      
-                    InsertInfo(nodeid,phone,lat,lng);
+
+
+                        nodeid.push(Number(Nodeinfo.node_id));
+                        phone.push(Number(Nodeinfo.phone));
+                        lat.push(Number(Nodeinfo.location.lat));
+                        lng.push(Number(Nodeinfo.location.lng));
+
+
+                        InsertInfo(nodeid, phone, lat, lng);
                     }
                 });
-           
-                
+
+
             }
 
-            function InsertInfo(x,y,z,t){
-                document.getElementById("NodeInfomation").innerHTML = '<i style="color:red">' + "Node_Id: " +'</i>' + x + '<br/>' +
-                '<i style="color:red">' + "Location_lat: " + '</i>' +  z + '<br/>' +
-                '<i style="color:red">' + "Location_lng: " + '</i>' +  t + '<br/>' +
-                '<i style="color:red">' + "Phone: " + '</i>' +  y + '<br/>'
-            } 
+            function InsertInfo(x, y, z, t) {
+                document.getElementById("NodeInfomation").innerHTML = '<i style="color:red">' + "Node_Id: " + '</i>' + x + '<br/>' +
+                    '<i style="color:red">' + "Location_lat: " + '</i>' + z + '<br/>' +
+                    '<i style="color:red">' + "Location_lng: " + '</i>' + t + '<br/>' +
+                    '<i style="color:red">' + "Phone: " + '</i>' + y + '<br/>'
+            }
 
             function drowchart() {
                 // alert(xaxis);
@@ -138,7 +142,7 @@ var globalvar = 0;
 
                     $('#chart').highcharts({
                         title: {
-                            text: 'Node: '+ <%=qs.id%>,
+                            text: 'Node: ' + <%=qs.id%>,
                             x: -20 //center
                         },
                         subtitle: {
@@ -186,11 +190,11 @@ var globalvar = 0;
         }
 
         //--------------------------------------
-        $(function(){
-            $("#sources").on("change",function(){
+        $(function() {
+            $("#sources").on("change", function() {
                 var e = document.getElementById("sources");
                 var strUser = e.options[e.selectedIndex].value;
-                var myVariable,Nodeinfo;
+                var myVariable, Nodeinfo;
                 var count;
                 var co = [];
                 var dust = [];
@@ -202,20 +206,21 @@ var globalvar = 0;
                 var nodeid = [];
                 var phone = [];
 
-            // check if have req.query
-           
-               
+                // check if have req.query
 
-            // No req.query
-          
+
+
+                // No req.query
+                var dcount = 0;
                 $.ajax({
                     type: "GET",
-                    url: "/getdata?id=" + strUser, 
+                    url: "/getdata?id=" + strUser,
                     dataType: "json",
                     success: function(data) {
                         myVariable = data;
                         count = Object.keys(myVariable).length;
                         // console.log(count);
+                        dcount = count;
                         console.log(myVariable[0].data.co);
                         for (var i = 0; i < count; i++) {
                             co.push(Number(myVariable[i].data.co));
@@ -224,7 +229,7 @@ var globalvar = 0;
                             gas.push(Number(myVariable[i].data.gas));
                             xaxis.push(Number(i + 1));
                         }
-                    drowchart();
+                        drowchart();
                     }
                 });
 
@@ -232,88 +237,96 @@ var globalvar = 0;
 
                 $.ajax({
                     type: "GET",
-                    url: "/getinfo?id=" + strUser, 
+                    url: "/getinfo?id=" + strUser,
                     dataType: "json",
                     success: function(data) {
                         Nodeinfo = data;
-                       
+
                         // console.log(count);
-                       
-                      
-                            nodeid.push(Number(Nodeinfo.node_id));
-                            phone.push(Number(Nodeinfo.phone));
-                            lat.push(Number(Nodeinfo.location.lat));
-                            lng.push(Number(Nodeinfo.location.lng));
-                           
-                      
-                    InsertInfo(nodeid,phone,lat,lng);
+
+
+                        nodeid.push(Number(Nodeinfo.node_id));
+                        phone.push(Number(Nodeinfo.phone));
+                        lat.push(Number(Nodeinfo.location.lat));
+                        lng.push(Number(Nodeinfo.location.lng));
+
+
+                        InsertInfo(nodeid, phone, lat, lng);
                     }
                 });
 
-            //---Function Insert Info
-            function InsertInfo(x,y,z,t){
-                document.getElementById("NodeInfomation").innerHTML = '<i style="color:red">' + "Node_Id: " +'</i>' + x + '<br/>' +
-                '<i style="color:red">' + "Location_lat: " + '</i>' +  z + '<br/>' +
-                '<i style="color:red">' + "Location_lng: " + '</i>' +  t + '<br/>' +
-                '<i style="color:red">' + "Phone: " + '</i>' +  y + '<br/>'
-            }
+                //---Function Insert Info
+                function InsertInfo(x, y, z, t) {
+                    document.getElementById("NodeInfomation").innerHTML = '<i style="color:red">' + "Node_Id: " + '</i>' + x + '<br/>' +
+                        '<i style="color:red">' + "Location_lat: " + '</i>' + z + '<br/>' +
+                        '<i style="color:red">' + "Location_lng: " + '</i>' + t + '<br/>' +
+                        '<i style="color:red">' + "Phone: " + '</i>' + y + '<br/>'
+                }
 
-            
-            function drowchart() {
-                // alert(xaxis);
-                $(function() {
+                function drowchart() {
+                    // alert(xaxis);
+                    $(function() {
 
-                    $('#chart').highcharts({
-                        title: {
-                            text: 'Node: ' + strUser,
-                            x: -20 //center
-                        },
-                        subtitle: {
-                            text: '',
-                            x: -20
-                        },
-                        xAxis: {
-                            categories: xaxis
-                        },
-                        yAxis: {
+                        $('#chart').highcharts({
                             title: {
-                                text: 'Temperature (°C)'
+                                text: 'Node: ' + strUser,
+                                x: -20 //center
                             },
-                            plotLines: [{
-                                value: 0,
-                                width: 1,
-                                color: '#808080'
+                            subtitle: {
+                                text: '',
+                                x: -20
+                            },
+                            xAxis: {
+                                categories: xaxis
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Temperature (°C)'
+                                },
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+                                }]
+                            },
+                            tooltip: {
+                                valueSuffix: '°C'
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle',
+                                borderWidth: 0
+                            },
+                            series: [{
+                                name: 'CO',
+                                data: co
+                            }, {
+                                name: 'TEMP',
+                                data: temp
+                            }, {
+                                name: 'DUST',
+                                data: dust
+                            }, {
+                                name: 'GAS',
+                                data: gas
                             }]
-                        },
-                        tooltip: {
-                            valueSuffix: '°C'
-                        },
-                        legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'middle',
-                            borderWidth: 0
-                        },
-                        series: [{
-                            name: 'CO',
-                            data: co
-                        }, {
-                            name: 'TEMP',
-                            data: temp
-                        }, {
-                            name: 'DUST',
-                            data: dust
-                        }, {
-                            name: 'GAS',
-                            data: gas
-                        }]
+                        });
                     });
-                });
-            }
+                }
+            });
+            // TODO : fix the code
+            socket.on("rdata", function(data) {
+                console.log('get data', data);
+
+                // co.push(Number(data.co));
+                // dust.push(Number(data.dust));
+                // temp.push(Number(data.temp));
+                // gas.push(Number(data.gas));
+                drowchart();
             });
         });
-        
-</script>
+    </script>
     <style type="text/css">
         select option {
             background: rgba(0, 0, 0, 0.3);
@@ -328,13 +341,11 @@ var globalvar = 0;
         }
     </style>
 
-
-
     <script src="js/highcharts.js"></script>
     <script src="js/exporting.js"></script>
     <link rel="stylesheet" href="css/styleGraph.css">
-   <!--  <script type="text/javascript">
-        
+    <!--  <script type="text/javascript">
+
     </script> -->
 
 
@@ -347,24 +358,25 @@ var globalvar = 0;
                 </select>
             </div>
         </div>
-        
-   
-    
+
+
+
         <div class="bot">
-        <div class="bleft"><!-- <p style="color: red">Node Info: </p> -->
-            <span id="NodeInfomation"></span>
-        </div>
+            <div class="bleft">
+                <!-- <p style="color: red">Node Info: </p> -->
+                <span id="NodeInfomation"></span>
+            </div>
             <div id="chart" class="bright"></div>
         </div>
     </div>
 
-    
+
 
 
 
     <script src="js/Graph.js"></script>
-   <!--  <script type="text/javascript">
+    <!--  <script type="text/javascript">
 
-        
+
     </script>
  -->
