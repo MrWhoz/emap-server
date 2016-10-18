@@ -12,7 +12,7 @@
         var globalvar = 0;
         <% } %>
         var socket = io();
-
+        var data_id = null;
         // create Node options
         function initfunction(node) {
             console.log(node.length);
@@ -221,6 +221,7 @@
                         count = Object.keys(myVariable).length;
                         // console.log(count);
                         dcount = count;
+                        data_id = myVariable[0].data.data_id;
                         console.log(myVariable[0].data.co);
                         for (var i = 0; i < count; i++) {
                             co.push(Number(myVariable[i].data.co));
@@ -232,7 +233,15 @@
                         drowchart();
                     }
                 });
+                socket.on("rdata", function(updateData) {
+                    console.log('get data', updateData.new_val.data);
 
+                     co.push(Number(updateData.new_val.data.co));
+                     dust.push(Number(updateData.new_val.data.dust));
+                     temp.push(Number(updateData.new_val.data.temp));
+                    gas.push(Number(updateData.new_val.data.gas));
+                    drowchart();
+                });
                 //Get Info Node
 
                 $.ajax({
@@ -316,15 +325,7 @@
                 }
             });
             // TODO : fix the code
-            socket.on("rdata", function(data) {
-                console.log('get data', data);
 
-                // co.push(Number(data.co));
-                // dust.push(Number(data.dust));
-                // temp.push(Number(data.temp));
-                // gas.push(Number(data.gas));
-                drowchart();
-            });
         });
     </script>
     <style type="text/css">
