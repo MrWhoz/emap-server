@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('newsApp', ['ionic']);
 
-app.controller('myNewsController', function($scope, $http){
+
+app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate){
 
   $scope.news = [];
 
@@ -22,6 +23,11 @@ app.controller('myNewsController', function($scope, $http){
         })
         $scope.$broadcast('scroll.infiniteScrollComplete');
     });
+  };
+
+
+  $scope.toggleLeft = function(){
+    $ionicSideMenuDelegate.toggleLeft();
   };
 
   $scope.doRefresh = function() {
@@ -42,6 +48,8 @@ app.controller('myNewsController', function($scope, $http){
        
     
   };
+
+
 
   $http({
     method: "GET",

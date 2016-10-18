@@ -33,32 +33,18 @@
     <script src="js/app.js"></script>
   </head>
   <body ng-app="newsApp" ng-controller = "myNewsController">
-
+  
     <ion-pane>
     
-
+  <ion-side-menus>
+    <ion-side-menu-content>
       <ion-header-bar class="bar-dark">
+      <div class="buttons">
+        <button class="button icon button-clear ion-navicon-round" ng-click="toggleLeft()"></button>
+      </div>
         <h1 class="title">Thesis</h1>
       </ion-header-bar>
 
-      
-      
-  <div class="tabs-striped tabs-color-assertive">
-    <div class="tabs tabs-icon-top">
-      <a class="tab-item active" href="#">
-        <i class="icon ion-home"></i>
-        HOME
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-star"></i>
-        FAVORITES
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-gear-a"></i>
-        SETTINGS
-      </a>
-    </div>
-  </div>
       <ion-content>
       <ion-refresher
         pulling-text="Pull to refresh..."
@@ -109,6 +95,61 @@
         </ion-infinite-scroll>
 
       </ion-content>
+    </ion-side-menu-content>
+
+      <ion-side-menu side="left">
+        <ion-list>
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-home"></i>
+            Home
+          </a>
+        </ion-list>
+        <ion-list>
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-pulse-strong"></i>
+            Graph
+          </a>
+        </ion-list>
+        <ion-list>
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-paper"></i>
+            Stastic
+          </a>
+        </ion-list>
+        <ion-list>
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-android-chat"></i>
+            Contact
+          </a>
+        </ion-list>
+        <ion-list>
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-android-person"></i>
+            Login
+          </a>
+        </ion-list>
+      </ion-side-menu>
+    </ion-side-menus>
+
+      
+      
+  <div class="tabs-striped tabs-color-assertive">
+    <div class="tabs tabs-icon-top">
+      <a class="tab-item active" href="#">
+        <i class="icon ion-home"></i>
+        HOME
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        FAVORITES
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-gear-a"></i>
+        SETTINGS
+      </a>
+    </div>
+  </div>
+      
     </ion-pane>
   </body>
 </html>
