@@ -233,7 +233,8 @@
                         drowchart();
                     }
                 });
-                socket.on("rdata", function(updateData) {
+                socket.off('rdata');
+                socket.on('rdata', function(updateData) {
                     console.log('get data', updateData.new_val.data);
 
                      co.push(Number(updateData.new_val.data.co));
