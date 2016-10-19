@@ -34,22 +34,26 @@
   </head>
   <body ng-app="newsApp" ng-controller = "myNewsController">
   
-    <ion-pane>
+    <ion-pane ng-controller="tabsController">
     
-  <ion-side-menus>
-    <ion-side-menu-content>
-      <ion-header-bar class="bar-dark">
-      <div class="buttons">
-        <button class="button icon button-clear ion-navicon-round" ng-click="toggleLeft()"></button>
-      </div>
-        <h1 class="title">Thesis</h1>
-      </ion-header-bar>
+  
 
-      <ion-content>
-      <ion-refresher
-        pulling-text="Pull to refresh..."
-        on-refresh="doRefresh()">
-      </ion-refresher>
+      <ion-tabs class="tabs-dark tabs-icon-only">
+        <ion-tab title="Home" icon-on="ion-home" icon-off="ion-home">
+            <ion-side-menus>
+                <ion-side-menu-content>
+                  <ion-header-bar class="bar-dark">
+                    <div class="buttons">
+                      <button class="button icon button-clear ion-navicon-round" ng-click="toggleLeft()"></button>
+                    </div>
+                    <h1 class="title">Thesis</h1>
+                  </ion-header-bar>
+
+            <ion-content>
+              <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="doRefresh()">
+              </ion-refresher>
         <!-- <div class="list">
 
           <a class="item item-icon-left" href="#">
@@ -79,25 +83,25 @@
 
         </div> -->
 
-        <section class="list">
-            <article class="item" ng-repeat = "newsArticle in news track by $index">
-              <a href="{{newsArticle.link}}" class="item item-avatar-left" ng-if="newsArticle.title">
-              <img ng-src="/img/hinh1.png">
-                <h2 class="noWhiteSpace">{{newsArticle.title}}</h2>
-                <p class="noWhiteSpace">{{newsArticle.content}}</p>
-                <p><i> - Posted on {{newsArticle.date}} {{newsArticle.time}}</i></p>
-              </a>
-            </article>
+              <section class="list">
+                  <article class="item" ng-repeat = "newsArticle in news track by $index">
+                    <a href="{{newsArticle.link}}" class="item item-avatar-left" ng-if="newsArticle.title">
+                      <img ng-src="/img/hinh1.png">
+                      <h2 class="noWhiteSpace">{{newsArticle.title}}</h2>
+                      <p class="noWhiteSpace">{{newsArticle.content}}</p>
+                      <p><i> - Posted on {{newsArticle.date}} {{newsArticle.time}}</i></p>
+                    </a>
+                  </article>
           
-        </section>
+              </section>
 
-        <ion-infinite-scroll on-infinite = "loadMore()" distance="5%">
-        </ion-infinite-scroll>
+            <ion-infinite-scroll on-infinite = "loadMore()" distance="5%">
+            </ion-infinite-scroll>
 
-      </ion-content>
-    </ion-side-menu-content>
+            </ion-content>
+        </ion-side-menu-content>
 
-      <ion-side-menu side="left">
+        <ion-side-menu side="left">
         <ion-list>
           <a class="item item-icon-left" href="#">
             <i class="icon ion-home"></i>
@@ -122,34 +126,150 @@
             Contact
           </a>
         </ion-list>
-        <ion-list>
+        <!-- <ion-list>
           <a class="item item-icon-left" href="#">
             <i class="icon ion-android-person"></i>
             Login
           </a>
-        </ion-list>
+        </ion-list> -->
       </ion-side-menu>
     </ion-side-menus>
+        </ion-tab>
 
-      
-      
-  <div class="tabs-striped tabs-color-assertive">
-    <div class="tabs tabs-icon-top">
-      <a class="tab-item active" href="#">
-        <i class="icon ion-home"></i>
-        HOME
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-star"></i>
-        FAVORITES
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-gear-a"></i>
-        SETTINGS
-      </a>
-    </div>
-  </div>
-      
+        <!-- tab 2 -->
+
+        <ion-tab title="Favorites" icon-on="ion-star" icon-off="ion-star">
+           <ion-content>
+            <ion-slide-box pager-click="navSlide(index)">
+              <ion-slide>
+            
+               
+                  <div class="bar bar-header item-input-inset">
+                    <label class="item-input-wrapper">
+                      <i class="icon ion-ios-search placeholder-icon"></i>
+                      <input type="search" placeholder="Node ID">
+                    </label>
+                    <button class="button">
+                      Cancel
+                    </button>
+                  </div>
+               
+                    <div class="color-red">Graph
+                    </div>
+                 
+               
+
+              </ion-slide>
+
+              <ion-slide>
+              <div class="color-red">Stastic
+                </div>
+              </ion-slide>
+            </ion-slide-box>
+         
+          </ion-content>
+        </ion-tab>
+
+       <!--  tab 3 -->
+       <ion-tab title="Setting" icon-on="ion-gear-a" icon-off="ion-gear-a">
+        <ion-content>
+          <div class="list">
+
+            <a class="item item-icon-left" href="#">
+              <i class="icon ion-email"></i>
+              Check mail
+              <span class="badge badge-assertive">1</span>
+            </a>
+
+            <a class="item item-icon-left item-icon-right" href="#">
+              <i class="icon ion-chatbubble-working"></i>
+              Call Ma
+              <i class="icon ion-ios-telephone-outline"></i>
+            </a>
+
+            <a class="item item-icon-left" href="#">
+              <i class="icon ion-star"></i>
+              Favorites
+              <span class="badge badge-assertive">4</span>
+            </a>
+
+            <a class="item item-icon-left" href="#">
+              <i class="icon ion-person-stalker"></i>
+              Friends
+              <span class="badge badge-assertive">0</span>
+            </a>
+            <div class="item item-color">Activities
+            </div>
+            <a class="item item-icon-left" href="#" id="login" ng-controller="AppCtrl" ng-click="modal.show()">
+              <i class="icon ion-person"></i>
+              Login
+            </a>
+            <a class="item item-icon-left" href="#" id="register" ng-controller="AppCtrl1" ng-click="modal.show()">
+              <i class="icon ion-android-create"></i>
+              Register
+            </a>
+
+          </div>
+
+
+        </ion-content>
+        <script id="templates/modal.html" type="text/ng-template">
+          <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+              <h1 class="title">Login Form</h1>
+              <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+              <div class="list">
+                <label class="item item-input">
+                  <span class="input-label">UserName</span>
+                  <input ng-model="newUser.firstName" type="text">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Password</span>
+                  <input ng-model="newUser.lastName" type="password">
+                </label>
+                <!-- <label class="item item-input">
+                  <span class="input-label">Email</span>
+                  <input ng-model="newUser.email" type="text">
+                </label> -->
+                <button class="button button-full button-positive" ng-click="createContact(newUser)">Ok</button>
+              </div>
+            </ion-content>
+          </ion-modal-view>
+        </script>
+
+        <script id="templates/modal.html1" type="text/ng-template">
+          <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+              <h1 class="title">Register Form</h1>
+              <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+              <div class="list">
+                <label class="item item-input">
+                  <span class="input-label">UserName</span>
+                  <input ng-model="newUser.firstName" type="text">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Password</span>
+                  <input ng-model="newUser.lastName" type="password">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Email</span>
+                  <input ng-model="newUser.email" type="text">
+                </label>
+                <button class="button button-full button-positive" ng-click="createContact(newUser)">Ok</button>
+              </div>
+            </ion-content>
+          </ion-modal-view>
+        </script>
+
+       </ion-tab>
+     </ion-tabs>
+
     </ion-pane>
+
+    
   </body>
 </html>

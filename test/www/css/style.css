@@ -2,3 +2,24 @@
 .noWhiteSpace {
 	white-space: normal !important;
 }
+.slider{
+	height: 100%;
+	text-align: center;
+}
+.scroll{
+	height: 100%;
+}
+
+.color-red{
+	height: 100% !important;
+	width: 100%;
+	
+}
+.color-yellow{
+	height: 100%;
+	width: 100%;
+	background-color: yellow;
+}
+.item-color{
+	background-color: #D9D9D9;
+}

@@ -5,6 +5,53 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('newsApp', ['ionic']);
 
+app.controller('tabsController',function($scope,$ionicSlideBoxDelegate){
+    $scope.navSlide = function(index){
+      $ionicSlideBoxDelegate.slide(index,500);
+    }
+});
+
+app.controller('AppCtrl', function($scope, $ionicModal) {
+  
+  $scope.contacts = [
+    { name: 'Gordon Freeman' },
+    { name: 'Barney Calhoun' },
+    { name: 'Lamarr the Headcrab' },
+  ];
+
+  $ionicModal.fromTemplateUrl('templates/modal.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  
+  $scope.createContact = function(u) {        
+    $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+    $scope.modal.hide();
+  };
+
+});
+
+app.controller('AppCtrl1', function($scope, $ionicModal) {
+  
+  $scope.contacts = [
+    { name: 'Gordon Freeman' },
+    { name: 'Barney Calhoun' },
+    { name: 'Lamarr the Headcrab' },
+  ];
+
+  $ionicModal.fromTemplateUrl('templates/modal.html1', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  
+  $scope.createContact = function(u) {        
+    $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+    $scope.modal.hide();
+  };
+
+});
 
 app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate){
 
