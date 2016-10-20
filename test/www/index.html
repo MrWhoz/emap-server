@@ -121,7 +121,7 @@
           </a>
         </ion-list>
         <ion-list>
-          <a class="item item-icon-left" href="#">
+          <a class="item item-icon-left" href="#" ng-controller="AppCtrl2" ng-click="modal.show()">
             <i class="icon ion-android-chat"></i>
             Contact
           </a>
@@ -134,6 +134,35 @@
         </ion-list> -->
       </ion-side-menu>
     </ion-side-menus>
+
+    <script id="templates/contact.html" type="text/ng-template">
+          <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-balanced">
+              <h1 class="title">Contact Form</h1>
+              <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+              <div class="list">
+                <label class="item item-input">
+                  <span class="input-label">First Name</span>
+                  <input ng-model="newUser.firstName" type="text">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Last Name</span>
+                  <input ng-model="newUser.lastName" type="password">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Email</span>
+                  <input ng-model="newUser.email" type="text">
+                </label>
+                <label class="item item-input">
+                  <textarea placeholder="Comments"></textarea>
+                </label>
+                <button class="button button-full button-balanced" ng-click="createContact(newUser)">Submit</button>
+              </div>
+            </ion-content>
+          </ion-modal-view>
+        </script>
         </ion-tab>
 
         <!-- tab 2 -->
@@ -241,7 +270,7 @@
 
         <script id="templates/modal.html1" type="text/ng-template">
           <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
+            <ion-header-bar class="bar bar-header bar-assertive">
               <h1 class="title">Register Form</h1>
               <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
             </ion-header-bar>
@@ -259,7 +288,7 @@
                   <span class="input-label">Email</span>
                   <input ng-model="newUser.email" type="text">
                 </label>
-                <button class="button button-full button-positive" ng-click="createContact(newUser)">Ok</button>
+                <button class="button button-full button-assertive" ng-click="createContact(newUser)">Ok</button>
               </div>
             </ion-content>
           </ion-modal-view>

@@ -53,6 +53,18 @@ app.controller('AppCtrl1', function($scope, $ionicModal) {
 
 });
 
+app.controller('AppCtrl2', function($scope, $ionicModal) {
+  
+
+  $ionicModal.fromTemplateUrl('templates/contact.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  
+
+});
+
 app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate){
 
   $scope.news = [];
