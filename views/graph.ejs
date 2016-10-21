@@ -113,7 +113,7 @@
                             count = Object.keys(myVariable).length;
                             // console.log(count);
                             data_id = myVariable[0].data_id;
-                            console.log('this is dataid',myVariable[0].data_id);
+                            console.log('this is dataid', myVariable[0].data_id);
                             for (var i = 0; i < count; i++) {
                                 co.push(Number(myVariable[i].data.co));
                                 dust.push(Number(myVariable[i].data.dust));
@@ -131,13 +131,7 @@
                         dataType: "json",
                         success: function(data) {
                             Nodeinfo = data;
-                            nodeid.push(Number(Nodeinfo.node_id));
-                            phone.push(Number(Nodeinfo.phone));
-                            lat.push(Number(Nodeinfo.location.lat));
-                            lng.push(Number(Nodeinfo.location.lng));
-
-
-                            InsertInfo(nodeid, phone, lat, lng);
+                            InsertInfo(Nodeinfo.node_id, Nodeinfo.phone, Nodeinfo.location.lat, Nodeinfo.location.lng);
                         }
                     });
                     socket.off('rdata');
@@ -154,11 +148,11 @@
                         }
                     });
                     //Display node info
-                    function InsertInfo(x, y, z, t) {
-                        document.getElementById("NodeInfomation").innerHTML = '<i style="color:red">' + "Node_Id: " + '</i>' + x + '<br/>' +
-                            '<i style="color:red">' + "Location_lat: " + '</i>' + z + '<br/>' +
-                            '<i style="color:red">' + "Location_lng: " + '</i>' + t + '<br/>' +
-                            '<i style="color:red">' + "Phone: " + '</i>' + y + '<br/>'
+                    function InsertInfo(nodeid, phone, lat, lng) {
+                        document.getElementById("NodeID").innerHTML = nodeid;
+                        document.getElementById("Phone").innerHTML = phone;
+                        document.getElementById("Latitude").innerHTML = lat;
+                        document.getElementById("Longitude").innerHTML = lng;
                     }
                     //Drawchart function
                     function drowchart() {
@@ -238,7 +232,6 @@
 
     </script> -->
 
-
     <div class="box123">
         <div class="top">
             <div class="left">NodeId:</div>
@@ -249,20 +242,34 @@
             </div>
         </div>
 
-
-
         <div class="bot">
-            <div class="bleft">
+            <div class="">
                 <!-- <p style="color: red">Node Info: </p> -->
-                <span id="NodeInfomation"></span>
+                <table class="table table-striped table-bordered table-hover table-condensed">
+                    <tbody>
+                        <tr>
+                            <td> Node ID</td>
+                            <td id="NodeID"></td>
+                        </tr>
+                        <tr>
+                            <td> Latitude </td>
+                            <td id="Latitude"></td>
+                        </tr>
+                        <tr>
+                            <td>Longitude </td>
+                            <td id="Longitude"></td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number </td>
+                            <td id="Phone"></td>
+                        </tr>
+                    </tbody>
+                    <!-- <span id="NodeInfomation"></span> -->
+                </table>
             </div>
             <div id="chart" class="bright"></div>
         </div>
     </div>
-
-
-
-
 
     <script src="js/Graph.js"></script>
     <!--  <script type="text/javascript">
