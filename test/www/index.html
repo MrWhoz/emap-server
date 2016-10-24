@@ -57,11 +57,17 @@
 
               <section class="list">
                   <article class="item" ng-repeat = "newsArticle in news track by $index">
-                    <a href="{{newsArticle.link}}" class="item item-avatar-left" ng-if="newsArticle.title">
+                    <a href="http://localhost:8888/getdata?id={{newsArticle.node_id}}" class="item item-avatar-left" ng-if="newsArticle.time">
                       <img ng-src="/img/hinh1.png">
-                      <h2 class="noWhiteSpace">{{newsArticle.title}}</h2>
-                      <p class="noWhiteSpace">{{newsArticle.content}}</p>
-                      <p><i> - Posted on {{newsArticle.date}} {{newsArticle.time}}</i></p>
+                      <h2 class="noWhiteSpace">Node ID: {{newsArticle.node_id}}</h2>
+                      <p class="noWhiteSpace">Location: </p>
+                      <p class="noWhiteSpace" style="padding-left: 20px">Latitude: {{newsArticle.location.lat}}</p>
+                      <p class="noWhiteSpace" style="padding-left: 20px">Longititude: {{newsArticle.location.lng}}</p>
+                      <p class="noWhiteSpace">Phone: {{newsArticle.phone}}</p>
+                      <p class="noWhiteSpace">Data_ID: {{newsArticle.data_id}}</p>
+                      <p class="noWhiteSpace">ID: {{newsArticle.id}}</p>
+                      <p class="noWhiteSpace" style="color:red; font-style: italic;">Status: {{newsArticle.status}}</p>
+                      <p><i> - Posted on {{newsArticle.time}}</i></p>
                     </a>
                   </article>
           
