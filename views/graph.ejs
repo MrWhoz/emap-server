@@ -119,8 +119,9 @@
                                 dust.push(Number(myVariable[i].data.dust));
                                 temp.push(Number(myVariable[i].data.temp));
                                 gas.push(Number(myVariable[i].data.gas));
-                                xaxis.push(Number(i + 1));
+                                xaxis.push(myVariable[i].time);
                             }
+                            console.log(xaxis);
                             drowchart();
                         }
                     });
@@ -144,6 +145,7 @@
                             dust.push(Number(updateData.new_val.data.dust));
                             temp.push(Number(updateData.new_val.data.temp));
                             gas.push(Number(updateData.new_val.data.gas));
+                            xaxis.push(updateData.new_val.time);
                             drowchart();
                         }
                     });
