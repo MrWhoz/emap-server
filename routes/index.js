@@ -185,7 +185,8 @@ router.get('/add', async function(req, res, next) {
         "s1": req.query.s1,
         "s2": req.query.s2,
         "s3": req.query.s3,
-        "s4": req.query.s4
+        "s4": req.query.s4,
+	"s5": req.query.s5
     };
     res.send(await node.addNodeData(nodeData));
     res.redirect('/home');

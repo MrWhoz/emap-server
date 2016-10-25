@@ -77,6 +77,7 @@
                 var gas = [];
                 var temp = [];
                 var xaxis = [];
+                var bat = [];
                 var node_id = null;
                 if (globalvar == 1) {
                     node_id = <%=qs.id%>;
@@ -95,6 +96,7 @@
                     gas = [];
                     temp = [];
                     xaxis = [];
+                    bat = [];
                     var lat = [];
                     var lng = [];
                     var nodeid = [];
@@ -119,6 +121,7 @@
                                 dust.push(Number(myVariable[i].data.dust));
                                 temp.push(Number(myVariable[i].data.temp));
                                 gas.push(Number(myVariable[i].data.gas));
+                                bat.push(Number(myVariable[i].data.bat));
                                 xaxis.push(Number(i + 1));
                             }
                             drowchart();
@@ -144,6 +147,7 @@
                             dust.push(Number(updateData.new_val.data.dust));
                             temp.push(Number(updateData.new_val.data.temp));
                             gas.push(Number(updateData.new_val.data.gas));
+                            bat.push(Number(updateData.new_val.data.bat));
                             drowchart();
                         }
                     });
@@ -202,6 +206,9 @@
                                 }, {
                                     name: 'GAS',
                                     data: gas
+                                }, {
+                                    name: 'BATTERY',
+                                    data: bat
                                 }]
                             });
                         });

@@ -69,7 +69,8 @@ async function addNodeData(nodeData) {
             co: nodeData.s1,
             temp: nodeData.s2,
             dust: nodeData.s3,
-            gas: nodeData.s4
+            gas: nodeData.s4,
+	    bat: nodeData.s5
         }
     }
     let result = await r.db(dbName).table("nodeData").insert(data).run(connection);
