@@ -75,7 +75,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
         id:$scope.lastarticleID
     }
 
-    $http.get('http://codedamn.com/filesCodedamn/news.php',{params: parameters}).success(function(items){
+    $http.get('http://localhost:8888/getinfo?list=1&status=1',{params: parameters}).success(function(items){
         $scope.lastarticleID = items.lastID;
         angular.forEach(items, function(item){
           $scope.news.push(item);
@@ -93,7 +93,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
     $scope.news = [];
     $http({
           method: "GET",
-          url: "http://codedamn.com/filesCodedamn/news.php"
+          url: "http://localhost:8888/getinfo?list=1&status=1"
         }).then(function(newsData){
           angular.forEach(newsData.data, function(newsArticle){
               $scope.news.push(newsArticle);
@@ -112,13 +112,13 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
 
   $http({
     method: "GET",
-    url: "http://codedamn.com/filesCodedamn/news.php"
+    url: "http://localhost:8888/getinfo?list=1&status=1"
   }).then(function(newsData){
     angular.forEach(newsData.data, function(newsArticle){
         $scope.news.push(newsArticle);
     });
-    $scope.news.lastarticleID = newsData.data.lastID;
-    console.log($scope.news.lastarticleID);
+    // $scope.news.lastarticleID = newsData.data.lastID;
+    // console.log($scope.news.lastarticleID);
   });
 });
 

@@ -54,42 +54,20 @@
                 pulling-text="Pull to refresh..."
                 on-refresh="doRefresh()">
               </ion-refresher>
-        <!-- <div class="list">
-
-          <a class="item item-icon-left" href="#">
-            <i class="icon ion-email"></i>
-            Check mail
-          </a>
-
-          <a class="item item-icon-left item-icon-right" href="#">
-            <i class="icon ion-chatbubble-working"></i>
-            Call Ma
-            <i class="icon ion-ios-telephone-outline"></i>
-          </a>
-
-          <a class="item item-icon-left" href="#">
-            <i class="icon ion-mic-a"></i>
-            Record album
-            <span class="item-note">
-              Grammy
-            </span>
-          </a>
-
-          <a class="item item-icon-left" href="#">
-            <i class="icon ion-person-stalker"></i>
-            Friends
-            <span class="badge badge-assertive">0</span>
-          </a>
-
-        </div> -->
 
               <section class="list">
                   <article class="item" ng-repeat = "newsArticle in news track by $index">
-                    <a href="{{newsArticle.link}}" class="item item-avatar-left" ng-if="newsArticle.title">
+                    <a href="http://localhost:8888/getdata?id={{newsArticle.node_id}}" class="item item-avatar-left" ng-if="newsArticle.time">
                       <img ng-src="/img/hinh1.png">
-                      <h2 class="noWhiteSpace">{{newsArticle.title}}</h2>
-                      <p class="noWhiteSpace">{{newsArticle.content}}</p>
-                      <p><i> - Posted on {{newsArticle.date}} {{newsArticle.time}}</i></p>
+                      <h2 class="noWhiteSpace">Node ID: {{newsArticle.node_id}}</h2>
+                      <p class="noWhiteSpace">Location: </p>
+                      <p class="noWhiteSpace" style="padding-left: 20px">Latitude: {{newsArticle.location.lat}}</p>
+                      <p class="noWhiteSpace" style="padding-left: 20px">Longititude: {{newsArticle.location.lng}}</p>
+                      <p class="noWhiteSpace">Phone: {{newsArticle.phone}}</p>
+                      <p class="noWhiteSpace">Data_ID: {{newsArticle.data_id}}</p>
+                      <p class="noWhiteSpace">ID: {{newsArticle.id}}</p>
+                      <p class="noWhiteSpace" style="color:red; font-style: italic;">Status: {{newsArticle.status}}</p>
+                      <p><i> - Posted on {{newsArticle.time}}</i></p>
                     </a>
                   </article>
           
