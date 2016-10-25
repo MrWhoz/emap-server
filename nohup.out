@@ -13229,3 +13229,77 @@ Error: Not Found
     at Function.handle (/home/pi/emap-server/node_modules/express/lib/router/index.js:176:3)
     at router (/home/pi/emap-server/node_modules/express/lib/router/index.js:46:12)
 [0mGET http://testp1.piwo.pila.pl/testproxy.php [33m404 [0m7.883 ms - 1629[0m
+Tue, 25 Oct 2016 03:15:09 GMT express-session deprecated undefined resave option; provide resave option at routes/index.js:10:12
+Tue, 25 Oct 2016 03:15:09 GMT express-session deprecated undefined saveUninitialized option; provide saveUninitialized option at routes/index.js:10:12
+Tue, 25 Oct 2016 03:15:10 GMT express-session deprecated undefined resave option; provide resave option at app.js:29:9
+Tue, 25 Oct 2016 03:15:10 GMT express-session deprecated undefined saveUninitialized option; provide saveUninitialized option at app.js:29:9
+Listening on port8888
+[0mGET /css/bootstrap.css [36m304 [0m31.952 ms - -[0m
+[0mGET /css/font-awesome.min.css [36m304 [0m28.915 ms - -[0m
+[0mGET /css/layoutStyle.css [36m304 [0m12.546 ms - -[0m
+[0mGET /css/login.css [36m304 [0m13.484 ms - -[0m
+[0mGET /css/styleHomepage.css [36m304 [0m11.462 ms - -[0m
+[0mGET /css/userprofile.css [36m304 [0m9.792 ms - -[0m
+[0mGET /js/jquery.js [36m304 [0m7.439 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m3.914 ms - -[0m
+[0mGET /js/jquery.ba-cond.min.js [36m304 [0m3.794 ms - -[0m
+[0mGET /js/login.js [36m304 [0m1.885 ms - -[0m
+[0mGET /getinfo?list=1&status=1 [36m304 [0m53.931 ms - -[0m
+Error: Not Found
+    at app.get.res.render.page (/home/pi/emap-server/app.js:182:15)
+    at Layer.handle [as handle_request] (/home/pi/emap-server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/pi/emap-server/node_modules/express/lib/router/index.js:312:13)
+    at /home/pi/emap-server/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/home/pi/emap-server/node_modules/express/lib/router/index.js:330:12)
+    at next (/home/pi/emap-server/node_modules/express/lib/router/index.js:271:10)
+    at /home/pi/emap-server/node_modules/express/lib/router/index.js:618:15
+    at next (/home/pi/emap-server/node_modules/express/lib/router/index.js:256:14)
+    at session (/home/pi/emap-server/node_modules/express-session/index.js:181:7)
+    at Layer.handle [as handle_request] (/home/pi/emap-server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/pi/emap-server/node_modules/express/lib/router/index.js:312:13)
+    at /home/pi/emap-server/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/home/pi/emap-server/node_modules/express/lib/router/index.js:330:12)
+    at next (/home/pi/emap-server/node_modules/express/lib/router/index.js:271:10)
+    at Function.handle (/home/pi/emap-server/node_modules/express/lib/router/index.js:176:3)
+    at router (/home/pi/emap-server/node_modules/express/lib/router/index.js:46:12)
+[0mGET /favicon.ico [33m404 [0m37.296 ms - 1629[0m
+[0mGET /css/bootstrap.css [36m304 [0m27.669 ms - -[0m
+[0mGET /css/font-awesome.min.css [36m304 [0m18.583 ms - -[0m
+[0mGET /css/layoutStyle.css [36m304 [0m23.930 ms - -[0m
+[0mGET /css/login.css [36m304 [0m23.876 ms - -[0m
+[0mGET /css/userprofile.css [36m304 [0m21.866 ms - -[0m
+[0mGET /js/jquery.js [36m304 [0m17.752 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m34.575 ms - -[0m
+[0mGET /js/jquery.ba-cond.min.js [36m304 [0m27.363 ms - -[0m
+[0mGET /css/styleGraph.css [32m200 [0m27.581 ms - 3774[0m
+[0mGET /js/exporting.js [32m200 [0m11.149 ms - 9164[0m
+[0mGET /js/socket.io.js [32m200 [0m17.436 ms - 82873[0m
+[0mGET /js/Graph.js [32m200 [0m6.767 ms - 1543[0m
+[0mGET /js/login.js [36m304 [0m9.224 ms - -[0m
+[0mGET /js/highcharts.js [32m200 [0m11.561 ms - 190858[0m
+new socketio connection
+new socketio connection
+[0mGET /getinfo?list=1&status=1 [36m304 [0m48.239 ms - -[0m
+[0mGET /getinfo?id=4 [32m200 [0m38.253 ms - 233[0m
+[0mGET /getdata?id=4 [32m200 [0m65.697 ms - 2[0m
+[0mGET /getinfo?id=1 [32m200 [0m36.650 ms - 217[0m
+[0mGET /getdata?id=1 [32m200 [0m480.607 ms - 50047[0m
+[0mGET /css/bootstrap.css [36m304 [0m29.280 ms - -[0m
+[0mGET /css/font-awesome.min.css [36m304 [0m18.413 ms - -[0m
+[0mGET /css/layoutStyle.css [36m304 [0m12.548 ms - -[0m
+[0mGET /css/login.css [36m304 [0m13.162 ms - -[0m
+[0mGET /css/userprofile.css [36m304 [0m13.882 ms - -[0m
+[0mGET /js/jquery.js [36m304 [0m14.547 ms - -[0m
+[0mGET /css/styleGraph.css [36m304 [0m6.810 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m8.127 ms - -[0m
+[0mGET /js/jquery.ba-cond.min.js [36m304 [0m4.533 ms - -[0m
+[0mGET /js/socket.io.js [36m304 [0m1.829 ms - -[0m
+[0mGET /js/highcharts.js [36m304 [0m10.248 ms - -[0m
+[0mGET /js/exporting.js [36m304 [0m8.308 ms - -[0m
+[0mGET /js/Graph.js [36m304 [0m5.287 ms - -[0m
+[0mGET /js/login.js [36m304 [0m4.808 ms - -[0m
+new socketio connection
+[0mGET /getinfo?list=1&status=1 [36m304 [0m29.041 ms - -[0m
+[0mGET /getinfo?id=1 [36m304 [0m48.378 ms - -[0m
+[0mGET /getdata?id=1 [36m304 [0m378.593 ms - -[0m
+[0mGET /add?node_id=1&s1=22&s2=33&s3=44&s5=50 [0m- [0m- ms - -[0m
