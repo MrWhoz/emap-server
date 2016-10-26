@@ -19,6 +19,10 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+   <!--  <script src="node_modules/chart.js/dist/Chart.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+    
+
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
@@ -26,11 +30,15 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
+    <script src="js/angular-chart.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/Chart.min.js"></script>
   </head>
   <body ng-app="newsApp" ng-controller = "myNewsController">
   
@@ -146,9 +154,9 @@
         <!-- tab 2 -->
 
         <ion-tab title="Favorites" icon-on="ion-star" icon-off="ion-star">
-           <ion-content>
+           <ion-content ng-controller="ExampleChart">
             <ion-slide-box pager-click="navSlide(index)">
-              <ion-slide>
+              <ion-slide >
             
                
                   <div class="bar bar-header item-input-inset">
@@ -157,13 +165,28 @@
                       <input type="search" placeholder="Node ID">
                     </label>
                     <button class="button">
-                      Cancel
+                      OK
                     </button>
                   </div>
                
-                    <div class="color-red">Graph
+                    <div class="card">
+                      <div class="item item-divider">
+                        This is a line chart
+                      </div>
+                      <div class="item item-text-wrap">
+                          <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" legend="true" chart-series="series" options="{showTooltips: false}"></canvas>
+                      </div> 
                     </div>
-                 
+
+                    <div class="card">
+                      <div class="item item-divider">
+                        This is a bar chart
+                      </div>
+                      <div class="item item-text-wrap">
+                          <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" legend="true" chart-series="series" options="{showTooltips: false}"></canvas>
+                      </div> 
+                    </div>
+                   
                
 
               </ion-slide>

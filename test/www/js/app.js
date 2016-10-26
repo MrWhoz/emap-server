@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('newsApp', ['ionic']);
+var app = angular.module('newsApp', ['ionic','chart.js']);
 
 app.controller('tabsController',function($scope,$ionicSlideBoxDelegate){
     $scope.navSlide = function(index){
@@ -63,6 +63,16 @@ app.controller('AppCtrl2', function($scope, $ionicModal) {
   });
   
 
+});
+
+// Chart js
+app.controller("ExampleChart", function($scope){
+  $scope.labels = ["January","February","March","April","May","Jun","July"];
+  $scope.series = ['Series A','Series B'];
+  $scope.data = [
+      [65,59,80,81,56,55,40],
+      [28,46,41,19,86,27,90]
+  ]; 
 });
 
 app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate){
