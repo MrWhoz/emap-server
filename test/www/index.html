@@ -162,12 +162,17 @@
                   <div class="bar bar-header item-input-inset">
                     <label class="item-input-wrapper">
                       <i class="icon ion-ios-search placeholder-icon"></i>
-                      <input type="search" placeholder="Node ID">
+                      <input type="search" placeholder="Node ID" id="NodeID" ng-model="Info.NodeID">
                     </label>
-                    <button class="button">
+                    <button class="button" ng-click="getNodeid(Info)">
                       OK
                     </button>
+
+
                   </div>
+                  <div class="item">
+                    {{value}}
+                    </div>
                
                     <div class="card">
                       <div class="item item-divider">

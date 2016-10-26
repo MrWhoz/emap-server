@@ -66,12 +66,57 @@ app.controller('AppCtrl2', function($scope, $ionicModal) {
 });
 
 // Chart js
-app.controller("ExampleChart", function($scope){
-  $scope.labels = ["January","February","March","April","May","Jun","July"];
-  $scope.series = ['Series A','Series B'];
+app.controller("ExampleChart", function($scope,$http){
+  var co = [];
+  var dust =[];
+  var gas = [];
+  var nhietdo = [];
+  var xaxis = [];
+  var temp;
+  var nodeid;
+  var obj = {content:null};
+  $scope.getNodeid = function(infodata){
+    $scope.news = [];
+    
+    $scope.value = infodata;
+    temp = $scope.value;
+    nodeid = temp.NodeID;
+    $http({
+      method:"GET",
+      url: "http://localhost:8888/getdata?id="+nodeid
+    }).then(function(newsData){
+    
+        $scope.news.push(newsData.data);
+        var t=1;
+          for(var j=0;j<$scope.news[0].length;j++){
+           
+              co.push(Number($scope.news[0][j].data.co));
+              dust.push(Number($scope.news[0][j].data.dust));
+              gas.push(Number($scope.news[0][j].data.gas));
+              nhietdo.push(Number($scope.news[0][j].data.temp));
+              // xaxis.push($scope.news[0][j].time);
+              xaxis.push(Number(t));
+              t++;
+          }
+   
+          console.log(co);
+          console.log(dust);
+          console.log(gas);
+          console.log(nhietdo);
+          console.log(xaxis);
+    });
+   
+    
+  };
+
+  
+  $scope.labels = xaxis;
+  $scope.series = ['CO','Dust','Gas','Temp'];
   $scope.data = [
-      [65,59,80,81,56,55,40],
-      [28,46,41,19,86,27,90]
+      co,
+      dust,
+      gas,
+      nhietdo
   ]; 
 });
 
@@ -86,10 +131,12 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
     }
 
     $http.get('http://localhost:8888/getinfo?list=1&status=1',{params: parameters}).success(function(items){
+
         $scope.lastarticleID = items.lastID;
         angular.forEach(items, function(item){
           $scope.news.push(item);
         })
+
         $scope.$broadcast('scroll.infiniteScrollComplete');
     });
   };
@@ -117,6 +164,8 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
        
     
   };
+
+  
 
 
 
