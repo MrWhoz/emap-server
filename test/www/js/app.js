@@ -66,7 +66,7 @@ app.controller('AppCtrl2', function($scope, $ionicModal) {
 });
 
 // Chart js
-app.controller("ExampleChart", function($scope,$http){
+app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
   var co = [];
   var dust =[];
   var gas = [];
@@ -81,43 +81,56 @@ app.controller("ExampleChart", function($scope,$http){
     $scope.value = infodata;
     temp = $scope.value;
     nodeid = temp.NodeID;
-    $http({
-      method:"GET",
-      url: "http://localhost:8888/getdata?id="+nodeid
-    }).then(function(newsData){
-    
-        $scope.news.push(newsData.data);
-        var t=1;
-          for(var j=0;j<$scope.news[0].length;j++){
-           
-              co.push(Number($scope.news[0][j].data.co));
-              dust.push(Number($scope.news[0][j].data.dust));
-              gas.push(Number($scope.news[0][j].data.gas));
-              nhietdo.push(Number($scope.news[0][j].data.temp));
-              // xaxis.push($scope.news[0][j].time);
-              xaxis.push(Number(t));
-              t++;
-          }
-   
-          console.log(co);
-          console.log(dust);
-          console.log(gas);
-          console.log(nhietdo);
-          console.log(xaxis);
-    });
-   
-    
-  };
+    console.log(nodeid);
+    var number = parseInt(nodeid);
+    console.log(number);
+    if(isNaN(number)){
+      var alerPopup = $ionicPopup.alert({
+        Title: 'Validation',
+        template:'Only Number Allowed!'
+      });
+      alertPopup.then(function(res){
+        console.log('Please enter valid number');
+      });
+    }else{
+        $http({
+          method:"GET",
+          url: "http://localhost:8888/getdata?id="+nodeid
+        }).then(function(newsData){
+        
+            $scope.news.push(newsData.data);
+            var t=1;
+              for(var j=0;j<$scope.news[0].length;j++){
+               
+                  co.push(Number($scope.news[0][j].data.co));
+                  dust.push(Number($scope.news[0][j].data.dust));
+                  gas.push(Number($scope.news[0][j].data.gas));
+                  nhietdo.push(Number($scope.news[0][j].data.temp));
+                  // xaxis.push($scope.news[0][j].time);
+                  xaxis.push(Number(t));
+                  t++;
+              }
+       
+              console.log(co);
+              console.log(dust);
+              console.log(gas);
+              console.log(nhietdo);
+              console.log(xaxis);
+        });
+       
+        
+      };
 
-  
-  $scope.labels = xaxis;
-  $scope.series = ['CO','Dust','Gas','Temp'];
-  $scope.data = [
-      co,
-      dust,
-      gas,
-      nhietdo
-  ]; 
+      
+      $scope.labels = xaxis;
+      $scope.series = ['CO','Dust','Gas','Temp'];
+      $scope.data = [
+          co,
+          dust,
+          gas,
+          nhietdo
+      ]; 
+    }
 });
 
 app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate){
