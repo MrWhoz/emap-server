@@ -192,6 +192,26 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
     // $scope.news.lastarticleID = newsData.data.lastID;
     // console.log($scope.news.lastarticleID);
   });
+
+  // Send Feedback
+  $scope.sendFeedback = function(){
+    if(window.plugins && window.plugins.emailComposer){
+      window.plugins.emailComposer.showEmailComposerWithCallback(function(result){
+        console.log("Response -> " + result);
+      },
+            "Feedback for your App", // Subject
+            "",                      // Body
+            ["manhcuong3010a9@gmail.com"],    // To
+            'Hello',                    // CC
+            null,                    // BCC
+            false,                   // isHTML
+            null,                    // Attachments
+            null);                   // Attachment Data
+      }
+    }
+
+
+
 });
 
 app.run(function($ionicPlatform) {
