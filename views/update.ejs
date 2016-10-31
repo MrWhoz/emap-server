@@ -3,7 +3,7 @@
 <div class="container">
   <h2>Updating Node: input</h2>
   <p>The form below contains four input elements</p>
- 
+
     <div class="form-group">
       <label for="nodeid">NodeID:</label>
       <input type="text" class="form-control" style="width: 50%" id="nodeid">
@@ -21,7 +21,7 @@
       <input type="text" class="form-control" style="width: 50%" id="phone">
     </div>
     <button class="btn btn-success" onclick="updatingnode()">Update</button>
-  
+
 </div>
 </div>
 <script type="text/javascript">
@@ -37,12 +37,30 @@
     // console.log(i[0]);
 
     function updatingnode(){
-      var nodeid = document.getElementById("nodeid").value;
+      var node_id = document.getElementById("nodeid").value;
       var lat = document.getElementById("lat").value;
-    
+
       var lng = document.getElementById("lng").value;
-    
+
       var phone = document.getElementById("phone").value;
-      window.location.replace("/updatenode?node="+nodeid+"&lat="+lat+"&lng="+lng+"&phone="+phone);
+      //window.location.replace("/updatenode?node="+nodeid+"&lat="+lat+"&lng="+lng+"&phone="+phone);
+      $.ajax({
+          type: "POST",
+          url: '/updatenode',
+          data: {
+              'node_id': node_id,
+              'lat': lat,
+              'lng': lng,
+              'phone': phone
+          },
+          dataType: 'json',
+          success: function(response) {
+              // you will get response from your php page (what you echo or print)
+              console.log(response);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              console.log(textStatus, errorThrown);
+          }
+      });
     }
 </script>

@@ -5,17 +5,19 @@ var sess;
 // -----
 var router = express.Router();
 var node = require('../models/node.js');
-router.use(session({secret:'ssshhhh'}));
+router.use(session({
+    secret: 'ssshhhh'
+}));
 var nodemailer = require('nodemailer');
 var smtpTransport = require("nodemailer-smtp-transport");
 
 var smtpTransport = nodemailer.createTransport(smtpTransport({
-    host : "smtp.gmail.com",
-    secureConnection : false,
+    host: "smtp.gmail.com",
+    secureConnection: false,
     port: 587,
-    auth : {
-        user : "manhcuong3010a9@gmail.com",
-        pass : "manhcuong1"
+    auth: {
+        user: "manhcuong3010a9@gmail.com",
+        pass: "manhcuong1"
     }
 }));
 
@@ -131,41 +133,56 @@ router.get('/getdata', async function(req, res, next) {
 //     res.send(data);
 // })
 
-router.get('/initnew', async function(req, res, next) {
+router.post('/initnew', async function(req, res, next) {
     // TODO : change get to post method, discuss about using device or web/app to config this
-    var lat = parseFloat(req.query.lat);
-    var lng = parseFloat(req.query.lng);
+    var lat = parseFloat(req.body.lat);
+    var lng = parseFloat(req.body.lng);
     let data = {
-        node_id: req.query.node,
+        node_id: req.body.node_id,
         location: {
             lat: lat,
             lng: lng
         },
-        phone: req.query.phone,
+        phone: req.body.phone,
         status: 0
     };
     let result = await node.addNode(data);
     // res.send(result);
-    res.redirect('/home');
+    if (result == 'duplicated') {
+        res.send({
+            status: 'duplicated'
+        });
+    } else {
+        res.send({
+            status: 'sucess'
+        });
+    }
 })
 
-router.get('/updatenode', async function(req, res, next) {
-    if (req.query.node) {
-        var lat = parseFloat(req.query.lat);
-        var lng = parseFloat(req.query.lng);
+router.post('/updatenode', async function(req, res, next) {
+    if (req.body.node_id) {
+        var lat = parseFloat(req.body.lat);
+        var lng = parseFloat(req.body.lng);
         let data = {
-            node_id: req.query.node,
+            node_id: req.body.node_id,
             location: {
                 lat: lat,
                 lng: lng
             },
-            phone: req.query.phone
+            phone: req.body.phone
         }
         let result = await node.updateNode(data);
         // res.send('result');
-        res.redirect('/configmarkers/confignode');
-    } else
-        res.send('error');
+        if (result == 'error') {
+            res.send({
+                status: 'error'
+            });
+        } else {
+            res.send({
+                status: 'sucess'
+            });
+        };
+    }
 });
 
 router.get('/replace', async function(req, res, next) {
@@ -186,10 +203,9 @@ router.get('/add', async function(req, res, next) {
         "s2": req.query.s2,
         "s3": req.query.s3,
         "s4": req.query.s4,
-	"s5": req.query.s5
+        "s5": req.query.s5
     };
     res.send(await node.addNodeData(nodeData));
-    res.redirect('/home');
 });
 
 // Graph with nodeID
@@ -201,18 +217,18 @@ router.get('/add', async function(req, res, next) {
 //     });
 // })
 
-router.get('/send',function(req,res){
-    var mailOptions={
-        to : 'manhcuong3010a9@gmail.com',
-        subject : req.query.subject,
-        text : req.query.text
+router.get('/send', function(req, res) {
+    var mailOptions = {
+        to: 'manhcuong3010a9@gmail.com',
+        subject: req.query.subject,
+        text: req.query.text
     }
     console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function(error, response){
-        if(error){
+    smtpTransport.sendMail(mailOptions, function(error, response) {
+        if (error) {
             console.log(error);
             res.end("error");
-        }else{
+        } else {
             console.log("Message sent: " + response.message);
             res.end("sent");
         }

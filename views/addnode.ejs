@@ -1,39 +1,54 @@
 <% layout('layout') -%>
-<div style="margin:70px auto">
-<div class="container">
-  <h2>Adding New Node: input</h2>
-  <p>The form below contains four input elements</p>
- 
-    <div class="form-group">
-      <label for="nodeid">NodeID:</label>
-      <input type="text" class="form-control" style="width: 50%" id="nodeid">
+    <div style="margin:70px auto">
+        <div class="container">
+            <h2>Adding New Node: input</h2>
+            <p>The form below contains four input elements</p>
+
+            <div class="form-group">
+                <label for="nodeid">NodeID:</label>
+                <input type="text" class="form-control" style="width: 50%" id="nodeid">
+            </div>
+            <div class="form-group">
+                <label for="lat">Lat:</label>
+                <input type="text" class="form-control" style="width: 50%" id="lat">
+            </div>
+            <div class="form-group">
+                <label for="lng">Lng:</label>
+                <input type="text" class="form-control" style="width: 50%" id="lng">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" style="width: 50%" id="phone">
+            </div>
+            <button class="btn btn-success" onclick="addnewnode()">OK</button>
+
+        </div>
     </div>
-    <div class="form-group">
-      <label for="lat">Lat:</label>
-      <input type="text" class="form-control" style="width: 50%" id="lat">
-    </div>
-    <div class="form-group">
-      <label for="lng">Lng:</label>
-      <input type="text" class="form-control" style="width: 50%" id="lng">
-    </div>
-    <div class="form-group">
-      <label for="phone">Phone:</label>
-      <input type="text" class="form-control" style="width: 50%" id="phone">
-    </div>
-    <button class="btn btn-success" onclick="addnewnode()">OK</button>
-  
-</div>
-</div>
-<script type="text/javascript">
-	function addnewnode(){
-		var nodeid = document.getElementById("nodeid").value;
-		var lat = document.getElementById("lat").value;
-		
-		var lng = document.getElementById("lng").value;
-		
-		var phone = document.getElementById("phone").value;
-		window.location.replace("/initnew?node="+nodeid+"&lat="+lat+"&lng="+lng+"&phone="+phone);
-		
-		
-	}
-</script>
+    <script type="text/javascript">
+        function addnewnode() {
+            var node_id = document.getElementById("nodeid").value;
+            var lat = document.getElementById("lat").value;
+            var lng = document.getElementById("lng").value;
+            var phone = document.getElementById("phone").value;
+
+            $.ajax({
+                type: "POST",
+                url: '/initnew',
+                data: {
+                    'node_id': node_id,
+                    'lat': lat,
+                    'lng': lng,
+                    'phone': phone
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // you will get response from your php page (what you echo or print)
+                    console.log(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+
+        }
+    </script>

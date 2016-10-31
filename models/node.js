@@ -13,6 +13,17 @@ async function addNode(data) {
     var connection = await connect();
     var duuid;
 
+    if (data.data_id == null){
+        var node = await r.db(dbName).table("nodeList").filter({
+            node_id: data.node_id
+        }).run(connection);
+        node = await node.toArray();
+        if (node[0]){
+          console.log('asdasdsad');
+          return 'duplicated';
+        }
+    }
+
     if (data.data_id) {
         duuid = data.data_id;
     } else duuid = uuid.v4();
@@ -31,6 +42,7 @@ async function addNode(data) {
     console.log('add node', data);
     let result = await r.db(dbName).table("nodeList").insert(data).run(connection);
     if (result) return result;
+
 }
 
 async function replaceNode(node_id_new, node_id_old) {
@@ -83,9 +95,9 @@ async function updateNode(data) {
         var sResult = await changeNodeStatus(data.node_id, 0);
         if (sResult) {
             var nNode = await addNode(data);
-            if (nNode) return 'ok';
+            if (nNode) return 'success';
         } else {
-            return 0;
+            return 'error';
         }
     }
 };
@@ -101,10 +113,10 @@ async function changeNodeStatus(node_id, status) {
     } else return 0;
 }
 
-async function getNodeInfoByID(id) {
+async function getNodeInfoByID(node_id) {
     var connection = await connect();
     var node = await r.db(dbName).table("nodeList").filter({
-        node_id: id,
+        node_id: node_id,
         status: 1
     }).run(connection);
     node = await node.toArray();
@@ -118,12 +130,12 @@ async function getNodeList(status) {
     node = await node.toArray();
     return node || false;
 }
-async function getNodeByIDStatus(id, status) {
+async function getNodeByIDStatus(node_id, status) {
     // TODO get lastest node
     var connection = await connect();
-    console.log('this is ID :', id);
+    console.log('this is ID :', node_id);
     var node = await r.db(dbName).table("nodeList").filter({
-        node_id: id,
+        node_id: node_id,
         status: status
     }).run(connection);
     node = await node.toArray();
@@ -147,12 +159,12 @@ async function getdataIDByNodeID(node_id) {
 async function getNodeDataByID(node_id) {
     var connection = await connect();
     let data_id = await getdataIDByNodeID(node_id);
-    var node = await r.db(dbName).table("nodeData").filter({
+    var data = await r.db(dbName).table("nodeData").filter({
         data_id: data_id
     }).orderBy('time').run(connection);
-    node = await node.toArray();
+    data = await data.toArray();
 
-    return node || false;
+    return data || false;
 }
 
 
