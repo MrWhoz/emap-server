@@ -39,6 +39,8 @@
     <script src="js/app.js"></script>
     <script src="js/Chart.js"></script>
     <script src="js/Chart.min.js"></script>
+
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM"></script>
   </head>
   <body ng-app="newsApp" ng-controller = "myNewsController">
   
@@ -65,7 +67,7 @@
 
               <section class="list">
                   <article class="item" ng-repeat = "newsArticle in news track by $index">
-                    <a href="http://localhost:8888/getdata?id={{newsArticle.node_id}}" class="item item-avatar-left" ng-if="newsArticle.time">
+                    <a href="http://localhost:8888/home" class="item item-avatar-left" ng-if="newsArticle.time">
                       <img ng-src="/img/hinh1.png">
                       <h2 class="noWhiteSpace">Node ID: {{newsArticle.node_id}}</h2>
                       <p class="noWhiteSpace">Location: </p>
@@ -85,6 +87,22 @@
             </ion-infinite-scroll>
 
             </ion-content>
+
+            <!-- Google map -->
+
+            <script id="templates/googlemap.html" type="text/ng-template">
+              <ion-modal-view>
+                <ion-header-bar class="bar bar-header bar-positive">
+                  <h1 class="title">Google Map</h1>
+                  <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                </ion-header-bar>
+                <ion-content class="padding" ng-controller="MapCtrl1">
+                    <div id="map" data-tap-disabled="true"></div>
+                </ion-content>
+              </ion-modal-view>
+            </script>
+
+
         </ion-side-menu-content>
 
         <ion-side-menu side="left">
