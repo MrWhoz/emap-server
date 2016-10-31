@@ -10,6 +10,9 @@ require('babel-polyfill');
 /*---------------BEGIN INIT------------------*/
 
 var routes = require('./routes/index');
+var user = require('./routes/user');
+var node = require('./routes/node');
+
 var app = express();
 
 var config = require('./routes/index');
@@ -177,6 +180,8 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/user', user);
+app.use('/node', node);
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
