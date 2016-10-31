@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MrWhoz/emap-server#readme",
   "dependencies": {
+    "angular-chart.js": "^1.0.3",
     "asyncawait": "^1.0.6",
     "babel": "^6.5.2",
     "babel-plugin-syntax-async-functions": "^6.1.4",
