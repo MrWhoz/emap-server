@@ -108,9 +108,10 @@
                                 temp.push(Number(myVariable[i].data.temp));
                                 gas.push(Number(myVariable[i].data.gas));
                                 bat.push(Number(myVariable[i].data.bat));
-                                xaxis.push(myVariable[i].time);
+                                var d = new Date(myVariable[i].time);
+                                xaxis.push(d);
                             }
-                            console.log(xaxis);
+                            console.log(data);
                             drowchart();
                         }
                     });

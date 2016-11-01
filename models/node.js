@@ -127,6 +127,7 @@ async function getNodeList(status) {
         status: status
     }).run(connection);
     node = await node.toArray();
+    console.log(node);
     return node || false;
 }
 async function getNodeByIDStatus(node_id, status) {
