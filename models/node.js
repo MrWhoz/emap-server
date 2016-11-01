@@ -13,14 +13,13 @@ async function addNode(data) {
     var connection = await connect();
     var duuid;
 
-    if (data.data_id == null){
+    if (data.data_id == null) {
         var node = await r.db(dbName).table("nodeList").filter({
-            node_id: data.node_id
+            node_id: data.node_id,
         }).run(connection);
         node = await node.toArray();
-        if (node[0]){
-          console.log('asdasdsad');
-          return 'duplicated';
+        if (node[0]) {
+            return 'duplicated';
         }
     }
 
@@ -42,7 +41,6 @@ async function addNode(data) {
     console.log('add node', data);
     let result = await r.db(dbName).table("nodeList").insert(data).run(connection);
     if (result) return result;
-
 }
 
 async function replaceNode(node_id_new, node_id_old) {
@@ -82,7 +80,7 @@ async function addNodeData(nodeData) {
             temp: nodeData.s2,
             dust: nodeData.s3,
             gas: nodeData.s4,
-	    bat: nodeData.s5
+            bat: nodeData.s5
         }
     }
     let result = await r.db(dbName).table("nodeData").insert(data).run(connection);
@@ -94,12 +92,13 @@ async function updateNode(data) {
     if (node) {
         var sResult = await changeNodeStatus(data.node_id, 0);
         if (sResult) {
+            data.data_id = node.data_id;
+            console.log(data);
             var nNode = await addNode(data);
             if (nNode) return 'success';
-        } else {
-            return 'error';
-        }
+        } else return 'create update error';
     }
+    return 'error'
 };
 
 async function changeNodeStatus(node_id, status) {
@@ -109,8 +108,8 @@ async function changeNodeStatus(node_id, status) {
         status: status
     }).run(connection);
     if (result) {
-        return 1;
-    } else return 0;
+        return 'success';
+    } else return 'error';
 }
 
 async function getNodeInfoByID(node_id) {

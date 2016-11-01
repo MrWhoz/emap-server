@@ -144,9 +144,13 @@ router.post('/initnew', async function(req, res, next) {
     let result = await node.addNode(data);
     // res.send(result);
     if (result == 'duplicated') {
-        res.send({status: 'duplicated'});
+        res.send({
+            status: 'duplicated'
+        });
     } else {
-        res.send({status: 'sucess'});
+        res.send({
+            status: 'sucess'
+        });
     }
 })
 
@@ -155,21 +159,19 @@ router.post('/updatenode', async function(req, res, next) {
         var lat = parseFloat(req.body.lat);
         var lng = parseFloat(req.body.lng);
         let data = {
-            node_id: req.body.node,
+            node_id: req.body.node_id,
             location: {
                 lat: lat,
                 lng: lng
             },
-            phone: req.query.phone
+            phone: req.body.phone
         }
         let result = await node.updateNode(data);
         // res.send('result');
-        if (result == 'error') {
-            res.send({status: 'error'});
-        } else {
-            res.send({status: 'sucess'});
-        };
-      }
+        res.send({
+            status: result
+        })
+    }
 });
 
 router.get('/replace', async function(req, res, next) {
@@ -193,7 +195,7 @@ router.get('/add', async function(req, res, next) {
         "s5": req.query.s5
     };
     res.send(await node.addNodeData(nodeData));
-    res.redirect('/home');
+
 });
 
 // Graph with nodeID
