@@ -1,186 +1,213 @@
 <% layout('layout') -%>
-<link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
+    <link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
     </script>
     <script type="text/javascript">
-window.onload = function () {
-  <% if(temp!='nouser') {%>
-    console.log("<%=temp%>");
-    document.getElementById("user").innerHTML = "<%=temp%>";
-    $('#modalbox').attr('data-target','#myModal1');
-        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
-  <%} else{%>
-    console.log("error");
-  <%}%>
-};
-</script>
+        window.onload = function() {
+            <% if(temp!='nouser') {%>
+            console.log("<%=temp%>");
+            document.getElementById("user").innerHTML = "<%=temp%>";
+            $('#modalbox').attr('data-target', '#myModal1');
+            document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+            <%} else{%>
+            console.log("error");
+            <%}%>
+        };
+    </script>
 
-<!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
+    <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
     <div id="floating-panel">
-      <input id="addmarker" onclick="addmarker();"  type=button value="Add Markers">
-      <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
-      <input onclick="configMarkers();" type=button value="Config Markers">
+        <input id="addmarker" onclick="addmarker();" type=button value="Add Markers">
+        <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
+        <input onclick="configMarkers();" type=button value="Config Markers">
     </div>
     <div id="map" style="width: 100%"></div>
 
     <script>
-    var map;
-    var markers = [];
-    var NodeID = [];
-    var lat = [];
-    var lng = [];
-    var temp;
-    // get data
-
-    $.ajax({
-      type:     "GET",
-      url:      "/getinfo?list=1&status=1", // <-- Here
-      dataType: "json",
-      success: function(data){
-
-          myVariable = data;
-          count = Object.keys(myVariable).length;
-        // console.log(count);
-        for(var i=0;i<count;i++){
-          NodeID.push(Number(myVariable[i].node_id));
-          lat.push(Number(myVariable[i].location.lat));
-          lng.push(Number(myVariable[i].location.lng));
-
-
-        }
-
-        temp = lat.length;
-        initMap();
-      }
-
-    });
-    function initMap() {
+        var map;
         var markers = [];
+        var NodeID = [];
+        var lat = [];
+        var lng = [];
+        var temp;
+        // get data
+        var nodeNumber;
 
-        // console.log(temp);
+        $.ajax({
+            type: "GET",
+            url: "/getinfo?list=1&status=1", // <-- Here
+            dataType: "json",
+            success: function(data) {
 
-        var j = [];
-        var t = [];
-        var z = [];
-        for(var i = 0;i<temp;i++){
-          j.push(parseFloat(lat[i]));
-          t.push(parseFloat(lng[i]));
-          z.push(parseInt(NodeID[i]));
-        }
-        // console.log(j);
-
-        if(temp>1){
-          var lat_lng = {lat: j[0], lng: t[0]};
-          map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 14,
-            center: lat_lng,
-            mapTypeId: google.maps.MapTypeId.roadmap
-          });
-          addMarker(lat_lng,z[0]);
-          for(var i =1; i<temp;i++){
-            var lat_lng = {lat: j[i], lng: t[i]};
-            addMarker(lat_lng,z[i]);
-          }
-        }else{
-        var lat_lng = {lat: 10.773283, lng: 106.657639};
-
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 14,
-          center: lat_lng,
-          mapTypeId: google.maps.MapTypeId.roadmap
-        });
-
-      // // This event listener will call addMarker() when the map is clicked.
-      // map.addListener('click', function(event) {
-      //   addMarker(event.latLng);
-      // });
-
-      // Adds a marker at the center of the map.
-        addMarker(lat_lng,1);
-      }
+                myVariable = data;
+                count = Object.keys(myVariable).length;
+                nodeNumber = count;
+                // console.log(count);
+                for (var i = 0; i < count; i++) {
+                    NodeID.push(Number(myVariable[i].node_id));
+                    lat.push(Number(myVariable[i].location.lat));
+                    lng.push(Number(myVariable[i].location.lng));
 
 
+                }
 
-      }
-      function addMarker(location,nodeid) {
-        var marker = new google.maps.Marker({
-        position: location,
-        map: map
+                temp = lat.length;
+                initMap();
+            }
 
         });
-        var temp = markers.length;
-        addInfoWindow(marker,nodeid);
 
-        markers.push(marker);
-        if(temp==0){
-          for(var i=0;i<markers.length;i++){
-            var circle = new google.maps.Circle({
-              map: map,
-              radius: 1200,
-              fillColor: '#AA0000'
-            });
-            circle.bindTo('center', markers[i], 'position');
-          }
-        }else{
-          for(var i=temp;i<markers.length;i++){
-            var circle = new google.maps.Circle({
-              map: map,
-              radius: 1200,
-              fillColor: '#AA0000'
-            });
-            circle.bindTo('center', markers[i], 'position');
-          }
+        function initMap() {
+            var markers = [];
+
+            // console.log(temp);
+
+            var j = [];
+            var t = [];
+            var z = [];
+            for (var i = 0; i < temp; i++) {
+                j.push(parseFloat(lat[i]));
+                t.push(parseFloat(lng[i]));
+                z.push(parseInt(NodeID[i]));
+            }
+            // console.log(j);
+
+            if (temp > 1) {
+                var lat_lng = {
+                    lat: j[0],
+                    lng: t[0]
+                };
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: lat_lng,
+                    mapTypeId: google.maps.MapTypeId.roadmap
+                });
+                addMarker(lat_lng, z[0]);
+                for (var i = 1; i < temp; i++) {
+                    var lat_lng = {
+                        lat: j[i],
+                        lng: t[i]
+                    };
+                    addMarker(lat_lng, z[i]);
+                }
+            } else {
+                var lat_lng = {
+                    lat: 10.773283,
+                    lng: 106.657639
+                };
+
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: lat_lng,
+                    mapTypeId: google.maps.MapTypeId.roadmap
+                });
+
+                // // This event listener will call addMarker() when the map is clicked.
+                // map.addListener('click', function(event) {
+                //   addMarker(event.latLng);
+                // });
+
+                // Adds a marker at the center of the map.
+                addMarker(lat_lng, 1);
+            }
         }
 
+        function addMarker(location, nodeid) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
 
-      }
+            });
+            var temp = markers.length;
+            addInfoWindow(marker, nodeid);
 
-      function addInfoWindow(marker, message) {
-            var temp = "/graph?id="+ message;
+            markers.push(marker);
+            if (temp == 0) {
+                for (var i = 0; i < markers.length; i++) {
+                    var circle = new google.maps.Circle({
+                        map: map,
+                        radius: 1200,
+                        fillColor: '#AA0000'
+                    });
+                    circle.bindTo('center', markers[i], 'position');
+                }
+            } else {
+                for (var i = temp; i < markers.length; i++) {
+                    var circle = new google.maps.Circle({
+                        map: map,
+                        radius: 1200,
+                        fillColor: '#AA0000'
+                    });
+                    circle.bindTo('center', markers[i], 'position');
+                }
+            }
+
+
+        }
+
+        function addInfoWindow(marker, message) {
+            var temp = "/graph?id=" + message;
 
             var infoWindow = new google.maps.InfoWindow({
-                content: "Node: " + message + '<br/>' + '<a href="'+temp+'">' + "View Graph" + '</a>' + '<br/>' + '<a href="#">' + "View Stastic" + '</a>'
-                // stastic later----------------
+                content: "Node: " + message + '<br/>' + '<a href="' + temp + '">' + "View Graph" + '</a>' + '<br/>' + '<a href="#">' + "View Stastic" + '</a>'
+                    // stastic later----------------
             });
 
-            google.maps.event.addListener(marker, 'click', function () {
+            google.maps.event.addListener(marker, 'click', function() {
                 infoWindow.open(map, marker);
             });
-      }
+        }
 
 
 
-      function addmarker(){
-        document.getElementById("addmarker").style.color = "blue";
+        function addmarker() {
+            document.getElementById("addmarker").style.color = "blue";
 
-        map.addListener('click', function(event) {
-          var i = temp;
+            map.addListener('click', function(event) {
+                var i = temp;
 
-          i++;
-          temp ++;
-          var phone = 123456;
+                i++;
+                temp++;
+                var phone = 123456;
+
+                nodeNumber++;
+                var lat = event.latLng.lat();
+                var len = event.latLng.lng();
+                addMarker(event.latLng, i);
+                // alert(event.latLng.lat());
+                //TODO
+                $.ajax({
+                    type: "POST",
+                    url: '/initnew',
+                    data: {
+                        'node_id': nodeNumber,
+                        'lat': lat,
+                        'lng': lng,
+                        'phone': phone
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        // you will get response from your php page (what you echo or print)
+                        console.log(response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+                });
+                //window.location.replace("/initnew?node="+i+"&lat="+lat+"&lng="+len+"&phone="+phone);
+            });
 
 
-        var lat = event.latLng.lat();
-        var len = event.latLng.lng();
-        addMarker(event.latLng,i);
-        // alert(event.latLng.lat());
-        //TODO
-        window.location.replace("/initnew?node="+i+"&lat="+lat+"&lng="+len+"&phone="+phone);
-        });
-
-
-      }
-      // Stop add markers
-      function stopAdd(){
-        document.getElementById("addmarker").style.color = "black";
-        google.maps.event.clearListeners(map, 'click');
-      }
+        }
+        // Stop add markers
+        function stopAdd() {
+            document.getElementById("addmarker").style.color = "black";
+            google.maps.event.clearListeners(map, 'click');
+        }
 
 
 
-      function configMarkers(){
-        window.location.href = "/configmarkers";
-      }
+        function configMarkers() {
+            window.location.href = "/configmarkers";
+        }
     </script>
