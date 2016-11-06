@@ -116,6 +116,12 @@
                                 xaxis.push(d);
                             }
                             console.log(data);
+                            document.getElementById("update").innerHTML = "CO: "+co[count-1] +'<br/>'
+                                + "Dust: " + dust[count-1] + '<br/>'
+                                + "Temp: " + temp[count-1] + '<br/>'
+                                + "Gas: " + gas[count-1] + '<br/>'
+                                + "Batery: " + bat[count-1] + '<br/>'
+                                + "DATE: " + xaxis[count-1] + '<br/>';
                             drowchart();
                         }
                     });
@@ -128,7 +134,8 @@
                             Nodeinfo = data;
                             InsertInfo(Nodeinfo.node_id, Nodeinfo.phone, Nodeinfo.location.lat, Nodeinfo.location.lng);
                             console.log(Nodeinfo.location.lat);
-                            initMap(Nodeinfo.location.lat,Nodeinfo.location.lng);
+                            initMap(Nodeinfo.location.lat,Nodeinfo.location.lng,Nodeinfo.node_id);
+
                         }
                     });
                     socket.off('rdata');
@@ -278,6 +285,10 @@
                             <td>Phone Number </td>
                             <td id="Phone"></td>
                         </tr>
+                        <tr>
+                            <td>Lasted Update </td>
+                            <td id="update"></td>
+                        </tr>
                     </tbody>
                     <!-- <span id="NodeInfomation"></span> -->
                 </table>
@@ -290,7 +301,7 @@
     <script src="js/Graph.js"></script>
     <script>
 
-      function initMap(lat,lng) {
+      function initMap(lat,lng,message) {
         var myLatLng = {lat: lat, lng: lng};
 
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -303,5 +314,19 @@
           map: map,
           title: 'Hello World!'
         });
+        addInfoWindow(marker,message);
       }
+
+      function addInfoWindow(marker, message) {
+        
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: "Node ID: " + message
+                    // stastic later----------------
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infoWindow.open(map, marker);
+            });
+        }
     </script>
