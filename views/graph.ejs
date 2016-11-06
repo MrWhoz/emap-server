@@ -1,6 +1,8 @@
 <% layout('layout') -%>
 
     <script src="js/socket.io.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
+    </script>
     <script type="text/javascript">
         //------
         // Check if have req.query
@@ -88,6 +90,8 @@
                     var nodeid = [];
                     var phone = [];
                     display();
+
+                   
                 });
 
                 function display() {
@@ -123,6 +127,8 @@
                         success: function(data) {
                             Nodeinfo = data;
                             InsertInfo(Nodeinfo.node_id, Nodeinfo.phone, Nodeinfo.location.lat, Nodeinfo.location.lng);
+                            console.log(Nodeinfo.location.lat);
+                            initMap(Nodeinfo.location.lat,Nodeinfo.location.lng);
                         }
                     });
                     socket.off('rdata');
@@ -139,6 +145,20 @@
                             drowchart();
                         }
                     });
+
+                    //create marker
+                    // function initMap() {
+                    //     var myLatLng = {lat: -25.363, lng: 131.044};
+                    //     var map = new google.maps.Map(document.getElementById('map'), {
+                    //         zoom: 4,
+                    //         center: myLatLng
+                    //     });
+                    //     var marker = new google.maps.Marker({
+                    //         position: myLatLng,
+                    //         map: map,
+                    //         title: 'Hello World!'
+                    //     });
+                    // }
                     //Display node info
                     function InsertInfo(nodeid, phone, lat, lng) {
                         document.getElementById("NodeID").innerHTML = nodeid;
@@ -146,6 +166,9 @@
                         document.getElementById("Latitude").innerHTML = lat;
                         document.getElementById("Longitude").innerHTML = lng;
                     }
+
+                    // create google map thumbnail
+
                     //Drawchart function
                     function drowchart() {
                         // alert(xaxis);
@@ -259,8 +282,26 @@
                     <!-- <span id="NodeInfomation"></span> -->
                 </table>
             </div>
-            <div id="chart" class="bright"></div>
+            <div id="chart" class="bright" style="float: left;width: 900px"></div>
+            <div id="map" style="float: right; width: 290px;height: 390px; margin:5px auto;"></div>
         </div>
     </div>
 
     <script src="js/Graph.js"></script>
+    <script>
+
+      function initMap(lat,lng) {
+        var myLatLng = {lat: lat, lng: lng};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 17,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+      }
+    </script>
