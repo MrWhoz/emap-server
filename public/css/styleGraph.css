@@ -131,25 +131,55 @@ body {
   margin:0 auto;
   height: auto;
 }
-.box123>.top>.left{
+.box123>.top>.contentleft{
+  float: left;
+  margin: 0;
+  width: 50%;
+}
+.box123>.top>.contentright{
+  float: left;
+  margin: 0;
+  width: 50%
+}
+.box123>.top>.contentleft>.left{
   font-size: 130%;
   font-style: bold;
-  width:20%;
+  width:40%;
   float: left;
   line-height: 50px;
   text-align: center;
 }
-.box123>.top>.id_100>select{
+.box123>.top>.contentright>.left{
+  font-size: 130%;
+  font-style: bold;
+  width:40%;
+  float: left;
+  line-height: 50px;
+  text-align: center;
+}
+.box123>.top>.contentleft>.id_100>select{
   width: 200px;
   height: 50px;
   float: left;
-  width: 15%;
+  
   margin-bottom: 20px;
 }
-.box123>.top>.id_100>select>option{
+.box123>.top>.contentleft>.id_100>select>option{
   line-height: 50px;
   height: 50px;
 }
+.box123>.top>.contentright>.id_100>select{
+  width: 200px;
+  height: 50px;
+  float: left;
+  
+  margin-bottom: 20px;
+}
+.box123>.top>.contentright>.id_100>select>option{
+  line-height: 50px;
+  height: 50px;
+}
+
 .box123>.bot{
   margin:100px auto;
   clear: both;

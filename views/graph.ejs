@@ -28,6 +28,10 @@
             $('#sources').val("<%=qs.id%>");
             <% } %>
         }
+
+        //Create date options
+
+
         window.onload = function() {
                 <% if(temp!='nouser') {%>
                 console.log("<%=temp%>");
@@ -56,7 +60,7 @@
                             NodeID.push(Number(myVariable[i].node_id));
                         }
                         initfunction(NodeID);
-                        console.log(NodeID);
+                        // console.log(NodeID);
                     }
                 });
                 //---------------------------------------
@@ -94,6 +98,121 @@
                    
                 });
 
+                function removeOptions(selectbox)
+                {
+                    var i;
+                    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+                    {
+                        selectbox.remove(i);
+                    }
+                }
+
+                function createDateOptions(date,co,dust,temp,gas,bat,xaxis){
+                    var select = document.getElementById("date");
+                    for(var i = 0, l = date.length; i < l; i++){
+                        var option = date[i];
+                        var el = document.createElement("option");
+                        el.textContent = option;
+                        el.value = option;
+                        select.appendChild(el);
+                    }
+                }
+
+                $("#date").on("change", function() {
+                    var e = document.getElementById("date");
+                    date = e.options[e.selectedIndex].value;
+                    var i = 0;
+                    var j;
+                    var long = xaxis.length;
+                    for(var t=0;t<long;t++){
+                        if(xaxis[t] == date){
+                            j = t;
+                            break;
+                        }
+                    }
+                    var ngay = xaxis[j].getDate();
+                    var thang = xaxis[j].getMonth();
+                    var co1 = [];
+                    var dust1 = [];
+                    var temp1 = [];
+                    var gas1 = [];
+                    var bat1 = [];
+                    var x = [];
+                    for(z=j;z<long;z++){
+                        if(z==j){
+                            co1.push(co[z]);
+                            dust1.push(dust[z]);
+                            temp1.push(temp[z]);
+                            gas1.push(gas[z]);
+                            x.push(xaxis[z]);
+                        }
+                        else{
+                            if(xaxis[z].getDate() == ngay && xaxis[z].getMonth()==thang){
+                                co1.push(co[z]);
+                                dust1.push(dust[z]);
+                                temp1.push(temp[z]);
+                                gas1.push(gas[z]);
+                                x.push(xaxis[z]);
+                            }
+                        }
+
+                    }
+
+                    // Drow new chart
+
+                    $(function() {
+                            $('#chart').highcharts({
+                                title: {
+                                    text: 'Node: ' + node_id,
+                                    x: -20 //center
+                                },
+                                subtitle: {
+                                    text: '',
+                                    x: -20
+                                },
+                                xAxis: {
+                                    categories: x
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: 'Value'
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: '#808080'
+                                    }]
+                                },
+                                tooltip: {
+                                    valueSuffix: '°C'
+                                },
+                                legend: {
+                                    layout: 'vertical',
+                                    align: 'right',
+                                    verticalAlign: 'middle',
+                                    borderWidth: 0
+                                },
+                                series: [{
+                                    name: 'CO',
+                                    data: co1
+                                }, {
+                                    name: 'TEMP',
+                                    data: temp1
+                                }, {
+                                    name: 'DUST',
+                                    data: dust1
+                                }, {
+                                    name: 'GAS',
+                                    data: gas1
+                                }, {
+                                    name: 'BATTERY',
+                                    data: bat1
+                                }]
+                            });
+                        });
+                    
+                   
+                    });
                 function display() {
                     // Get node data
                     $.ajax({
@@ -122,6 +241,29 @@
                                 + "Gas: " + gas[count-1] + '<br/>'
                                 + "Batery: " + bat[count-1] + '<br/>'
                                 + "DATE: " + xaxis[count-1] + '<br/>';
+
+                            console.log(xaxis[0]);
+                            var date = [];
+                            for(var i=0;i<count;i++){
+                                
+                                if(i==0){
+                                    date.push(xaxis[i]);
+                                    
+                                }else{
+                                    var long = date.length;
+                                    var lastelement = date[long-1];
+                                    var ngay = lastelement.getDate();
+                                    var thang = lastelement.getMonth();
+                                    if(xaxis[i].getDate()!=ngay || xaxis[i].getMonth()!=thang){
+                                        date.push(xaxis[i]);
+                                    }
+                                }
+                            }
+                          
+                        
+                            console.log(date.length);
+                            removeOptions(document.getElementById("date"));
+                            createDateOptions(date,co,dust,temp,gas,bat,xaxis);
                             drowchart();
                         }
                     });
@@ -256,15 +398,28 @@
 
     <div class="box123">
         <div class="top">
-            <div class="left">NodeId:</div>
-            <div class="id_100">
-                <select name="sources" id="sources">
-                    <option value="">Chose Node ID</option>
-                </select>
+            <div class="contentleft">
+                <div class="left">NodeId:</div>
+                <div class="id_100">
+                    <select name="sources" id="sources">
+                        <option value="">Chose Node ID</option>
+                    </select>
+                </div>
             </div>
+
+            <div class="contentright">
+                <div class="left">Date:</div>
+                <div class="id_100">
+                    <select name="date" id="date">
+                        <option value="">Chose Date</option>
+                    </select>
+                </div>
+            </div>
+
+            
         </div>
 
-        <div class="bot">
+        <div class="bot" style="clear: both;">
             <div class="">
                 <!-- <p style="color: red">Node Info: </p> -->
                 <table class="table table-striped table-bordered table-hover table-condensed">
