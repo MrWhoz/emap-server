@@ -116,6 +116,79 @@
                         el.value = option;
                         select.appendChild(el);
                     }
+                    var ngay = xaxis[0].getDate();
+                    var thang = xaxis[0].getMonth();
+                    var co1 = [];
+                    var dust1 = [];
+                    var temp1 = [];
+                    var gas1 = [];
+                    var bat1 = [];
+                    var x = [];
+                    for(var i = 0; i < xaxis.length; i++){
+                        if(xaxis[i].getDate() == ngay && xaxis[i].getMonth() ==  thang){
+                            co1.push(co[i]);
+                            dust1.push(dust[i]);
+                            temp1.push(temp[i]);
+                            gas1.push(gas[i]);
+                            x.push(xaxis[i]);
+                        }
+                    }
+                    console.log(co1);
+                    console.log(dust1);
+                    console.log(gas1);
+                    console.log(temp1);
+                    console.log(x);
+                    // Drow chart with 1st option
+                    $(function() {
+                            $('#chart').highcharts({
+                                title: {
+                                    text: 'Node: ' + node_id,
+                                    x: -20 //center
+                                },
+                                subtitle: {
+                                    text: '',
+                                    x: -20
+                                },
+                                xAxis: {
+                                    categories: x
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: 'Value'
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: '#808080'
+                                    }]
+                                },
+                                tooltip: {
+                                    valueSuffix: '°C'
+                                },
+                                legend: {
+                                    layout: 'vertical',
+                                    align: 'right',
+                                    verticalAlign: 'middle',
+                                    borderWidth: 0
+                                },
+                                series: [{
+                                    name: 'CO',
+                                    data: co1
+                                }, {
+                                    name: 'TEMP',
+                                    data: temp1
+                                }, {
+                                    name: 'DUST',
+                                    data: dust1
+                                }, {
+                                    name: 'GAS',
+                                    data: gas1
+                                }, {
+                                    name: 'BATTERY',
+                                    data: bat1
+                                }]
+                            });
+                        });
                 }
 
                 $("#date").on("change", function() {
@@ -264,7 +337,7 @@
                             console.log(date.length);
                             removeOptions(document.getElementById("date"));
                             createDateOptions(date,co,dust,temp,gas,bat,xaxis);
-                            drowchart();
+                            // drowchart();
                         }
                     });
                     // Get node info
