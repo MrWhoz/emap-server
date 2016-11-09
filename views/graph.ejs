@@ -133,11 +133,12 @@
                             x.push(xaxis[i]);
                         }
                     }
-                    console.log(co1);
-                    console.log(dust1);
-                    console.log(gas1);
-                    console.log(temp1);
-                    console.log(x);
+                    var x1 = [];
+                    for(var t = 0; t < x.length; t++){
+                        x1.push(x[t].getHours()+":"+x[t].getMinutes() + ":" + x[t].getSeconds());
+                    }
+                    console.log(x1);
+                    
                     // Drow chart with 1st option
                     $(function() {
                             $('#chart').highcharts({
@@ -150,7 +151,7 @@
                                     x: -20
                                 },
                                 xAxis: {
-                                    categories: x
+                                    categories: x1
                                 },
                                 yAxis: {
                                     title: {
@@ -230,6 +231,10 @@
                         }
 
                     }
+                    var x1 = [];
+                    for(var t = 0; t < x.length; t++){
+                        x1.push(x[t].getHours()+":"+x[t].getMinutes() + ":" + x[t].getSeconds());
+                    }
 
                     // Drow new chart
 
@@ -244,7 +249,7 @@
                                     x: -20
                                 },
                                 xAxis: {
-                                    categories: x
+                                    categories: x1
                                 },
                                 yAxis: {
                                     title: {
