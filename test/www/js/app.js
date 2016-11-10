@@ -109,7 +109,7 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
     }else{
         $http({
           method:"GET",
-          url: "http://localhost:8888/getdata?id="+nodeid
+          url: "http://www.codingyourfuture.com/getdata?id="+nodeid
         }).then(function(newsData){
         
             $scope.news.push(newsData.data);
@@ -213,7 +213,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
         id:$scope.lastarticleID
     }
 
-    $http.get('http://localhost:8888/getinfo?list=1&status=1',{params: parameters}).success(function(items){
+    $http.get('http://www.codingyourfuture.com/getinfo?list=1&status=1',{params: parameters}).success(function(items){
 
         $scope.lastarticleID = items.lastID;
         angular.forEach(items, function(item){
@@ -233,7 +233,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
     $scope.news = [];
     $http({
           method: "GET",
-          url: "http://localhost:8888/getinfo?list=1&status=1"
+          url: "http://www.codingyourfuture.com/getinfo?list=1&status=1"
         }).then(function(newsData){
           angular.forEach(newsData.data, function(newsArticle){
               $scope.news.push(newsArticle);
@@ -254,7 +254,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
 
   $http({
     method: "GET",
-    url: "http://localhost:8888/getinfo?list=1&status=1"
+    url: "http://www.codingyourfuture.com/getinfo?list=1&status=1"
   }).then(function(newsData){
     angular.forEach(newsData.data, function(newsArticle){
         $scope.news.push(newsArticle);

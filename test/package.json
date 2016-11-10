@@ -1,7 +1,7 @@
 {
-  "name": "test",
+  "name": "Thesis",
   "version": "1.1.1",
-  "description": "test: An Ionic project",
+  "description": "Get data from sensor and tracking via googlemap.",
   "dependencies": {
     "angular-chart.js": "^1.0.3",
     "chart.js": "^2.3.0",
