@@ -95,7 +95,7 @@
                     var phone = [];
                     display();
 
-                   
+
                 });
 
                 function removeOptions(selectbox)
@@ -130,6 +130,7 @@
                             dust1.push(dust[i]);
                             temp1.push(temp[i]);
                             gas1.push(gas[i]);
+                            bat1.push(bat[i]);
                             x.push(xaxis[i]);
                         }
                     }
@@ -138,7 +139,7 @@
                         x1.push(x[t].getHours()+":"+x[t].getMinutes() + ":" + x[t].getSeconds());
                     }
                     console.log(x1);
-                    
+
                     // Drow chart with 1st option
                     $(function() {
                             $('#chart').highcharts({
@@ -218,6 +219,7 @@
                             dust1.push(dust[z]);
                             temp1.push(temp[z]);
                             gas1.push(gas[z]);
+                            bat1.push(bat[z]);
                             x.push(xaxis[z]);
                         }
                         else{
@@ -226,6 +228,7 @@
                                 dust1.push(dust[z]);
                                 temp1.push(temp[z]);
                                 gas1.push(gas[z]);
+                                bat1.push(bat[z]);
                                 x.push(xaxis[z]);
                             }
                         }
@@ -288,8 +291,8 @@
                                 }]
                             });
                         });
-                    
-                   
+
+
                     });
                 function display() {
                     // Get node data
@@ -323,10 +326,10 @@
                             console.log(xaxis[0]);
                             var date = [];
                             for(var i=0;i<count;i++){
-                                
+
                                 if(i==0){
                                     date.push(xaxis[i]);
-                                    
+
                                 }else{
                                     var long = date.length;
                                     var lastelement = date[long-1];
@@ -337,8 +340,8 @@
                                     }
                                 }
                             }
-                          
-                        
+
+
                             console.log(date.length);
                             removeOptions(document.getElementById("date"));
                             createDateOptions(date,co,dust,temp,gas,bat,xaxis);
@@ -494,7 +497,7 @@
                 </div>
             </div>
 
-            
+
         </div>
 
         <div class="bot" style="clear: both;">
@@ -551,7 +554,7 @@
       }
 
       function addInfoWindow(marker, message) {
-        
+
 
             var infoWindow = new google.maps.InfoWindow({
                 content: "Node ID: " + message
