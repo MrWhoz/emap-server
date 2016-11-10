@@ -203,6 +203,7 @@ body {
   width:80% ;
   float: left ;
   height: 400px;
+  margin-bottom: 30px;
 }
 .optionbox{
   line-height: 50px;
