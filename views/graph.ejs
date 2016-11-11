@@ -32,6 +32,7 @@
         //Create date options
 
 
+
         window.onload = function() {
                 <% if(temp!='nouser') {%>
                 console.log("<%=temp%>");
@@ -97,7 +98,59 @@
 
 
                 });
-
+                function drowchart(xaxis,co,dust,gas,temp,bat) {
+                        // alert(xaxis);
+                        $(function() {
+                            $('#chart').highcharts({
+                                title: {
+                                    text: 'Node: ' + node_id,
+                                    x: -20 //center
+                                },
+                                subtitle: {
+                                    text: '',
+                                    x: -20
+                                },
+                                xAxis: {
+                                    categories: xaxis
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: 'Value'
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: '#808080'
+                                    }]
+                                },
+                                tooltip: {
+                                    valueSuffix: '°C'
+                                },
+                                legend: {
+                                    layout: 'vertical',
+                                    align: 'right',
+                                    verticalAlign: 'middle',
+                                    borderWidth: 0
+                                },
+                                series: [{
+                                    name: 'CO',
+                                    data: co
+                                }, {
+                                    name: 'TEMP',
+                                    data: temp
+                                }, {
+                                    name: 'DUST',
+                                    data: dust
+                                }, {
+                                    name: 'GAS',
+                                    data: gas
+                                }, {
+                                    name: 'BATTERY',
+                                    data: bat
+                                }]
+                            });
+                        });
+                    }
                 function removeOptions(selectbox)
                 {
                     var i;
@@ -142,58 +195,7 @@
                         x1.push(x[t].getHours()+":"+x[t].getMinutes() + ":" + x[t].getSeconds());
                     }
                     console.log(x1);
-
-                    // Drow chart with 1st option
-                    $(function() {
-                            $('#chart').highcharts({
-                                title: {
-                                    text: 'Node: ' + node_id,
-                                    x: -20 //center
-                                },
-                                subtitle: {
-                                    text: '',
-                                    x: -20
-                                },
-                                xAxis: {
-                                    categories: x1
-                                },
-                                yAxis: {
-                                    title: {
-                                        text: 'Value'
-                                    },
-                                    plotLines: [{
-                                        value: 0,
-                                        width: 1,
-                                        color: '#808080'
-                                    }]
-                                },
-                                tooltip: {
-                                    valueSuffix: '°C'
-                                },
-                                legend: {
-                                    layout: 'vertical',
-                                    align: 'right',
-                                    verticalAlign: 'middle',
-                                    borderWidth: 0
-                                },
-                                series: [{
-                                    name: 'CO',
-                                    data: co1
-                                }, {
-                                    name: 'TEMP',
-                                    data: temp1
-                                }, {
-                                    name: 'DUST',
-                                    data: dust1
-                                }, {
-                                    name: 'GAS',
-                                    data: gas1
-                                }, {
-                                    name: 'BATTERY',
-                                    data: bat1
-                                }]
-                            });
-                        });
+                    drowchart(x1,co1,dust1,gas1,temp1,bat1);
                 }
 
                 $("#date").on("change", function() {
@@ -243,59 +245,8 @@
                     }
 
                     // Drow new chart
-
-                    $(function() {
-                            $('#chart').highcharts({
-                                title: {
-                                    text: 'Node: ' + node_id,
-                                    x: -20 //center
-                                },
-                                subtitle: {
-                                    text: '',
-                                    x: -20
-                                },
-                                xAxis: {
-                                    categories: x1
-                                },
-                                yAxis: {
-                                    title: {
-                                        text: 'Value'
-                                    },
-                                    plotLines: [{
-                                        value: 0,
-                                        width: 1,
-                                        color: '#808080'
-                                    }]
-                                },
-                                tooltip: {
-                                    valueSuffix: '°C'
-                                },
-                                legend: {
-                                    layout: 'vertical',
-                                    align: 'right',
-                                    verticalAlign: 'middle',
-                                    borderWidth: 0
-                                },
-                                series: [{
-                                    name: 'CO',
-                                    data: co1
-                                }, {
-                                    name: 'TEMP',
-                                    data: temp1
-                                }, {
-                                    name: 'DUST',
-                                    data: dust1
-                                }, {
-                                    name: 'GAS',
-                                    data: gas1
-                                }, {
-                                    name: 'BATTERY',
-                                    data: bat1
-                                }]
-                            });
-                        });
-
-
+                    drowchart(x1,co1,dust1,gas1,temp1,bat1);
+                    
                     });
                 function display() {
                     // Get node data
@@ -375,23 +326,11 @@
                             gas.push(Number(updateData.new_val.data.gas));
                             bat.push(Number(updateData.new_val.data.bat));
                             xaxis.push(updateData.new_val.time);
-                            drowchart();
+                            drowchart(xaxis,co,dust,gas,temp,bat);
                         }
                     });
 
-                    //create marker
-                    // function initMap() {
-                    //     var myLatLng = {lat: -25.363, lng: 131.044};
-                    //     var map = new google.maps.Map(document.getElementById('map'), {
-                    //         zoom: 4,
-                    //         center: myLatLng
-                    //     });
-                    //     var marker = new google.maps.Marker({
-                    //         position: myLatLng,
-                    //         map: map,
-                    //         title: 'Hello World!'
-                    //     });
-                    // }
+                   
                     //Display node info
                     function InsertInfo(nodeid, phone, lat, lng) {
                         document.getElementById("NodeID").innerHTML = nodeid;
@@ -403,59 +342,7 @@
                     // create google map thumbnail
 
                     //Drawchart function
-                    function drowchart() {
-                        // alert(xaxis);
-                        $(function() {
-                            $('#chart').highcharts({
-                                title: {
-                                    text: 'Node: ' + node_id,
-                                    x: -20 //center
-                                },
-                                subtitle: {
-                                    text: '',
-                                    x: -20
-                                },
-                                xAxis: {
-                                    categories: xaxis
-                                },
-                                yAxis: {
-                                    title: {
-                                        text: 'Value'
-                                    },
-                                    plotLines: [{
-                                        value: 0,
-                                        width: 1,
-                                        color: '#808080'
-                                    }]
-                                },
-                                tooltip: {
-                                    valueSuffix: '°C'
-                                },
-                                legend: {
-                                    layout: 'vertical',
-                                    align: 'right',
-                                    verticalAlign: 'middle',
-                                    borderWidth: 0
-                                },
-                                series: [{
-                                    name: 'CO',
-                                    data: co
-                                }, {
-                                    name: 'TEMP',
-                                    data: temp
-                                }, {
-                                    name: 'DUST',
-                                    data: dust
-                                }, {
-                                    name: 'GAS',
-                                    data: gas
-                                }, {
-                                    name: 'BATTERY',
-                                    data: bat
-                                }]
-                            });
-                        });
-                    }
+                    
                 }
             }
             //--------------------------------------
