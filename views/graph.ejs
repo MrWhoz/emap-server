@@ -111,10 +111,13 @@
                     var select = document.getElementById("date");
                     for(var i = 0, l = date.length; i < l; i++){
                         var option = date[i];
+                        var temp = String(option);
+                        var temp1 = temp.substring(0,16);
                         var el = document.createElement("option");
-                        el.textContent = option;
+                        el.textContent = temp1;
                         el.value = option;
                         select.appendChild(el);
+                        // console.log(temp.substring(0,16));
                     }
                     var ngay = xaxis[0].getDate();
                     var thang = xaxis[0].getMonth();
