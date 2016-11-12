@@ -124,7 +124,7 @@
                                     }]
                                 },
                                 tooltip: {
-                                    valueSuffix: '°C'
+                                    // valueSuffix: '°C'
                                 },
                                 legend: {
                                     layout: 'vertical',
@@ -133,19 +133,19 @@
                                     borderWidth: 0
                                 },
                                 series: [{
-                                    name: 'CO',
+                                    name: 'CO(ppm)',
                                     data: co
                                 }, {
-                                    name: 'TEMP',
+                                    name: 'TEMP(°C)',
                                     data: temp
                                 }, {
-                                    name: 'DUST',
+                                    name: 'DUST(ppm)',
                                     data: dust
                                 }, {
-                                    name: 'GAS',
+                                    name: 'GAS(ppm)',
                                     data: gas
                                 }, {
-                                    name: 'BATTERY',
+                                    name: 'BATTERY(%)',
                                     data: bat
                                 }]
                             });
@@ -270,12 +270,13 @@
                                 xaxis.push(d);
                             }
                             console.log(data);
-                            document.getElementById("update").innerHTML = "CO: "+co[count-1] +'<br/>'
-                                + "Dust: " + dust[count-1] + '<br/>'
-                                + "Temp: " + temp[count-1] + '<br/>'
-                                + "Gas: " + gas[count-1] + '<br/>'
-                                + "Batery: " + bat[count-1] + '<br/>'
-                                + "DATE: " + xaxis[count-1] + '<br/>';
+                            document.getElementById("update").innerHTML = "DATE: " + xaxis[count-1] + '<br/>'
+                                + "CO: "+co[count-1] + '°C'+'<br/>'
+                                + "Dust: " + dust[count-1] +'ppm'+ '<br/>'
+                                + "Temp: " + temp[count-1] +'ppm' + '<br/>'
+                                + "Gas: " + gas[count-1] +'ppm'+ '<br/>'
+                                + "Batery: " + bat[count-1]+'%' + '<br/>'
+                                ;
 
                             console.log(xaxis[0]);
                             var date = [];
