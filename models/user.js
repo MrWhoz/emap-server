@@ -15,7 +15,7 @@ async function register(user) {
   if (existId) {
     return {
       code: -1,
-      message: "Username đã tồn tại, vui lòng chọn username khác",
+      message: "Username existed",
       data: existId
     };
   };
@@ -24,8 +24,18 @@ async function register(user) {
     user_id: user.id,
     password: user.password,
     role: user.role,
-    full_naem: user.name,
+    full_name: user.name,
+    status: user.status,
+    mail: user.mail,
     created_time: new Date()
+  };
+
+  console.log('Add user function', data);
+  let result = await r.db(dbName).table("user").insert(data).run(connection);
+  if (result) return {
+    code: 1,
+    message: "Account created successful",
+    data: result
   };
 }
 
