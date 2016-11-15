@@ -93,9 +93,14 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
   var xaxis = [];
   var temp;
   var nodeid;
+  var dates = [];
+  var z;
   var obj = {content:null};
+  $scope.dates = [];
+  var xaxis1 = [];
   $scope.getNodeid = function(infodata){
     $scope.news = [];
+    
     
     $scope.value = infodata;
     temp = $scope.value;
@@ -116,97 +121,82 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
           method:"GET",
           url: "http://www.codingyourfuture.com/getdata?id="+nodeid
         }).then(function(newsData){
+            // angular.forEach(newsData.data, function(dates){
+            //     $scope.dates.push(dates);
+            // });
+            // console.log($scope.dates);
         
             $scope.news.push(newsData.data);
             var t=1;
+            var tempdate;
               for(var j=0;j<$scope.news[0].length;j++){
                
                   co.push(Number($scope.news[0][j].data.co));
                   dust.push(Number($scope.news[0][j].data.dust));
                   gas.push(Number($scope.news[0][j].data.gas));
                   nhietdo.push(Number($scope.news[0][j].data.temp));
-                  // xaxis.push($scope.news[0][j].time);
-                  xaxis.push(Number(t));
+                  xaxis1.push($scope.news[0][j].time);
+                  xaxis.push($scope.news[0][j].time.substring(0,10));
+                  if(t==1){
+                      $scope.dates.push($scope.news[0][j].time.substring(0,10));
+                      tempdate = $scope.news[0][j].time.substring(0,10);
+                  }else{
+                    if(tempdate != $scope.news[0][j].time.substring(0,10) ){
+                      $scope.dates.push($scope.news[0][j].time.substring(0,10));
+                      tempdate = $scope.news[0][j].time.substring(0,10);
+                    }
+                  }
+                  
+                  
+                  
                   t++;
+                  z= j;
               }
        
-              console.log(co);
-              console.log(dust);
-              console.log(gas);
-              console.log(nhietdo);
-              console.log(xaxis);
+        });
+        var alerPopup = $ionicPopup.alert({
+          Title: 'Date',
+          template:'Choose Date!'
+        });
+        alertPopup.then(function(res){
+          console.log('Please choose date from dropdown options');
         });
        
         
       };
-
+      z = j;
+      console.log(z);
       
-      $scope.labels = xaxis;
+    }
+
+    $scope.selectedItemChanged = function(selectedItem){
+      var co1 = [];
+      var dust1 = [];
+      var gas1 = [];
+      var temp1 = [];
+      var x2 = [];
+      $scope.calculatedValue = 'You selected number ' + selectedItem.modal;
+      for(var k = 0; k <= z; k++ ){
+          if (xaxis[k] == selectedItem){
+            co1.push(Number(co[k]));
+            dust1.push(Number(dust[k]));
+            gas1.push(Number(gas[k]));
+            temp1.push(Number(nhietdo[k]));
+            x2.push(xaxis1[k]);
+          }
+      }
+      console.log(co1);
+      $scope.labels = x2;
       $scope.series = ['CO','Dust','Gas','Temp'];
       $scope.data = [
-          co,
-          dust,
-          gas,
-          nhietdo
+          co1,
+          dust1,
+          gas1,
+          temp1
       ]; 
     }
 });
-// app.controller('MapCtrl1', function($scope, $ionicLoading, $compile){
-//   function initialize() {
-//         var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
-        
-//         var mapOptions = {
-//           center: myLatlng,
-//           zoom: 16,
-//           mapTypeId: google.maps.MapTypeId.ROADMAP
-//         };
-//         var map = new google.maps.Map(document.getElementById("map"),
-//             mapOptions);
-        
-//         //Marker + infowindow + angularjs compiled ng-click
-//         var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
-//         var compiled = $compile(contentString)($scope);
 
-//         var infowindow = new google.maps.InfoWindow({
-//           content: compiled[0]
-//         });
-
-//         var marker = new google.maps.Marker({
-//           position: myLatlng,
-//           map: map,
-//           title: 'Uluru (Ayers Rock)'
-//         });
-
-//         google.maps.event.addListener(marker, 'click', function() {
-//           infowindow.open(map,marker);
-//         });
-
-//         $scope.map = map;
-//       }
-//       google.maps.event.addDomListener(window, 'load', initialize);
-      
-//       $scope.centerOnMe = function() {
-//         if(!$scope.map) {
-//           return;
-//         }
-
-//         $scope.loading = $ionicLoading.show({
-//           content: 'Getting current location...',
-//           showBackdrop: false
-//         });
-
-//         navigator.geolocation.getCurrentPosition(function(pos) {
-//           $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-//           $scope.loading.hide();
-//         }, function(error) {
-//           alert('Unable to get location: ' + error.message);
-//         });
-//       };
-      
-//       $scope.clickTest = function() {
-//         alert('Example of infowindow with ng-click')
-//       };
-// });
 
 app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate,$ionicLoading,$compile){
 
@@ -229,6 +219,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
     });
   };
 
+  
 
   $scope.toggleLeft = function(){
     $ionicSideMenuDelegate.toggleLeft();
@@ -265,7 +256,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
         $scope.news.push(newsArticle);
     });
     // $scope.news.lastarticleID = newsData.data.lastID;
-    // console.log($scope.news.lastarticleID);
+    console.log($scope.news);
   });
 
   // Send Feedback
