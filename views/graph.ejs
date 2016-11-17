@@ -271,11 +271,11 @@
                             }
                             console.log(data);
                             document.getElementById("update").innerHTML = "DATE: " + xaxis[count-1] + '<br/>'
-                                + "CO: "+co[count-1] + '°C'+'<br/>'
-                                + "Dust: " + dust[count-1] +'ppm'+ '<br/>'
-                                + "Temp: " + temp[count-1] +'ppm' + '<br/>'
-                                + "Gas: " + gas[count-1] +'ppm'+ '<br/>'
-                                + "Batery: " + bat[count-1]+'%' + '<br/>'
+                                + "CO: "+co[count-1] + '°C'+'<span style="padding-left:80px"></span>'
+                                + "Dust: " + dust[count-1] +'ppm'+ '<span style="padding-left:80px"></span>'
+                                + "Temp: " + temp[count-1] +'ppm' + '<span style="padding-left:100px"></span>'
+                                + "Gas: " + gas[count-1] +'ppm'+ '<span style="padding-left:80px"></span>'
+                                + "Batery: " + bat[count-1]+'%' + '<span style="padding-left:80px"></span>'
                                 ;
 
                             console.log(xaxis[0]);
@@ -413,7 +413,7 @@
                             <td id="Phone"></td>
                         </tr>
                         <tr>
-                            <td>Lasted Update </td>
+                            <td>Latest Update </td>
                             <td id="update"></td>
                         </tr>
                     </tbody>
