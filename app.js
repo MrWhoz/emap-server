@@ -37,15 +37,13 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: 'secret',
+    secret: 'ssshhhh',
     cookie: {
         maxAge: 10 * 24 * 3600 * 1000
     },
     saveUninitialized: true,
     resave: true
 }));
-
-
 
 app.use('/', routes);
 app.use('/user', user);
