@@ -271,12 +271,12 @@
                                 xaxis.push(d);
                             }
                             console.log(data);
-                            document.getElementById("update").innerHTML = "DATE: " + xaxis[count-1] + '<br/>'
-                                + "CO: "+co[count-1] + '°C'+'<span style="padding-left:80px"></span>'
-                                + "Dust: " + dust[count-1] +'ppm'+ '<span style="padding-left:80px"></span>'
-                                + "Temp: " + temp[count-1] +'ppm' + '<span style="padding-left:100px"></span>'
-                                + "Gas: " + gas[count-1] +'ppm'+ '<span style="padding-left:80px"></span>'
-                                + "Batery: " + bat[count-1]+'%' + '<span style="padding-left:80px"></span>'
+                            document.getElementById("update").innerHTML = "DATE: " + xaxis[count-1] + '<hr/>'
+                                + '<span style="color:red;">CO: </span>'+co[count-1] + '°C'+'<span style="padding-left:110px"></span>'
+                                + '<span style="color:red;">DUST: </span>' + dust[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
+                                + '<span style="color:red;">TEMP: </span>' + temp[count-1] +'ppm' + '<span style="padding-left:110px"></span>'
+                                + '<span style="color:red;">GAS: </span>' + gas[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
+                                + '<span style="color:red;">BATTERY: </span>' + bat[count-1]+'%'
                                 ;
 
                             console.log(xaxis[0]);
@@ -335,10 +335,10 @@
                    
                     //Display node info
                     function InsertInfo(nodeid, phone, lat, lng) {
-                        document.getElementById("NodeID").innerHTML = nodeid;
-                        document.getElementById("Phone").innerHTML = phone;
-                        document.getElementById("Latitude").innerHTML = lat;
-                        document.getElementById("Longitude").innerHTML = lng;
+                        document.getElementById("NodeID").innerHTML = '<span style="color:red">'+nodeid+'</span>';
+                        document.getElementById("Phone").innerHTML = '<span style="color:red">'+phone+'</span>';
+                        document.getElementById("Latitude").innerHTML = '<span style="color:red">'+lat+'</span>';
+                        document.getElementById("Longitude").innerHTML = '<span style="color:red">'+lng+'</span>';
                     }
 
                     // create google map thumbnail
