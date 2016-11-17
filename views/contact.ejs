@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/normalizeContact.css" type="text/css" />
 <script type="text/javascript">
 window.onload = function () {
+  document.getElementById("contacttag").className = "active";
   <% if(temp!='nouser') {%>
     console.log("<%=temp%>");
     document.getElementById("user").innerHTML = "<%=temp%>";

@@ -198,7 +198,15 @@ border-color: #5D5B66;
 }
 
 .navbar-inverse .navbar-nav > .active > a {
-	background: #ffffff;
+	color:red;
+  background-color: white;
+  font-size: 110%;
+  border-bottom: white;
+}
+.navbar-inverse .navbar-nav > .active > a:hover {
+  color:red;
+  background-color: white;
+  font-size: 110%;
 }
 
 .navbar-inverse .navbar-brand {

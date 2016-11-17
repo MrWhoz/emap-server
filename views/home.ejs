@@ -4,9 +4,11 @@
     </script>
     <script type="text/javascript">
         window.onload = function() {
+            document.getElementById("hometag").className = "active";
             <% if(temp!='nouser') {%>
             console.log("<%=temp%>");
             document.getElementById("user").innerHTML = "<%=temp%>";
+
             $('#modalbox').attr('data-target', '#myModal1');
             document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
             <%} else{%>

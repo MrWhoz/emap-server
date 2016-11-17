@@ -1,6 +1,7 @@
 <% layout('layout') -%>
 <script type="text/javascript">
 window.onload = function () {
+	document.getElementById("stastictag").className = "active";
 	<% if(temp!='nouser') {%>
 		console.log("<%=temp%>");
 		document.getElementById("user").innerHTML = "<%=temp%>";
