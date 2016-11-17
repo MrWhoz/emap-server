@@ -5,9 +5,11 @@ var sess;
 // -----
 var router = express.Router();
 var node = require('../models/node.js');
+
 router.use(session({
     secret: 'ssshhhh'
 }));
+
 var nodemailer = require('nodemailer');
 var smtpTransport = require("nodemailer-smtp-transport");
 
@@ -21,38 +23,132 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
     }
 }));
 
-router.get('/', function(req, res, next) {
-    res.render('index');
+
+var sess;
+var checksess;
+
+router.get('/', function(req, res) {
+    // sess=req.session;
+    if (checksess) {
+        res.render('home', {
+            title: 'test',
+            temp: checksess
+        });
+    } else {
+        res.render('home', {
+            title: 'test',
+            temp: 'nouser'
+        });
+    }
 });
 
-/* GET Contact page. */
-router.get('/contact', function(req, res) {
-    res.render('contact', {
-        title: 'Contact'
-    });
+router.post('/login', function(req, res) {
+    sess = req.session;
+    sess.email = req.body.username;
+    res.end('done');
 });
 
-/* GET Graph page. */
-router.get('/graph', function(req, res) {
-    res.render('graph', {
-        title: 'Graph',
-        qs: req.query
-    });
+router.get('/logout', function(req, res) {
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/home');
+        }
+    })
 });
 
-/* GET Stastic page. */
-router.get('/stastic', function(req, res) {
-    res.render('stastic', {
-        title: 'Stastic'
-    });
+router.get('/check', function(req, res) {
+    sess = req.session;
+
+    if (sess.email) {
+        res.redirect('/admin');
+    } else {
+        res.render('check');
+    }
 });
 
-/* GET Home page. Req user*/
 router.get('/home', function(req, res) {
-    res.render('home', {
-        title: 'Home'
+    // sess=req.session;
+    sess = req.session;
+    checksess = sess.email;
+    if (checksess) {
+        res.render('home', {
+            title: 'test',
+            temp: checksess
+        });
 
-    });
+
+    } else {
+        res.render('home', {
+            title: 'test',
+            temp: 'nouser'
+        });
+
+    }
+});
+router.get('/stastic', function(req, res) {
+    if (checksess) {
+        res.render('stastic', {
+            title: 'test',
+            temp: checksess
+        });
+        app.get('/contact', function(req, res) {
+            if (sess.email) {
+                res.render('contact', {
+                    title: 'contact',
+                    temp: checksess
+                })
+            }
+        });
+
+
+    } else {
+        res.render('stastic', {
+            title: 'test',
+            temp: 'nouser'
+        });
+
+    }
+});
+
+//------------
+router.get('/contact', function(req, res) {
+    // sess=req.session;
+    if (checksess) {
+        res.render('contact', {
+            title: 'test',
+            temp: checksess
+        });
+
+
+    } else {
+        res.render('contact', {
+            title: 'test',
+            temp: 'nouser'
+        });
+
+    }
+});
+//-----Graph session
+router.get('/graph', function(req, res) {
+    // sess=req.session;
+    if (checksess) {
+        res.render('graph', {
+            title: 'test',
+            qs: req.query,
+            temp: checksess
+        });
+
+
+    } else {
+        res.render('graph', {
+            title: 'test',
+            temp: 'nouser',
+            qs: req.query
+        });
+
+    }
 });
 
 /* GET ConfigMarkers page. */ //TODO :move all node function to route node
