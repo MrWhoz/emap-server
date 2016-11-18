@@ -25,6 +25,8 @@
         <input id="addmarker" onclick="addmarker();" type=button value="Add Markers">
         <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
         <input onclick="configMarkers();" type=button value="Config Markers">
+        <hr/>
+        <p style="text-align: left;" id="nodeactive">Node Active: </p>
     </div>
     <div id="map" style="width: 100%"></div>
 
@@ -57,6 +59,7 @@
                 }
 
                 temp = lat.length;
+                document.getElementById("nodeactive").innerHTML = "Node Active: " + temp;
                 initMap();
             }
 
