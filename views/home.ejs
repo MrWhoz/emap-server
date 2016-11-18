@@ -6,6 +6,8 @@
         window.onload = function() {
             document.getElementById("hometag").className = "active";
             <% if(temp!='nouser') {%>
+            var yourUl = document.getElementById("floating-panel");
+            yourUl.style.display = yourUl.style.display === 'none' ? '' : 'none';
             console.log("<%=temp%>");
             document.getElementById("user").innerHTML = "<%=temp%>";
 
@@ -13,12 +15,13 @@
             document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
             <%} else{%>
             console.log("error");
+            document.getElementById("floating-panel").style.display="none"
             <%}%>
         };
     </script>
 
     <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
-    <div id="floating-panel">
+    <div id="floating-panel"style="display: none; overflow-x: visible; overflow-y: visible; " >
         <input id="addmarker" onclick="addmarker();" type=button value="Add Markers">
         <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
         <input onclick="configMarkers();" type=button value="Config Markers">
