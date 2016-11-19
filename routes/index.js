@@ -93,14 +93,6 @@ router.get('/stastic', function(req, res) {
             title: 'test',
             temp: checksess
         });
-        app.get('/contact', function(req, res) {
-            if (sess.email) {
-                res.render('contact', {
-                    title: 'contact',
-                    temp: checksess
-                })
-            }
-        });
 
 
     } else {
@@ -151,39 +143,105 @@ router.get('/graph', function(req, res) {
     }
 });
 
+
 /* GET ConfigMarkers page. */ //TODO :move all node function to route node
 router.get('/configmarkers', function(req, res) {
-    res.render('configmarkers', {
-        title: 'Config'
-    });
+    if (checksess) {
+        res.render('configmarkers', {
+            title: 'test',
+            qs: req.query,
+            temp: checksess
+        });
+
+
+    } else {
+        res.render('configmarkers', {
+            title: 'test',
+            temp: 'nouser',
+            qs: req.query
+        });
+
+    }
 });
 
 /* GET Add Node page. */ //TODO :move all node function to route node
 router.get('/configmarkers/addnode', function(req, res) {
-    res.render('addnode', {
-        title: 'Add Node'
-    });
+    if (checksess) {
+        res.render('addnode', {
+            title: 'test',
+            qs: req.query,
+            temp: checksess
+        });
+
+
+    } else {
+        res.render('addnode', {
+            title: 'test',
+            temp: 'nouser',
+            qs: req.query
+        });
+
+    }
 });
 
 /* GET ConfigNode page. */ //TODO :move all node function to route node
 router.get('/configmarkers/confignode', function(req, res) {
-    res.render('confignode', {
-        title: 'Config Node'
-    });
+    if (checksess) {
+        res.render('confignode', {
+            title: 'test',
+            qs: req.query,
+            temp: checksess
+        });
+
+
+    } else {
+        res.render('confignode', {
+            title: 'test',
+            temp: 'nouser',
+            qs: req.query
+        });
+
+    }
 });
 
 /* GET updatenode page. */ //TODO :move all node function to route node
 router.get('/configmarkers/confignode/update', function(req, res) {
-    res.render('update', {
-        title: 'Update Node'
-    });
+    if (checksess) {
+        res.render('update', {
+            title: 'test',
+            qs: req.query,
+            temp: checksess
+        });
+
+
+    } else {
+        res.render('update', {
+            title: 'test',
+            temp: 'nouser',
+            qs: req.query
+        });
+
+    }
 });
 
 /* GET replacenode page. */ //TODO :move all node function to route node
 router.get('/configmarkers/confignode/replace', function(req, res) {
-    res.render('replace', {
-        title: 'Replace Node'
-    });
+    if (checksess) {
+        res.render('replace', {
+            title: 'test',
+            qs: req.query,
+            temp: checksess
+        });
+
+
+    } else {
+        res.render('replace', {
+            title: 'test',
+            temp: 'nouser',
+            qs: req.query
+        });
+
+    }
 });
 
 router.get('/admin', function(req, res) {

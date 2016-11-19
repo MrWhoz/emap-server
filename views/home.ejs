@@ -1,5 +1,7 @@
 <% layout('layout') -%>
     <link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
+
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
     </script>
     <script type="text/javascript">
@@ -26,9 +28,10 @@
         <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
         <input onclick="configMarkers();" type=button value="Config Markers">
         <hr/>
-        <p style="text-align: left;" id="nodeactive">Node Active: </p>
+        <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p>
     </div>
     <div id="map" style="width: 100%"></div>
+    
 
     <script>
         var map;
@@ -36,6 +39,7 @@
         var NodeID = [];
         var lat = [];
         var lng = [];
+        var phone = [];
         var temp;
         // get data
         var nodeNumber;
@@ -54,12 +58,45 @@
                     NodeID.push(Number(myVariable[i].node_id));
                     lat.push(Number(myVariable[i].location.lat));
                     lng.push(Number(myVariable[i].location.lng));
-
+                    phone.push(Number(myVariable[i].phone));
 
                 }
 
                 temp = lat.length;
-                document.getElementById("nodeactive").innerHTML = "Node Active: " + temp;
+                console.log(NodeID);
+                document.getElementById("nodeactive").innerHTML = '<i class="fa fa-list" aria-hidden="true"></i>' +'<span style="color:red;">Node Active:      </span>'  + '<a href="#">' + temp + '</a>' + '<span style="color:red;">' + "(" + '<i class="fa fa-hand-o-left" aria-hidden="true"></i>' + "Click here for Node Info" + ")" + '</span>';
+                function call(){
+                    var table = document.getElementById("list");
+                    if (table != null) {
+                    for (var i = 0; i < table.rows.length; i++) {
+                          // do update
+                          table.rows[i].cells[0].className = 'color1';
+                          table.rows[i].cells[2].className = 'color2';
+                          table.rows[i].cells[3].className = 'color3';
+
+                          //   table.rows[i].cells[5].onclick = function () {
+                          //       tableText(this);
+                          //   };
+                          // // do replace
+                          // table.rows[i].cells[6].onclick = function () {
+                          //     tableText1(this);
+                          // };
+                        }
+                    }
+                }
+                
+                function drowtable(){
+                    for(var i=0;i<NodeID.length;i++){
+                        var rows = "";
+                        var link = "http://localhost:8888/graph?id=" + NodeID[i];
+                        console.log(link);
+                        rows += "<tr><td>" + NodeID[i] + "</td><td>" + lat[i] + "</td><td>" + lng[i] + "</td><td>" + phone[i] + "</td><td>" + "1" + "</td><td>" + '<a href="' + link + '">' + "View" + '</a>' + "</td><td>" + "</td></tr>";
+
+                        $(rows).appendTo("#list tbody");
+                    }
+                    call();
+                }
+                drowtable();
                 initMap();
             }
 

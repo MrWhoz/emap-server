@@ -196,6 +196,46 @@
         </div>
     </div>
 
+    <!-- Data Info -->
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Node Infomations</h4>
+                </div>
+                <div class="modal-body">
+                   <table class="table-fill" id="list" style="margin:40px auto">
+                        <thead>
+                        <tr>
+                        <th class="text-left" style="text-align: center; color: red;">NodeID</th>
+                        <th class="text-left" style="text-align: center;">Lat</th>
+                        <th class="text-left" style="text-align: center;">Lng</th>
+
+                        <th class="text-left" style="text-align: center; color:blue;">Phone</th>
+                        <th class="text-left" style="text-align: center;">Status</th>
+                        <th class="text-left" style="text-align: center;">Graph</th>
+                        
+                        </tr>
+                        </thead>
+                        <tbody class="table-hover">
+
+
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
     <script src="/js/login.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -216,40 +256,6 @@
             });
         });
 
-        // function refresh(){
-        //     location.reload();
-        // }
-        // function checklogin(){
-
-        //     // Test - Using Ajax later for User Infomations
-        //     var x,y;
-        //     x = $("#username").val();
-        //     console.log(x);
-        //     y = $("#password").val();
-        //     // check(x,y);
-
-        //     if ((x == "cuong") && (y=="cuong")){
-        //         alert("login success! Click button OK in Modal to refresh page!");
-        //         sessionStorage.setItem('user',"cuong");
-               
-                
-
-        //     }else{
-        //         alert("Error Username or Password!");
-        //     }
-
-        // }
-        // function check(x,y){
-            
-        // }
-
-        //Log out
-        // function logout(){
-        //     // sessionStorage.clear();
-        //     sessionStorage.setItem('user',"0")
-        //     alert(sessionStorage.user);
-        //     location.reload();
-        // }
     </script>
 </body>
 </html>
