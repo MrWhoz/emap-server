@@ -8,7 +8,18 @@
 <link rel="stylesheet" href="/css/configStyle.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript">
+window.onload = function () {
+  <% if(temp!='nouser') {%>
+    console.log("<%=temp%>");
+    document.getElementById("user").innerHTML = "<%=temp%>";
+    $('#modalbox').attr('data-target','#myModal1');
+        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+  <%} else{%>
+    console.log("error");
+  <%}%>
+};
+</script>
 <div style="margin-top:50px;">
 <div class="table-title">
 <h3>Node Informations</h3>

@@ -4,7 +4,19 @@
     
 
 <link rel="stylesheet" href="css/styleGraph.css">
-
+<script type="text/javascript">
+window.onload = function () {
+ 
+  <% if(temp!='nouser') {%>
+    console.log("<%=temp%>");
+    document.getElementById("user").innerHTML = "<%=temp%>";
+    $('#modalbox').attr('data-target','#myModal1');
+        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+  <%} else{%>
+    console.log("error");
+  <%}%>
+};
+</script>
   
 
 <div class="center">
