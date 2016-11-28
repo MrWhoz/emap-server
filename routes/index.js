@@ -155,11 +155,8 @@ router.get('/configmarkers', function(req, res) {
 
 
     } else {
-        res.render('configmarkers', {
-            title: 'test',
-            temp: 'nouser',
-            qs: req.query
-        });
+        res.status(404)        // HTTP status 404: NotFound
+            .send('Not found');
 
     }
 });
@@ -175,11 +172,13 @@ router.get('/configmarkers/addnode', function(req, res) {
 
 
     } else {
-        res.render('addnode', {
-            title: 'test',
-            temp: 'nouser',
-            qs: req.query
-        });
+        // res.render('addnode', {
+        //     title: 'test',
+        //     temp: 'nouser',
+        //     qs: req.query
+        // });
+        res.status(404)        // HTTP status 404: NotFound
+            .send('Not found');
 
     }
 });
@@ -195,11 +194,13 @@ router.get('/configmarkers/confignode', function(req, res) {
 
 
     } else {
-        res.render('confignode', {
-            title: 'test',
-            temp: 'nouser',
-            qs: req.query
-        });
+        // res.render('confignode', {
+        //     title: 'test',
+        //     temp: 'nouser',
+        //     qs: req.query
+        // });
+        res.status(404)        // HTTP status 404: NotFound
+            .send('Not found');
 
     }
 });
@@ -215,11 +216,13 @@ router.get('/configmarkers/confignode/update', function(req, res) {
 
 
     } else {
-        res.render('update', {
-            title: 'test',
-            temp: 'nouser',
-            qs: req.query
-        });
+        // res.render('update', {
+        //     title: 'test',
+        //     temp: 'nouser',
+        //     qs: req.query
+        // });
+        res.status(404)        // HTTP status 404: NotFound
+            .send('Not found');
 
     }
 });
@@ -235,11 +238,13 @@ router.get('/configmarkers/confignode/replace', function(req, res) {
 
 
     } else {
-        res.render('replace', {
-            title: 'test',
-            temp: 'nouser',
-            qs: req.query
-        });
+        // res.render('replace', {
+        //     title: 'test',
+        //     temp: 'nouser',
+        //     qs: req.query
+        // });
+        res.status(404)        // HTTP status 404: NotFound
+            .send('Not found');
 
     }
 });

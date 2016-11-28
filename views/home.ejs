@@ -88,7 +88,7 @@
                 function drowtable(){
                     for(var i=0;i<NodeID.length;i++){
                         var rows = "";
-                        var link = "http://localhost:8888/graph?id=" + NodeID[i];
+                        var link = "http://www.codingyourfuture.com/graph?id=" + NodeID[i];
                         console.log(link);
                         rows += "<tr><td>" + NodeID[i] + "</td><td>" + lat[i] + "</td><td>" + lng[i] + "</td><td>" + phone[i] + "</td><td>" + "1" + "</td><td>" + '<a href="' + link + '">' + "View" + '</a>' + "</td><td>" + "</td></tr>";
 
