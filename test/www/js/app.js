@@ -182,10 +182,10 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
             dust1.push(Number(dust[k]));
             gas1.push(Number(gas[k]));
             temp1.push(Number(nhietdo[k]));
-            x2.push(xaxis1[k]);
+            x2.push(xaxis1[k].substring(11,19));
           }
       }
-      console.log(co1);
+      // console.log(x2[0].substring(11,19));
       $scope.labels = x2;
       $scope.series = ['CO','Dust','Gas','Temp'];
       $scope.data = [
