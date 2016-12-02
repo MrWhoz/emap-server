@@ -171,7 +171,7 @@
                         var wtemp = String(option);
                         var wtemp1 = wtemp.substring(0,16);
                         var el = document.createElement("option");
-                        el.textContent = temp1;
+                        el.textContent = wtemp1;
                         el.value = option;
                         select.appendChild(el);
                         // console.log(temp.substring(0,16));
@@ -273,8 +273,10 @@
                                 var d = new Date(myVariable[i].time);
                                 xaxis.push(d);
                             }
-                            console.log(data);
-                            document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + xaxis[count-1] + '<hr/>'
+                            var lastdate = String(xaxis[count-1]).substring(0,25);
+                            console.log(lastdate);
+                        
+                            document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate+ '<hr/>'
                                 + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + '°C'+'<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">DUST: </span>' + dust[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">TEMP: </span>' + temp[count-1] +'ppm' + '<span style="padding-left:110px"></span>'
@@ -689,8 +691,9 @@
                                 var d = new Date(myVariable[i].time);
                                 xaxis.push(d);
                             }
-                            console.log(data);
-                            document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + xaxis[count-1] + '<hr/>'
+                            var lastdate = String(xaxis[count-1]).substring(0,25);
+                            console.log(lastdate);
+                            document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate + '<hr/>'
                                 + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + '°C'+'<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">DUST: </span>' + dust[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">TEMP: </span>' + temp[count-1] +'ppm' + '<span style="padding-left:110px"></span>'
