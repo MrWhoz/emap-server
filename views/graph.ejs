@@ -40,6 +40,10 @@
                 document.getElementById("user").innerHTML = "<%=temp%>";
                 $('#modalbox').attr('data-target', '#myModal1');
                 document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+                var yourUl1 = document.getElementById("editbutton1");
+                yourUl1.style.display = yourUl1.style.display === 'none' ? '' : 'none';
+                var yourUl2 = document.getElementById("editbutton2");
+                yourUl2.style.display = yourUl2.style.display === 'none' ? '' : 'none';
                 <%} else{%>
                 console.log("error");
                 <%}%>
@@ -277,9 +281,9 @@
                             console.log(lastdate);
                         
                             document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate+ '<hr/>'
-                                + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + '°C'+'<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + 'ppm'+'<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">DUST: </span>' + dust[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
-                                + '<span style="font-weight:bold;">TEMP: </span>' + temp[count-1] +'ppm' + '<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">TEMP: </span>' + temp[count-1] +'°C' + '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">GAS: </span>' + gas[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">BATTERY: </span>' + bat[count-1]+'%'
                                 ;
@@ -340,7 +344,8 @@
                    
                     //Display node info
                     function InsertInfo(nodeid, phone, lat, lng) {
-                        document.getElementById("NodeID").innerHTML = nodeid;
+                        document.getElementById("NodeID").value = nodeid;
+                        document.getElementById('NodeID').disabled = true;
                         document.getElementById("Phone").value = phone;
                         document.getElementById('Phone').disabled = true;
                         document.getElementById("Latitude").value = lat;
@@ -401,8 +406,8 @@
                     </select>
                 </div>
             </div>
-            <button style="float: right; height: 50px;width: 50px; display: none" class="btn-danger" id="editbutton" onclick="EditConfirm()"><i class="fa fa-check-square" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
-            <button style="float: right; height: 50px;width: 50px; margin-right: 20px" class="btn-success" onclick="EditNode()"><i class="fa fa-cog" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
+            <button style="float: right; height: 50px;width: 50px; display: none" class="btn-danger" id="editbutton1" onclick="EditConfirm()"><i class="fa fa-check-square" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
+            <button style="float: right; height: 50px;width: 50px; margin-right: 20px; display: none;" id="editbutton2" class="btn-success" onclick="EditNode()"><i class="fa fa-cog" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
 
 
         </div>
@@ -414,7 +419,7 @@
                     <tbody>
                         <tr>
                             <td style="font-weight: bold;"> Node ID</td>
-                            <td id="NodeID"></td>
+                            <td><input  id="NodeID" style="width: 100%; border: 0; background-color: white;"></input></td>
                         </tr>
                         <tr>
                             <td style="font-weight: bold;"> Latitude </td>
@@ -696,9 +701,9 @@
                             var lastdate = String(xaxis[count-1]).substring(0,25);
                             console.log(lastdate);
                             document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate + '<hr/>'
-                                + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + '°C'+'<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + 'ppm'+'<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">DUST: </span>' + dust[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
-                                + '<span style="font-weight:bold;">TEMP: </span>' + temp[count-1] +'ppm' + '<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">TEMP: </span>' + temp[count-1] +'°C' + '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">GAS: </span>' + gas[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">BATTERY: </span>' + bat[count-1]+'%'
                                 ;
@@ -759,7 +764,8 @@
                    
                     //Display node info
                     function InsertInfo(nodeid, phone, lat, lng) {
-                        document.getElementById("NodeID").innerHTML = nodeid;
+                        document.getElementById("NodeID").value = nodeid;
+                        document.getElementById('NodeID').disabled = true;
                         document.getElementById("Phone").value = phone;
                         document.getElementById('Phone').disabled = true;
                         document.getElementById("Latitude").value = lat;
@@ -815,40 +821,41 @@
                         $('#Latitude').removeAttr('disabled');
                         $('#Longitude').removeAttr('disabled');
                         $('#Phone').removeAttr('disabled');
-                        var yourUl = document.getElementById("editbutton");
-                        yourUl.style.display = yourUl.style.display === 'none' ? '' : 'none';
+                        
                     }
                 }
 
                 function EditConfirm(){
-                    var Nodeid = document.getElementById("NodeID").value;
+                    var node_id = document.getElementById("NodeID").value;
                     var lat = document.getElementById("Latitude").value;
                     var lng = document.getElementById("Longitude").value;
                     var phone = document.getElementById("Phone").value;
                     console.log(phone);
+                    console.log(node_id);
+                    console.log(lat);
+                    console.log(lng);
                     $.ajax({
-                        type: "POST",
-                        url: '/updatenode',
-                        data: {
-                            'node_id': Nodeid,
-                            'lat': lat,
-                            'lng': lng,
-                            'phone': phone
-                        },
-                        dataType: 'json',
-                        success: function(response) {
-                            // you will get response from your php page (what you echo or print)
-                            console.log(response);
-                            $('#Latitude').attr('disabled', 'disabled');
+                      type: "POST",
+                      url: '/updatenode',
+                      data: {
+                          'node_id': node_id,
+                          'lat': lat,
+                          'lng': lng,
+                          'phone': phone
+                      },
+                      dataType: 'json',
+                      success: function(response) {
+                          // you will get response from your php page (what you echo or print)
+                          console.log(response);
+                      },
+                      error: function(jqXHR, textStatus, errorThrown) {
+                          console.log(textStatus, errorThrown);
+                      }
+                  });
+                    $('#Latitude').attr('disabled', 'disabled');
                             $('#Longitude').attr('disabled', 'disabled');
                             $('#Phone').attr('disabled', 'disabled');
                             alert("Update success!");
-
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.log(textStatus, errorThrown);
-                        }
-                    });
                 }
         
     </script>
