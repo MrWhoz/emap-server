@@ -401,6 +401,8 @@
                     </select>
                 </div>
             </div>
+            <button style="float: right; height: 50px;width: 50px; display: none" class="btn-danger" id="editbutton" onclick="EditConfirm()"><i class="fa fa-check-square" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
+            <button style="float: right; height: 50px;width: 50px; margin-right: 20px" class="btn-success" onclick="EditNode()"><i class="fa fa-cog" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
 
 
         </div>
@@ -805,6 +807,48 @@
                         }
                     });
                     
+                }
+
+                function EditNode(){
+                    var lat = document.getElementById("Latitude").value;
+                    if(lat!= null){
+                        $('#Latitude').removeAttr('disabled');
+                        $('#Longitude').removeAttr('disabled');
+                        $('#Phone').removeAttr('disabled');
+                        var yourUl = document.getElementById("editbutton");
+                        yourUl.style.display = yourUl.style.display === 'none' ? '' : 'none';
+                    }
+                }
+
+                function EditConfirm(){
+                    var Nodeid = document.getElementById("NodeID").value;
+                    var lat = document.getElementById("Latitude").value;
+                    var lng = document.getElementById("Longitude").value;
+                    var phone = document.getElementById("Phone").value;
+                    console.log(phone);
+                    $.ajax({
+                        type: "POST",
+                        url: '/updatenode',
+                        data: {
+                            'node_id': Nodeid,
+                            'lat': lat,
+                            'lng': lng,
+                            'phone': phone
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            // you will get response from your php page (what you echo or print)
+                            console.log(response);
+                            $('#Latitude').attr('disabled', 'disabled');
+                            $('#Longitude').attr('disabled', 'disabled');
+                            $('#Phone').attr('disabled', 'disabled');
+                            alert("Update success!");
+
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus, errorThrown);
+                        }
+                    });
                 }
         
     </script>
