@@ -817,11 +817,17 @@
 
                 function EditNode(){
                     var lat = document.getElementById("Latitude").value;
-                    if(lat!= null){
+                    var nodeid = document.getElementById("NodeID").value;
+                    console.log(nodeid-1);
+                
+                    if(nodeid-1<0){
+                        
+                        alert("Empty Node");
+                        
+                    }else{
                         $('#Latitude').removeAttr('disabled');
                         $('#Longitude').removeAttr('disabled');
                         $('#Phone').removeAttr('disabled');
-                        
                     }
                 }
 
