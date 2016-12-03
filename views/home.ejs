@@ -24,14 +24,45 @@
 
     <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
     <div id="floating-panel"style="display: none; overflow-x: visible; overflow-y: visible; " >
-        <input id="addmarker" onclick="addmarker();" type=button value="Add Markers">
-        <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
-        <input onclick="configMarkers();" type=button value="Config Markers">
+        <!-- <input id="addmarker" type=button value="Add Markers" data-toggle="modal" data-target="#myModalAddNode"> -->
+        <button style="height: 50px;width: 50px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 50px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <!-- <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers"> -->
+        <!-- <input onclick="configMarkers();" type=button value="Config Markers"> -->
         <hr/>
         <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p>
     </div>
     <div id="map" style="width: 100%"></div>
     
+
+    <!-- Add Nodeid and phone -->
+    <div class="modal fade" id="myModalAddNode" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Assign Nodeid and Phone</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                      <label for="newNodeid">NodeID:</label>
+                      <input type="text" class="form-control" style="width: 100%" id="newNodeid">
+                    </div>
+                    <div class="form-group">
+                      <label for="newPhone">Phone</label>
+                      <input type="text" class="form-control" style="width: 100%" id="newPhone">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addmarker()">Ok</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <script>
         var map;
@@ -206,16 +237,21 @@
 
 
         function addmarker() {
+            alert("Click in google map for direct adding node!")
             document.getElementById("addmarker").style.color = "blue";
-
+            var tempNode = document.getElementById("newNodeid").value;
+            var newNode = parseInt(tempNode);
+            var tempPhone = document.getElementById("newPhone").value;
+            var newPhone = parseInt(tempPhone);
+            console.log(newPhone);
             map.addListener('click', function(event) {
                 var i = temp;
 
                 i++;
                 temp++;
-                var phone = 123456;
+                var phone = newPhone;
 
-                nodeNumber++;
+                nodeNumber = newNode;
                 var lat = event.latLng.lat();
                 var lng = event.latLng.lng();
                 addMarker(event.latLng, i);
@@ -234,6 +270,8 @@
                     success: function(response) {
                         // you will get response from your php page (what you echo or print)
                         console.log(response);
+                        document.getElementById("addmarker").style.color = "black";
+                        google.maps.event.clearListeners(map, 'click');
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(textStatus, errorThrown);
