@@ -205,11 +205,10 @@ border-color: #5D5B66;
   font-style:bold !important;
 }
 .navbar-inverse .navbar-nav > .active > a:hover {
-  color:red;
+  color:black;
   background-color: white;
   font-size: 110%;
 }
-
 .navbar-inverse .navbar-brand {
 	color: #ffffff;
 	font-weight: bolder;
