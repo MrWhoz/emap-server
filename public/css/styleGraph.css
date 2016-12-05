@@ -146,9 +146,10 @@ body {
   font-style: bold;
   width:40%;
   float: left;
-  line-height: 50px;
-  text-align: center;
+  line-height: 30px;
+  text-align: right;
   font-weight: bold;
+  padding-right: 20px;
 }
 .box123>.top>.contentright>.left{
   font-size: 130%;
@@ -160,7 +161,7 @@ body {
 }
 .box123>.top>.contentleft>.id_100>select{
   width: 200px;
-  height: 50px;
+  height: 30px;
   float: left;
   
   margin-bottom: 20px;

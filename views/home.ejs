@@ -25,12 +25,12 @@
     <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
     <div id="floating-panel"style="display: none; overflow-x: visible; overflow-y: visible; " >
         <!-- <input id="addmarker" type=button value="Add Markers" data-toggle="modal" data-target="#myModalAddNode"> -->
-        <button style="height: 50px;width: 50px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
-        <button style="height: 50px;width: 50px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
-        <!-- <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers"> -->
-        <!-- <input onclick="configMarkers();" type=button value="Config Markers"> -->
-        <hr/>
-        <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p>
+        <button style="height: 50px;width: 100px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" id="nodeactive" data-toggle="modal" data-target="#myModal2"><i class="fa fa-list" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        
+       <!--  <hr/>
+        <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p> -->
     </div>
     <div id="map" style="width: 100%"></div>
     
@@ -95,7 +95,7 @@
 
                 temp = lat.length;
                 console.log(NodeID);
-                document.getElementById("nodeactive").innerHTML = '<i class="fa fa-list" aria-hidden="true"></i>' +'<span style="color:red;">Node Active:      </span>'  + '<a href="#">' + temp + '</a>' + '<span style="color:red;">' + "(" + '<i class="fa fa-hand-o-left" aria-hidden="true"></i>' + "Click here for Node Info" + ")" + '</span>';
+                // document.getElementById("nodeactive").innerHTML = '<i class="fa fa-list" aria-hidden="true"></i>' +'<span style="color:red;">Node Active:      </span>'  + '<a href="#">' + temp + '</a>' + '<span style="color:red;">' + "(" + '<i class="fa fa-hand-o-left" aria-hidden="true"></i>' + "Click here for Node Info" + ")" + '</span>';
                 function call(){
                     var table = document.getElementById("list");
                     if (table != null) {
@@ -254,7 +254,7 @@
                 nodeNumber = newNode;
                 var lat = event.latLng.lat();
                 var lng = event.latLng.lng();
-                addMarker(event.latLng, i);
+                addMarker(event.latLng, nodeNumber);
                 // alert(event.latLng.lat());
                 //TODO
                 $.ajax({
