@@ -2,4 +2,3 @@ node_modules
 rethinkdb.exe
 rethinkdb_data
 rethinkdb_data/*
-log/*
