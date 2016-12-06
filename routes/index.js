@@ -6,10 +6,6 @@ var sess;
 var router = express.Router();
 var node = require('../models/node.js');
 
-router.use(session({
-    secret: 'ssshhhh'
-}));
-
 var nodemailer = require('nodemailer');
 var smtpTransport = require("nodemailer-smtp-transport");
 
@@ -23,70 +19,11 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
     }
 }));
 
-
-var sess;
-var checksess;
-
 router.get('/', function(req, res) {
     // sess=req.session;
-    if (checksess) {
-        res.render('home', {
-            title: 'test',
-            temp: checksess
-        });
-    } else {
-        res.render('home', {
-            title: 'test',
-            temp: 'nouser'
-        });
-    }
+        res.render('home')
 });
 
-router.post('/login', function(req, res) {
-    sess = req.session;
-    sess.email = req.body.username;
-    res.end('done');
-});
-
-router.get('/logout', function(req, res) {
-    req.session.destroy(function(err) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/home');
-        }
-    })
-});
-
-router.get('/check', function(req, res) {
-    sess = req.session;
-
-    if (sess.email) {
-        res.redirect('/admin');
-    } else {
-        res.render('check');
-    }
-});
-
-router.get('/home', function(req, res) {
-    // sess=req.session;
-    sess = req.session;
-    checksess = sess.email;
-    if (checksess) {
-        res.render('home', {
-            title: 'test',
-            temp: checksess
-        });
-
-
-    } else {
-        res.render('home', {
-            title: 'test',
-            temp: 'nouser'
-        });
-
-    }
-});
 router.get('/stastic', function(req, res) {
     if (checksess) {
         res.render('stastic', {

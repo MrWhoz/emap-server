@@ -14,11 +14,19 @@ async function register(user) {
     let connection = await connect();
     // Check if user exist
     let existId = await getUserById(user.id);
+    let existmId = await getUserById(user.mail);
     if (existId) {
         return {
             code: -1,
             message: "Username existed",
             data: existId
+        };
+    };
+    if (existmId) {
+        return {
+            code: -2,
+            message: "Mail is used",
+            data: existmId
         };
     };
     var data = {
@@ -39,6 +47,28 @@ async function register(user) {
     };
 };
 
+async function update(user) {
+    let connection = await connect();
+    let existId = await getUserById(user.id);
+    if (existId) {
+        var update = await r.db(dbName).table('user').get(user.id).update({
+            password: user.password,
+            role: user.role,
+            full_name: user.name,
+            status: user.status,
+            mail: user.mail,
+        }).run(connection);
+        return {
+            code: 1,
+            message: 'success',
+            data: update
+        }
+    } else return {
+        code: -1,
+        message: "Account couldn't be found"
+    }
+};
+
 async function login(user) {
     let connection = await connect();
     let existUser = await getUserById(user.id);
@@ -48,6 +78,15 @@ async function getUserById(id) {
     var connection = await connect();
     var user = await r.db(dbName).table("user").filter({
         user_id: id
+    }).run(connection);
+    user = await user.toArray();
+    return user[0] || false;
+};
+
+async function getUserByMail(mail) {
+    var connection = await connect();
+    var user = await r.db(dbName).table("user").filter({
+        'mail': mail
     }).run(connection);
     user = await user.toArray();
     return user[0] || false;
@@ -65,5 +104,6 @@ async function getUserList(status) {
 module.exports = {
     register,
     getUserById,
-    getUserList
+    getUserList,
+    update
 }

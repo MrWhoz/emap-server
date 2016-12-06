@@ -6,14 +6,16 @@ var passport = require('passport');
 var user = require('../models/user.js');
 var LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy(
+passport.use('local', new LocalStrategy(
     async function(username, password, done) {
-        var existUser = await user.getUserById(username);
-        if (existUser) {
-            return done(null, existUser);
-        } else return done(null,false);
+        var User = await user.getUserById(username);
+        if (User) {
+            if (User.password == password) {
+                return done(null, User);
+            } else return done(null, false)
+        } else
+            return done(null, false);
     }));
-
 
 passport.serializeUser(function(user, done) {
     done(null, user.user_id);
@@ -25,47 +27,50 @@ passport.deserializeUser(async function(id, done) {
 });
 
 router.get('/', async function(req, res, next) {
-    console.log('dsadasasd');
     var userList = await user.getUserList('active');
-
-
     console.log(userList);
+    res.send(userList);
 });
 
-router.get('/login', async function(req, res, next) {
-    // TODO : login
+router.get('/loginState', function(req, res) {
+    if (req.isAuthenticated())
+        res.send({
+            'isLogin': true,
+            'user': {
+                'displayName': req.user.name,
+                'user_id': req.user.user_id
+            }
+        })
+    else
+        res.send({
+            'isLogin': false
+        })
 });
 
 router.post('/login',
     passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/users/register'
+        successRedirect: '#',
+        failureRedirect: '#',
+        failureFlash: true
     }),
     function(req, res) {
-        res.redirect('/');
+        res.end('gotcha');
     });
 
+router.get('/success', function(req, res) {
+    res.send({
+        state: 'success',
+        user: req.user ? req.user : null
+    });
+});
 
-router.get('/register', async function(req, res, next) {
-
-    //TODO: below are just test code, clean it
-    var test = {
-        id: 'xtungvo',
-        name: 'Tung Tan Vo',
-        role: 'user',
-        password: 'abc123',
-        mail: 'tung@gmail.com'
-    }
-    var data = {
-        id: test.id,
-        password: test.password,
-        role: test.role,
-        name: test.name,
-        mail: test.mail,
-        status: 'active'
-    };
-    var result = await user.register(data);
-    res.send(result);
+//send failure login state back to view(angular)
+router.get('/failure', function(req, res) {
+    res.send({
+        state: 'failure',
+        user: null,
+        message: "Invalid username or password"
+    });
 });
 
 router.post('/register', async function(req, res, next) {
@@ -82,4 +87,14 @@ router.post('/register', async function(req, res, next) {
     var result = await user.register(data);
     res.send(result);
 });
+
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 module.exports = router;

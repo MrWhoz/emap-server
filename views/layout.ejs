@@ -6,6 +6,7 @@
 <html lang="en">
 <!--<![endif]-->
 <!-- HEAD SECTION -->
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -18,21 +19,23 @@
     <!--GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <!--BOOTSTRAP MAIN STYLES -->
-    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
     <!--FONTAWESOME MAIN STYLE -->
-    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
     <!--CUSTOM STYLE -->
-    <link href="/css/layoutStyle.css" rel="stylesheet" />
+    <link href="css/layoutStyle.css" rel="stylesheet" />
     <!-- Login Form -->
-    <link href="/css/login.css" rel="stylesheet" />
-    <link href="/css/userprofile.css" rel="stylesheet" />
+    <link href="css/login.css" rel="stylesheet" />
+    <link href="css/userprofile.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
 </head>
-    <!--END HEAD SECTION -->
+<!--END HEAD SECTION -->
+
 <body>
     <!-- <script type="text/javascript">
     // window.onload = function () {
@@ -41,8 +44,8 @@
     //         // document.getElementById("modalbox").id = "1";
     //         $('#modalbox').attr('data-target','#myModal1');
     //         document.getElementById("userprofile").innerHTML = sessionStorage.user + " Profile";
-           
-           
+
+
     //     }
     //     if(sessionStorage.user == "0"){
     //          document.getElementById("user").innerHTML = "Login";
@@ -50,7 +53,7 @@
     //     }
     // };
     </script>-->
-     <!-- NAV SECTION -->
+    <!-- NAV SECTION -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -63,199 +66,198 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="hometag"><a href="/home" >HOME</a></li>
+                    <li id="hometag"><a href="/home">HOME</a></li>
                     <li id="graphtag"><a href="/graph">GRAPH</a></li>
                     <li id="stastictag"><a href="/stastic">STASTIC</a></li>
-                    <li id="contacttag"><a href="/contact">CONTACT</a></li>                    
+                    <li id="contacttag"><a href="/contact">CONTACT</a></li>
                     <!-- Login -->
-                
-                        <li data-toggle="modal" data-target="#myModal" id="modalbox" ><a href="#" id="user">LOGIN</a></li>
-                  
-                    
+
+                    <li data-toggle="modal" data-target="#myModal" id="modalbox"><a href="#" id="user">LOGIN</a></li>
+
+
                 </ul>
             </div>
-           
+
         </div>
     </div>
-     
-    <!--END FOOTER SECTION --> 
+
+    <!--END FOOTER SECTION -->
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY LIBRARY -->
-    <script src="/js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
     <!-- CORE BOOTSTRAP LIBRARY -->
-    <script src="/js/bootstrap.min.js"></script>
-     <!-- SLIDESHOW LIBRARY -->
-  <!--    <script src="assets/js/modernizr.custom.79639.js"></script> -->
-    <script src="/js/jquery.ba-cond.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- SLIDESHOW LIBRARY -->
+    <!--    <script src="assets/js/modernizr.custom.79639.js"></script> -->
+    <script src="js/jquery.ba-cond.min.js"></script>
     <!-- <script src="assets/js/jquery.slitslider.js"></script> -->
-       <!-- CUSTOM SCRIPT-->   
+    <!-- CUSTOM SCRIPT-->
     <!-- <script src="assets/js/custom.js"></script> -->
     <!-- Login Script -->
-     
+    <script src="js/login.js"></script>
     <%- body %>
 
 
-    <div id="footer">
-        <div class="container">
-            <div class="row ">
-                © 2014 www.yourdomain.com | All Right Reserved              
-        
-            </div>
-            
-        </div>
-       
-    </div>
+        <div id="footer">
+            <div class="container">
+                <div class="row ">
+                    © 2014 www.yourdomain.com | All Right Reserved
 
-    <!-- Modal Login -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+                </div>
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Login/Register</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="formlogin">
-                        <form class="register-form">
-                          <input type="text" placeholder="name"/>
-                          <input type="password" placeholder="password"/>
-                          <input type="text" placeholder="email address"/>
-                          <button>create</button>
-                          <p class="message">Already registered? <a href="#">Sign In</a></p>
-                        </form>
-                        <form class="login-form">
-                          <input type="text" placeholder="username" id="username" />
-                          <input type="password" placeholder="password" id="password" />
-                          <button id="submit">login</button>
-                          <p class="message">Not registered? <a href="#">Create an account</a></p>
-                        </form>
-                      </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="refresh()">Ok</button>
-                </div>
             </div>
 
         </div>
-    </div>
 
-    <!-- User Profile -->
-    <div class="modal fade" id="myModal1" role="dialog">
-        <div class="modal-dialog">
+        <!-- Modal Login -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id = "userprofile"></h4>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Login/Register</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="formlogin">
+                            <form class="register-form">
+                                <input type="text" placeholder="name" />
+                                <input type="password" placeholder="password" />
+                                <input type="text" placeholder="email address" />
+                                <button>create</button>
+                                <p class="message">Already registered? <a href="#">Sign In</a></p>
+                            </form>
+                            <form class="login-form">
+                                <input type="text" placeholder="username" id="username" />
+                                <input type="password" placeholder="password" id="password" />
+                                <button id="submit">login</button>
+                                <p class="message">Not registered? <a href="#">Create an account</a></p>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="refresh()">Ok</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <h1 class="title-pen"> User Profile <span>UI</span></h1>
-                            <div class="user-profile">
-                                <img class="avatar" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTF_erFD1SeUnxEpvFjzBCCDxLvf-wlh9ZuPMqi02qGnyyBtPWdE-3KoH3s" alt="Ash" />
-                                <div class="username">Will Smith</div>
-                                <div class="bio">
-                                    Senior UI Designer
-                                </div>
-                                <div class="description">
-                                    I use to design websites and applications
-                                    for the web.
-                                </div>
-                                <div class="data">
-                                    <i class="fa fa-heart-o" aria-hidden="true">1-</i>Likes
-                                    <span>|</span>
-                                    <i class="fa fa-eye" aria-hidden="true">1-</i>Follows
-                                    <span>|</span>
-                                    <i class="fa fa-users" aria-hidden="true">1-</i>Friends
-                                </div>
-                                
+
+            </div>
+        </div>
+
+        <!-- User Profile -->
+        <div class="modal fade" id="myModal1" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="userprofile"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1 class="title-pen"> User Profile <span>UI</span></h1>
+                        <div class="user-profile">
+                            <img class="avatar" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTF_erFD1SeUnxEpvFjzBCCDxLvf-wlh9ZuPMqi02qGnyyBtPWdE-3KoH3s" alt="Ash" />
+                            <div class="username">Will Smith</div>
+                            <div class="bio">
+                                Senior UI Designer
                             </div>
-                            <i class="fa fa-check-square-o" aria-hidden="true" style="float:right; font-size:150%; padding-right:10%;" data-toggle="modal" data-target="#myModal3">Edit</i>
-                            <footer>
-                                
-                                <h1>
+                            <div class="description">
+                                I use to design websites and applications for the web.
+                            </div>
+                            <div class="data">
+                                <i class="fa fa-heart-o" aria-hidden="true">1-</i>Likes
+                                <span>|</span>
+                                <i class="fa fa-eye" aria-hidden="true">1-</i>Follows
+                                <span>|</span>
+                                <i class="fa fa-users" aria-hidden="true">1-</i>Friends
+                            </div>
+
+                        </div>
+                        <i class="fa fa-check-square-o" aria-hidden="true" style="float:right; font-size:150%; padding-right:10%;" data-toggle="modal" data-target="#myModal3">Edit</i>
+                        <footer>
+
+                            <h1>
                                     inspired by
                                     <a href="https://dribbble.com/shots/1033074-User-Profile">
                                         <span class="entypo-dribbble"></span> shot
                                     </a>
                                 </h1>
-                                <div style="margin: 0 auto">
+                            <div style="margin: 0 auto">
                                 <div style="width: 70px; margin: 0 auto">
-                                <button class="btn btn-danger" style="width: 100%"><a href="/logout" style="color: white;">Log out</a></button>
+                                    <button class="btn btn-danger" style="width: 100%"><a href="/logout" style="color: white;">Log out</a></button>
                                 </div>
-                                </div>
-                            </footer>
+                            </div>
+                        </footer>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                </div>
+
             </div>
-
         </div>
-    </div>
 
-    <!-- Data Info -->
-    <div class="modal fade" id="myModal2" role="dialog">
-        <div class="modal-dialog">
+        <!-- Data Info -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Node Infomations</h4>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Node Infomations</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table-fill" id="list" style="margin:40px auto">
+                            <thead>
+                                <tr>
+                                    <th class="text-left" style="text-align: center; color: red;">NodeID</th>
+                                    <th class="text-left" style="text-align: center;">Lat</th>
+                                    <th class="text-left" style="text-align: center;">Lng</th>
+
+                                    <th class="text-left" style="text-align: center; color:blue;">Phone</th>
+                                    <th class="text-left" style="text-align: center;">Status</th>
+                                    <th class="text-left" style="text-align: center;">Graph</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="table-hover">
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                   <table class="table-fill" id="list" style="margin:40px auto">
-                        <thead>
-                        <tr>
-                        <th class="text-left" style="text-align: center; color: red;">NodeID</th>
-                        <th class="text-left" style="text-align: center;">Lat</th>
-                        <th class="text-left" style="text-align: center;">Lng</th>
 
-                        <th class="text-left" style="text-align: center; color:blue;">Phone</th>
-                        <th class="text-left" style="text-align: center;">Status</th>
-                        <th class="text-left" style="text-align: center;">Graph</th>
-                        
-                        </tr>
-                        </thead>
-                        <tbody class="table-hover">
-
-
-                        </tbody>
-                    </table>
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                </div>
             </div>
-
         </div>
-    </div>
 
 
-    <script src="/js/login.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var email,pass;
-            $("#submit").click(function(){
-                username=$("#username").val();
-                password=$("#password").val();
-                /*
-                * Perform some validation here.
-                */
-                $.post("/login",{username:username,password:password},function(data){        
-                    if(data==='done')           
-                    {
-                        window.location.href="/home";
-                    }
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var email, pass;
+                $("#submit").click(function() {
+                    username = $("#username").val();
+                    password = $("#password").val();
+                    /*
+                     * Perform some validation here.
+                     */
+                    $.post("/user/login", {
+                        username: username,
+                        password: password
+                    }, function(data) {
+
+                    });
+
                 });
-                
             });
-        });
-
-    </script>
+        </script>
 </body>
+
 </html>
