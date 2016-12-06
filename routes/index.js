@@ -26,59 +26,36 @@ router.get('/', function(req, res) {
 });
 
 router.get('/stastic', function(req, res) {
-    if (checksess) {
-        res.render('stastic', {
-            title: 'test',
-            temp: checksess
-        });
-
-
-    } else {
+   
         res.render('stastic', {
             title: 'test',
             temp: 'nouser'
         });
 
-    }
+    
 });
 
 //------------
 router.get('/contact', function(req, res) {
     // sess=req.session;
-    if (checksess) {
-        res.render('contact', {
-            title: 'test',
-            temp: checksess
-        });
-
-
-    } else {
+   
         res.render('contact', {
             title: 'test',
             temp: 'nouser'
         });
 
-    }
+    
 });
 //-----Graph session
 router.get('/graph', function(req, res) {
     // sess=req.session;
-    if (checksess) {
-        res.render('graph', {
-            title: 'test',
-            qs: req.query,
-            temp: checksess
-        });
-
-
-    } else {
         res.render('graph', {
             title: 'test',
             temp: 'nouser',
             qs: req.query
         });
 
-    }
+    
 });
 
 
