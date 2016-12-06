@@ -30,7 +30,7 @@ async function register(user) {
         };
     };
     var data = {
-        user_id: user.id,
+        username: user.id,
         password: user.password,
         role: user.role,
         full_name: user.name,
@@ -77,7 +77,7 @@ async function login(user) {
 async function getUserById(id) {
     var connection = await connect();
     var user = await r.db(dbName).table("user").filter({
-        user_id: id
+        username: id
     }).run(connection);
     user = await user.toArray();
     return user[0] || false;

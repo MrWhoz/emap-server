@@ -9,6 +9,8 @@ var passport = require('passport');
 require('babel-register');
 require('babel-polyfill');
 var serveIndex = require('serve-index');
+const flash = require('connect-flash');
+var auth = require('./routes/auth')(passport);
 /*---------------BEGIN INIT------------------*/
 
 var routes = require('./routes/index');
@@ -33,6 +35,8 @@ app.set('view engine', 'ejs');
 app.use(session({
     secret: 'ssshhhh'
 }));
+var initPassport = require('./libs/auth');
+initPassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
@@ -42,13 +46,13 @@ app.use('/debug', serveIndex('./log'));
 app.use('/', routes);
 app.use('/user', user);
 app.use('/node', node);
-
+app.use('/auth', auth);
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-
+app.use(flash());
 app.get('/url', function(req, res) {
     res.render('view', {
         page: req.url,

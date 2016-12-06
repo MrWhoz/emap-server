@@ -8,7 +8,7 @@
         window.onload = function() {
           $.ajax({
               type: "GET",
-              url: "/user/loginState", // <-- Here
+              url: "/auth/loginState", // <-- Here
               dataType: "json",
               success: function(data) {
                   console.log(data);

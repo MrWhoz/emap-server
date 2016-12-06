@@ -128,10 +128,10 @@
                                 <button>create</button>
                                 <p class="message">Already registered? <a href="#">Sign In</a></p>
                             </form>
-                            <form class="login-form">
-                                <input type="text" placeholder="username" id="username" />
-                                <input type="password" placeholder="password" id="password" />
-                                <button id="submit">login</button>
+                            <form class="login-form" action="/auth/login" method="post">
+                                <input type="text" class="form-control" name="username" />
+                                <input type="password" class="form-control" name="password" />
+                                <button type="submit">login</button>
                                 <p class="message">Not registered? <a href="#">Create an account</a></p>
                             </form>
                         </div>
@@ -236,28 +236,6 @@
 
             </div>
         </div>
-
-
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var email, pass;
-                $("#submit").click(function() {
-                    username = $("#username").val();
-                    password = $("#password").val();
-                    /*
-                     * Perform some validation here.
-                     */
-                    $.post("/user/login", {
-                        username: username,
-                        password: password
-                    }, function(data) {
-
-                    });
-
-                });
-            });
-        </script>
 </body>
 
 </html>

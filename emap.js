@@ -4,17 +4,15 @@ var dbName = config.rethinkdb.db;
 var debug = require('debug')('http'),
     http = require('http'),
     name = 'My App';
-
 r = require('rethinkdb');
-//fdasfasf
+// PORT SETUP
 var port = normalizePort(config.app.port || '8888');
 app.set('port', port);
 var server = http.createServer(app);
 server.listen(port);
-//server.on('error', onError);
+
 var io = require('socket.io')(server);
 io.on('connection', function(socket) {
-    // connected
     console.log('new socketio connection');
 });
 server.on('listening', onListening);
@@ -44,6 +42,7 @@ function onListening() {
     console.log('Listening on ' + bind);
 };
 var connection = null;
+
 r.connect({
     host: 'localhost',
     port: 28015
@@ -57,10 +56,3 @@ r.connect({
         });
     });
 })
-
-// function sendSdata(item){
-//   io.sockets.emit('rdata',item);
-//
-// }
-
-// exports.sendSdata = sendSdata;
