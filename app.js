@@ -8,7 +8,7 @@ var session = require('express-session');
 var passport = require('passport');
 require('babel-register');
 require('babel-polyfill');
-
+var serveIndex = require('serve-index');
 /*---------------BEGIN INIT------------------*/
 
 var routes = require('./routes/index');
@@ -30,21 +30,15 @@ app.use(bodyParser.urlencoded({
 app.set('views', path.join(__dirname, 'views'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
-
+app.use(session({
+    secret: 'ssshhhh'
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(session({
-    secret: 'ssshhhh',
-    cookie: {
-        maxAge: 10 * 24 * 3600 * 1000
-    },
-    saveUninitialized: true,
-    resave: true
-}));
-
+app.use('/log', express.static(path.join(__dirname, 'log')));
+app.use('/debug', serveIndex('./log'));
 app.use('/', routes);
 app.use('/user', user);
 app.use('/node', node);
@@ -68,7 +62,5 @@ app.get('/url', function(req, res) {
 });
 
 //--------
-
-
 
 module.exports = app;

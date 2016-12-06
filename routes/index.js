@@ -5,7 +5,7 @@ var sess;
 // -----
 var router = express.Router();
 var node = require('../models/node.js');
-
+var logger = require('../libs/winston.js');
 var nodemailer = require('nodemailer');
 var smtpTransport = require("nodemailer-smtp-transport");
 
@@ -21,7 +21,8 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
 
 router.get('/', function(req, res) {
     // sess=req.session;
-        res.render('home')
+        res.render('home');
+        logger.info("Get home route");
 });
 
 router.get('/stastic', function(req, res) {
