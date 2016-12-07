@@ -1,21 +1,14 @@
 <% layout('layout') -%>
 <script type="text/javascript">
 window.onload = function () {
-  <% if(temp!='nouser') {%>
-    console.log("<%=temp%>");
-    document.getElementById("user").innerHTML = "<%=temp%>";
-    $('#modalbox').attr('data-target','#myModal1');
-        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
-  <%} else{%>
-    console.log("error");
-  <%}%>
+
 };
 </script>
 <div style="margin:70px auto">
 <div class="container">
   <h2>Replacing Node: input</h2>
   <p>The form below contains one input elements</p>
- 
+
     <div class="form-group">
       <label for="oldnodeid">Old NodeID:</label>
       <input type="text" class="form-control" style="width: 50%" id="oldnodeid">
@@ -24,9 +17,9 @@ window.onload = function () {
       <label for="lat">New NodeID</label>
       <input type="text" class="form-control" style="width: 50%" id="newnodeid">
     </div>
-    
+
     <button class="btn btn-success" onclick="replacingnode()">Replace</button>
-  
+
 </div>
 </div>
 <script src="js/replace.js"></script>

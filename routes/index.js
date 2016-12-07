@@ -46,16 +46,7 @@ router.get('/home', function(req, res) {
 });
 
 router.get('/static', function(req, res) {
-
-    if (req.session.hasOwnProperty('passport')) {
-        res.render('static', {
-            username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname
-        });
-    } else res.render('static', {
-        username: null,
-        name: null
-    });
+    res.render('static');
     logger.info("IP:" + req.clientIP + " GET /static route");
 });
 

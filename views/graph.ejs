@@ -37,18 +37,23 @@
 
 
         window.onload = function() {
-                <% if(temp!='nouser') {%>
-                console.log("<%=temp%>");
-                document.getElementById("user").innerHTML = "<%=temp%>";
-                $('#modalbox').attr('data-target', '#myModal1');
-                document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+                // <% if(temp!='nouser') {%>
+                // console.log("<%=temp%>");
+                // document.getElementById("user").innerHTML = "<%=temp%>";
+                // $('#modalbox').attr('data-target', '#myModal1');
+                // document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
+                // var yourUl1 = document.getElementById("editbutton1");
+                // yourUl1.style.display = yourUl1.style.display === 'none' ? '' : 'none';
+                // var yourUl2 = document.getElementById("editbutton2");
+                // yourUl2.style.display = yourUl2.style.display === 'none' ? '' : 'none';
+                // <%} else{%>
+                // console.log("error");
+                // <%}%>
                 var yourUl1 = document.getElementById("editbutton1");
                 yourUl1.style.display = yourUl1.style.display === 'none' ? '' : 'none';
                 var yourUl2 = document.getElementById("editbutton2");
                 yourUl2.style.display = yourUl2.style.display === 'none' ? '' : 'none';
-                <%} else{%>
-                console.log("error");
-                <%}%>
+
                 //-- create options
                 var NodeID = [];
                 var lat = [];
@@ -107,7 +112,7 @@
 
                 });
 
-                
+
                 function drowchart(xaxis,co,dust,gas,temp,bat) {
                         // alert(xaxis);
                         $(function() {
@@ -256,7 +261,7 @@
 
                     // Drow new chart
                     drowchart(x1,co1,dust1,gas1,temp1,bat1);
-                    
+
                     });
                 function display() {
                     // Get node data
@@ -281,7 +286,7 @@
                             }
                             var lastdate = String(xaxis[count-1]).substring(0,25);
                             console.log(lastdate);
-                        
+
                             document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate+ '<hr/>'
                                 + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + 'ppm'+'<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">DUST: </span>' + dust[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
@@ -343,7 +348,7 @@
                         }
                     });
 
-                   
+
                     //Display node info
                     function InsertInfo(nodeid, phone, lat, lng) {
                         document.getElementById("NodeID").value = nodeid;
@@ -359,12 +364,12 @@
                     // create google map thumbnail
 
                     //Drawchart function
-                    
+
                 }
 
             }
-            
-                
+
+
             //--------------------------------------
     </script>
     <style type="text/css">
@@ -450,4 +455,3 @@
 
     <script src="js/Graph.js"></script>
     <script src="js/Graph1.js"></script>
-   
