@@ -21,17 +21,17 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
 router.get('/', function(req, res) {
     res.render('index');
     console.log(req.session);
-    logger.info("IP:",req.clientIP,"GET / route");
+    logger.info("IP:" + req.clientIP +" GET /route");
 });
 
 router.get('/home', function(req, res) {
     res.render('index');
     console.log(req.session);
-    logger.info("IP:",req.clientIP,"GET /home route");
+    logger.info("IP:" + req.clientIP +" GET /home route");
 });
 
 router.get('/static', function(req, res) {
-    logger.info("IP:",req.clientIP,"GET /static route");
+    logger.info("IP:" + req.clientIP +" GET /static route");
     res.render('stastic', {
         title: 'test',
         temp: 'nouser'
@@ -40,7 +40,7 @@ router.get('/static', function(req, res) {
 
 //------------
 router.get('/contact', function(req, res) {
-    logger.info("IP:",req.clientIP,"GET /contact route");
+    logger.info("IP:" + req.clientIP +" GET /contact route");
     res.render('contact', {
         title: 'test',
         temp: 'nouser'
@@ -48,7 +48,7 @@ router.get('/contact', function(req, res) {
 });
 //-----Graph session
 router.get('/graph', function(req, res) {
-    logger.info("IP:",req.clientIP,"GET /graph route");
+    logger.info("IP:" + req.clientIP +" GET /graph route");
     res.render('graph', {
         title: 'test',
         temp: 'nouser',
@@ -146,14 +146,14 @@ router.get('/getinfo', async function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     if (req.query.id) {
         var data = await node.getNodeInfoByID(req.query.id);
-        logger.info("IP:",req.clientIP,"GET /getinfo: get node info by id:", req.query.id, data);
+        logger.info("IP:" + req.clientIP +" GET /getinfo: get node info by id:", req.query.id, data);
     } else if (req.query.phone) {
         var data = await node.getNodeInfoByPhone(req.query.phone);
-        logger.info("IP:",req.clientIP,"GET /getinfo: get node info by phone:", req.query.id, data);
+        logger.info("IP:" + req.clientIP +" GET /getinfo: get node info by phone:", req.query.id, data);
     } else if (req.query.list) {
         let status = parseInt(req.query.status)
         var data = await node.getNodeList(status);
-        logger.info("IP:",req.clientIP,"GET /getinfo: get list node info - number of nodes", data.length);
+        logger.info("IP:" + req.clientIP +" GET /getinfo: get list node info - number of nodes", data.length);
     }
     res.send(data);
 });
@@ -163,7 +163,7 @@ router.get('/getdata', async function(req, res, next) {
     if (req.query.id) {
         var data = await node.getNodeDataByID(req.query.id);
     }
-    logger.info("IP:",req.clientIP,"GET /getdata: Node data ID", req.query.id, 'number of records: ',data.length);
+    logger.info("IP:" + req.clientIP +" GET /getdata: Node data ID", req.query.id, 'number of records: ',data.length);
     res.send(data);
 });
 
@@ -180,10 +180,10 @@ router.post('/initnew', async function(req, res, next) {
         phone: req.body.phone,
         status: 0
     };
-    logger.info("IP:",req.clientIP,"GET /initnew: Node data", data);
+    logger.info("IP:" + req.clientIP +" GET /initnew: Node data", data);
     let result = await node.addNode(data);
     // res.send(result);
-    logger.info("IP:",req.clientIP,"GET /initnew: status init new node is ", result);
+    logger.info("IP:" + req.clientIP +" GET /initnew: status init new node is ", result);
     if (result == 'duplicated') {
         res.send({
             status: 'duplicated'
@@ -208,7 +208,7 @@ router.post('/updatenode', async function(req, res, next) {
             phone: req.body.phone
         }
         let result = await node.updateNode(data);
-        logger.info("IP:",req.clientIP,"GET /updatenode: Node data", data);
+        logger.info("IP:" + req.clientIP +" GET /updatenode: Node data", data);
         res.send({
             status: result
         })
@@ -235,7 +235,7 @@ router.get('/add', async function(req, res, next) {
         "s4": req.query.s4,
         "s5": req.query.s5
     };
-    logger.info("IP:",req.clientIP,"GET /add: Node data", nodeData);
+    logger.info("IP:" + req.clientIP + " GET /add: Node data", nodeData);
     res.send(await node.addNodeData(nodeData));
 
 });
