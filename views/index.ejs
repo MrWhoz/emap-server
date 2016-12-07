@@ -1,17 +1,61 @@
 <% layout('layout') -%>
-<link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
+    <link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+          $.ajax({
+              type: "GET",
+              url: "/auth/loginState", // <-- Here
+              dataType: "json",
+              success: function(data) {
+                  console.log(data);
+              }
+          });
+        };
     </script>
 
-<!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
-    <div id="floating-panel">
-      <input id="addmarker" onclick="addmarker();"  type=button value="Add Markers">
-      <input id="stopadd" onclick="stopAdd();" type=button value="Stop Add Markers">
-      <input onclick="configMarkers();" type=button value="Config Markers">
+    <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
+    <div id="floating-panel"style="display: none; overflow-x: visible; overflow-y: visible; " >
+        <!-- <input id="addmarker" type=button value="Add Markers" data-toggle="modal" data-target="#myModalAddNode"> -->
+        <button style="height: 50px;width: 100px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" id="nodeactive" data-toggle="modal" data-target="#myModal2"><i class="fa fa-list" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+
+       <!--  <hr/>
+        <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p> -->
     </div>
-    <div id="map"></div>
-    <script src="js/index.js"></script>
- 
-    
-    
+    <div id="map" style="width: 100%"></div>
+
+
+    <!-- Add Nodeid and phone -->
+    <div class="modal fade" id="myModalAddNode" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Assign Nodeid and Phone</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                      <label for="newNodeid">NodeID:</label>
+                      <input type="text" class="form-control" style="width: 100%" id="newNodeid">
+                    </div>
+                    <div class="form-group">
+                      <label for="newPhone">Phone</label>
+                      <input type="text" class="form-control" style="width: 100%" id="newPhone">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addmarker()">Ok</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="js/home.js"></script>

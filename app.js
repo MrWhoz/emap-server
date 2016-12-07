@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/log', express.static(path.join(__dirname, 'log')));
-app.use('/debug', serveIndex('./log'));
+app.use('/log', serveIndex('./log'));
 app.use('/', routes);
 app.use('/user', user);
 app.use('/node', node);

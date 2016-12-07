@@ -20,7 +20,14 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
 
 router.get('/', function(req, res) {
     // sess=req.session;
-        res.render('home');
+        res.render('index');
+        console.log(req.session);
+        logger.info("Get home route");
+});
+
+router.get('/home', function(req, res) {
+    // sess=req.session;
+        res.render('index');
         console.log(req.session);
         logger.info("Get home route");
 });
@@ -31,8 +38,6 @@ router.get('/stastic', function(req, res) {
             title: 'test',
             temp: 'nouser'
         });
-
-
 });
 
 //------------
