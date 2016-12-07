@@ -1,15 +1,7 @@
 <% layout('layout') -%>
 <script type="text/javascript">
 window.onload = function () {
-	document.getElementById("stastictag").className = "active";
-	<% if(temp!='nouser') {%>
-		console.log("<%=temp%>");
-		document.getElementById("user").innerHTML = "<%=temp%>";
-		$('#modalbox').attr('data-target','#myModal1');
-        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
-	<%} else{%>
-		console.log("error");
-	<%}%>
+
 };
 </script>
 <div style="font-size: 200%;margin-top:100px" class="flip">Stastic</div>

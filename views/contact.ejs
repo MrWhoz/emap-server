@@ -4,15 +4,7 @@
 <link rel="stylesheet" href="/css/normalizeContact.css" type="text/css" />
 <script type="text/javascript">
 window.onload = function () {
-  document.getElementById("contacttag").className = "active";
-  <% if(temp!='nouser') {%>
-    console.log("<%=temp%>");
-    document.getElementById("user").innerHTML = "<%=temp%>";
-    $('#modalbox').attr('data-target','#myModal1');
-        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
-  <%} else{%>
-    console.log("error");
-  <%}%>
+
 };
 </script>
 <div style="margin-top:80px"></div>
@@ -24,7 +16,7 @@ window.onload = function () {
   <div class="row1 body">
     <div class="form">
       <ul>
-        
+
         <li>
           <p class="left" style="font-size: 160%">
             <label for="first_name" class="slideInUp">first name</label>
@@ -32,27 +24,27 @@ window.onload = function () {
           </p>
           <p class="pull-right">
             <label for="last_name" style="font-size: 160%">last name</label>
-            <input id="lastname" type="text" name="last_name" placeholder="Smith" style="font-size: 160%"/>      
+            <input id="lastname" type="text" name="last_name" placeholder="Smith" style="font-size: 160%"/>
           </p>
         </li>
-        
+
         <li>
           <p>
             <label for="email" style="font-size: 160%">email <span class="req" id="validation">*</span></label>
             <input type="email" id="to" name="email" placeholder="john.smith@gmail.com" style="font-size: 140%" />
           </p>
-        </li>        
+        </li>
         <li><div class="divider"></div></li>
         <li>
           <label for="comments" style="font-size: 160%">comments</label>
           <textarea id="content" cols="46" rows="6" name="comments" style="font-size: 160%"></textarea>
         </li>
-        
+
         <li style="font-size: 130%">
           <input class="btn btn-submit" id="send_email" type="submit" style="color: #fbf2f2"  value="Submit" />
           <small style="font-size: 130%">or press <strong>enter</strong></small>
         </li>
-        
+
       </ul>
     </div>
      <span id="message" style="margin: 0 auto; font-size: 160%"></span>
