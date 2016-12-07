@@ -1,5 +1,4 @@
 var express = require('express');
-var session = require('express-session');
 var sockio = require("socket.io");
 var sess;
 // -----
@@ -22,29 +21,30 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
 router.get('/', function(req, res) {
     // sess=req.session;
         res.render('home');
+        console.log(req.session);
         logger.info("Get home route");
 });
 
 router.get('/stastic', function(req, res) {
-   
+
         res.render('stastic', {
             title: 'test',
             temp: 'nouser'
         });
 
-    
+
 });
 
 //------------
 router.get('/contact', function(req, res) {
     // sess=req.session;
-   
+
         res.render('contact', {
             title: 'test',
             temp: 'nouser'
         });
 
-    
+
 });
 //-----Graph session
 router.get('/graph', function(req, res) {
@@ -55,7 +55,7 @@ router.get('/graph', function(req, res) {
             qs: req.query
         });
 
-    
+
 });
 
 

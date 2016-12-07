@@ -30,7 +30,7 @@ module.exports = function(passport) {
         console.log('success');
         res.send({
             state: 'success',
-            user: req.user ? req.user : null
+            username: req.session.passport.user
         });
     });
 
@@ -51,8 +51,6 @@ module.exports = function(passport) {
             console.log('islog success');
             return next();
         }
-
-
         // if they aren't redirect them to the home page
         console.log('islog failure');
         res.redirect('/');

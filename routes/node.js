@@ -1,5 +1,4 @@
 var express = require('express');
-var session = require('express-session');
 var sockio = require("socket.io");
 var sess;
 // -----
