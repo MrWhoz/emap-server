@@ -20,12 +20,17 @@ module.exports = function(passport) {
 
     router.post('/login',
         passport.authenticate('local', {
-            successRedirect: '/auth/success',
-            failureRedirect: '/auth/failure'
-        }), function(req,res,next){
-          res.redirect('/');
+            failureRedirect: '/#loginfail'
+        }),
+        function(req, res, next) {
+            res.redirect('/');
         });
 
+    router.get('/logout', function(req, res) {
+        req.logout();
+        req.session.destroy();
+        res.redirect('/');
+    });
     router.get('/success', function(req, res) {
         console.log('success');
         res.send({

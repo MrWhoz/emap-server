@@ -72,9 +72,15 @@
                     <li id="contacttag"><a href="/contact">CONTACT</a></li>
                     <!-- Login -->
 
-                    <li data-toggle="modal" data-target="#myModal" id="modalbox"><a href="#" id="user">LOGIN</a></li>
-
-
+                    <% if(username){ %>
+                        <li data-toggle="modal" data-target="#myModal1" id="modalbox">
+                            <a href="#">
+                                <%= username %>
+                            </a>
+                        </li>
+                        <% } else{ %>
+                            <li data-toggle="modal" data-target="#myModal" id="modalbox"><a href="#" id="user">LOGIN</a></li>
+                            <% } %>
                 </ul>
             </div>
 
@@ -112,7 +118,6 @@
         <!-- Modal Login -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -140,10 +145,23 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="refresh()">Ok</button>
                     </div>
                 </div>
-
             </div>
         </div>
-
+        <div class="modal fade" id="loginfail" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                      <div class="description">
+                          I use to design websites and applications for the web.
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="refresh()">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- User Profile -->
         <div class="modal fade" id="myModal1" role="dialog">
             <div class="modal-dialog">
@@ -158,7 +176,7 @@
                         <h1 class="title-pen"> User Profile <span>UI</span></h1>
                         <div class="user-profile">
                             <img class="avatar" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTF_erFD1SeUnxEpvFjzBCCDxLvf-wlh9ZuPMqi02qGnyyBtPWdE-3KoH3s" alt="Ash" />
-                            <div class="username">Will Smith</div>
+                            <div class="username"><%= name %></div>
                             <div class="bio">
                                 Senior UI Designer
                             </div>
@@ -185,7 +203,7 @@
                                 </h1>
                             <div style="margin: 0 auto">
                                 <div style="width: 70px; margin: 0 auto">
-                                    <button class="btn btn-danger" style="width: 100%"><a href="/logout" style="color: white;">Log out</a></button>
+                                    <button class="btn btn-danger" style="width: 100%"><a href="/auth/logout" style="color: white;">Log out</a></button>
                                 </div>
                             </div>
                         </footer>

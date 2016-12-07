@@ -33,7 +33,7 @@ async function register(user) {
         username: user.id,
         password: user.password,
         role: user.role,
-        full_name: user.name,
+        fullname: user.name,
         status: user.status,
         mail: user.mail,
         created_time: new Date()
