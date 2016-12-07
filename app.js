@@ -7,13 +7,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
+var requestIp = require('request-ip');
+var serveIndex = require('serve-index');
 require('babel-register');
 require('babel-polyfill');
-var serveIndex = require('serve-index');
-//const flash = require('connect-flash');
-var auth = require('./routes/auth')(passport);
-/*---------------BEGIN INIT------------------*/
 
+//const flash = require('connect-flash');
+/*---------------BEGIN INIT------------------*/
+var auth = require('./routes/auth')(passport);
 var routes = require('./routes/index');
 var user = require('./routes/user');
 var node = require('./routes/node');
@@ -33,6 +34,7 @@ app.use(passport.initialize());
 app.set('views', path.join(__dirname, 'views'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
+app.use(requestIp.mw({ attributeName : 'clientIP' }))
 app.use(cookieParser());
 app.use(session({
     secret: 'ssshhhh'
@@ -59,7 +61,7 @@ app.get('/url', function(req, res) {
         nav: {
             'home': '/home',
             'graph': '/graph',
-            'stastic': '/stastic',
+            'stastic': '/static',
             'contact': '/contact'
         }
     });
