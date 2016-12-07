@@ -19,128 +19,150 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
 }));
 
 router.get('/', function(req, res) {
-    if (req.session.hasOwnProperty('passport')){
-      logger.info("IP:" + req.clientIP + " GET /route and has session",req.session.passport);
+    if (req.session.hasOwnProperty('passport')) {
+        logger.info("IP:" + req.clientIP + " GET /route and has session", req.session.passport);
         res.render('index', {
             username: req.session.passport.user.username,
             name: req.session.passport.user.fullname
         });
-      }
-    else res.render('index', {
+    } else res.render('index', {
         username: null,
         name: null
     });
-    console.log(req.session);
     logger.info("IP:" + req.clientIP + " GET /route");
 });
 
 router.get('/home', function(req, res) {
-    res.render('index');
-    console.log(req.session);
+    if (req.session.hasOwnProperty('passport')) {
+        res.render('index', {
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname
+        });
+    } else res.render('index', {
+        username: null,
+        name: null
+    });
     logger.info("IP:" + req.clientIP + " GET /home route");
 });
 
 router.get('/static', function(req, res) {
-    logger.info("IP:" + req.clientIP + " GET /static route");
-    res.render('stastic', {
-        title: 'test',
-        temp: 'nouser'
+
+    if (req.session.hasOwnProperty('passport')) {
+        res.render('static', {
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname
+        });
+    } else res.render('static', {
+        username: null,
+        name: null
     });
+    logger.info("IP:" + req.clientIP + " GET /static route");
 });
 
 //------------
 router.get('/contact', function(req, res) {
-    logger.info("IP:" + req.clientIP + " GET /contact route");
-    res.render('contact', {
-        title: 'test',
-        temp: 'nouser'
+    if (req.session.hasOwnProperty('passport')) {
+        res.render('contact', {
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname
+        });
+    } else res.render('contact', {
+        username: null,
+        name: null
     });
+    logger.info("IP:" + req.clientIP + " GET /contact route");
 });
 //-----Graph session
 router.get('/graph', function(req, res) {
-    logger.info("IP:" + req.clientIP + " GET /graph route");
-    res.render('graph', {
-        title: 'test',
-        temp: 'nouser',
+    if (req.session.hasOwnProperty('passport')) {
+        res.render('graph', {
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname,
+            qs: req.query
+        });
+    } else res.render('graph', {
+        username: null,
+        name: null,
         qs: req.query
     });
+    logger.info("IP:" + req.clientIP + " GET /graph route");
 });
 
 /* GET ConfigMarkers page. */ //TODO :move all node function to route node
 router.get('/configmarkers', function(req, res) {
-    if (checksess) {
+    if (req.session.hasOwnProperty('passport')) {
         res.render('configmarkers', {
-            title: 'test',
-            qs: req.query,
-            temp: checksess
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname,
+            qs: req.query
         });
-    } else {
-        res.status(404) // HTTP status 404: NotFound
-            .send('Not found');
-    }
+    } else res.render('configmarkers', {
+        username: null,
+        name: null,
+        qs: req.query
+    });
 });
 
 /* GET Add Node page. */ //TODO :move all node function to route node
 router.get('/configmarkers/addnode', function(req, res) {
-    if (checksess) {
+    if (req.session.hasOwnProperty('passport')) {
         res.render('addnode', {
-            title: 'test',
-            qs: req.query,
-            temp: checksess
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname,
+            qs: req.query
         });
-    } else {
-        res.status(404) // HTTP status 404: NotFound
-            .send('Not found');
+    } else res.render('addnode', {
+        username: null,
+        name: null,
+        qs: req.query
+    });
 
-    }
 });
 
 /* GET ConfigNode page. */ //TODO :move all node function to route node
 router.get('/configmarkers/confignode', function(req, res) {
-    if (checksess) {
+    if (req.session.hasOwnProperty('passport')) {
         res.render('confignode', {
-            title: 'test',
-            qs: req.query,
-            temp: checksess
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname,
+            qs: req.query
         });
-    } else {
-        res.status(404) // HTTP status 404: NotFound
-            .send('Not found');
-    }
+    } else res.render('confignode', {
+        username: null,
+        name: null,
+        qs: req.query
+    });
 });
 
 /* GET updatenode page. */ //TODO :move all node function to route node
 router.get('/configmarkers/confignode/update', function(req, res) {
-    if (checksess) {
+    if (req.session.hasOwnProperty('passport')) {
         res.render('update', {
-            title: 'test',
-            qs: req.query,
-            temp: checksess
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname,
+            qs: req.query
         });
-    } else {
-        res.status(404) // HTTP status 404: NotFound
-            .send('Not found');
-    }
+    } else res.render('update', {
+        username: null,
+        name: null,
+        qs: req.query
+    });
+
 });
 
 /* GET replacenode page. */ //TODO :move all node function to route node
 router.get('/configmarkers/confignode/replace', function(req, res) {
-    if (checksess) {
+    if (req.session.hasOwnProperty('passport')) {
         res.render('replace', {
-            title: 'test',
-            qs: req.query,
-            temp: checksess
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname,
+            qs: req.query
         });
-    } else {
-        // res.render('replace', {
-        //     title: 'test',
-        //     temp: 'nouser',
-        //     qs: req.query
-        // });
-        res.status(404) // HTTP status 404: NotFound
-            .send('Not found');
-
-    }
+    } else res.render('replace', {
+        username: null,
+        name: null,
+        qs: req.query
+    });
 });
 
 router.get('/admin', function(req, res) {
