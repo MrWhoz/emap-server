@@ -415,3 +415,49 @@
                             $('#Phone').attr('disabled', 'disabled');
                             alert("Update success!");
                 }
+
+                // refresh lastupdate
+                function doRefresh(){
+                    var e = document.getElementById("sources");
+                    var node_id = e.options[e.selectedIndex].value;
+                    var co = [];
+                    var dust = [];
+                    var temp = [];
+                    var gas = [];
+                    var bat = [];
+                    var xaxis = [];
+                    $.ajax({
+                        type: "GET",
+                        url: "/getdata?id=" + node_id,
+                        dataType: "json",
+                        success: function(data) {
+                            var myVariable = data;
+                            var count = Object.keys(myVariable).length;
+                            // console.log(count);
+                            data_id = myVariable[0].data_id;
+                            console.log('this is dataid', myVariable[0].data_id);
+                          
+                            co.push(Number(myVariable[count-1].data.co));
+                            dust.push(Number(myVariable[count-1].data.dust));
+                            temp.push(Number(myVariable[count-1].data.temp));
+                            gas.push(Number(myVariable[count-1].data.gas));
+                            bat.push(Number(myVariable[count-1].data.bat));
+                            var d = new Date(myVariable[count-1].time);
+                            xaxis.push(d);
+                            
+                            var lastdate = String(xaxis[0]).substring(0,25);
+                            console.log(lastdate);
+
+                            document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate+ '<hr/>'
+                                + '<span style="font-weight:bold;">CO: </span>'+co[0] + 'ppm'+'<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">DUST: </span>' + dust[0] +'ppm'+ '<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">TEMP: </span>' + temp[0] +'°C' + '<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">GAS: </span>' + gas[0] +'ppm'+ '<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">BATTERY: </span>' + bat[0]+'%' ;
+                                
+                                alert("Refresh done!");
+                            }
+                            
+                            
+                        });
+                }
