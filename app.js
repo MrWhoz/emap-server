@@ -31,16 +31,20 @@ app.use(bodyParser.urlencoded({
 }));
 initPassport(passport);
 app.use(passport.initialize());
+app.use(passport.session());
 app.set('views', path.join(__dirname, 'views'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.use(requestIp.mw({ attributeName : 'clientIP' }))
 app.use(cookieParser());
 app.use(session({
-    secret: 'ssshhhh'
+    secret: 'ssshhhh',
+    cookie: {
+        maxAge: 10 * 24 * 3600 * 1000
+    },
+    saveUninitialized: true,
+    resave: true
 }));
-
-app.use(passport.session());
 app.use(logger('dev'));
 app.use('/log', express.static(path.join(__dirname, 'log')));
 app.use(express.static(path.join(__dirname, 'public')));

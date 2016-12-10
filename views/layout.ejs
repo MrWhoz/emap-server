@@ -37,23 +37,16 @@
 <!--END HEAD SECTION -->
 
 <body>
-    <!-- <script type="text/javascript">
-    // window.onload = function () {
-    //     if(typeof(Storage) !== "undefined"){
-    //         document.getElementById("user").innerHTML = sessionStorage.user;
-    //         // document.getElementById("modalbox").id = "1";
-    //         $('#modalbox').attr('data-target','#myModal1');
-    //         document.getElementById("userprofile").innerHTML = sessionStorage.user + " Profile";
 
-
-    //     }
-    //     if(sessionStorage.user == "0"){
-    //          document.getElementById("user").innerHTML = "Login";
-    //          $('#modalbox').attr('data-target','#myModal');
-    //     }
-    // };
-    </script>-->
+    <script type="text/javascript">
+        window.onload = function() {
+            var user = checkLogin();
+            console.log('this is the get user function result',user);
+        };
+    </script>
     <!-- NAV SECTION -->
+
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -65,22 +58,14 @@
                 <a class="navbar-brand" href="/home">LOGO HERE</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" id="navbar">
                     <li id="hometag"><a href="/home">HOME</a></li>
                     <li id="graphtag"><a href="/graph">GRAPH</a></li>
                     <li id="stastictag"><a href="/static">STATIC</a></li>
                     <li id="contacttag"><a href="/contact">CONTACT</a></li>
                     <!-- Login -->
 
-                    <% if(username){ %>
-                        <li data-toggle="modal" data-target="#myModal1" id="modalbox">
-                            <a href="#">
-                                <%= username %>
-                            </a>
-                        </li>
-                        <% } else{ %>
-                            <li data-toggle="modal" data-target="#myModal" id="modalbox"><a href="#" id="user">LOGIN</a></li>
-                            <% } %>
+
                 </ul>
             </div>
 
@@ -152,9 +137,9 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-body">
-                      <div class="description">
-                          I use to design websites and applications for the web.
-                      </div>
+                        <div class="description">
+                            I use to design websites and applications for the web.
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="refresh()">Ok</button>
@@ -176,7 +161,8 @@
                         <h1 class="title-pen"> User Profile <span>UI</span></h1>
                         <div class="user-profile">
                             <img class="avatar" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTF_erFD1SeUnxEpvFjzBCCDxLvf-wlh9ZuPMqi02qGnyyBtPWdE-3KoH3s" alt="Ash" />
-                            <div class="username"><%= name %></div>
+                            <div class="username" id="name">
+                            </div>
                             <div class="bio">
                                 Senior UI Designer
                             </div>

@@ -20,7 +20,10 @@ module.exports = function(passport) {
 
     router.post('/login',
         passport.authenticate('local', {
-            failureRedirect: '/#loginfail'
+            successRedirect: '/',
+            failureRedirect: '/#loginfail',
+            passReqToCallback: true,
+            session:true
         }),
         function(req, res, next) {
             res.redirect('/');

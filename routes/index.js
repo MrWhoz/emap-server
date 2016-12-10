@@ -17,6 +17,26 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
         pass: "manhcuong1"
     }
 }));
+// ============SESSION ===========
+router.get('/isLogged', ensureAuthenticated, function() {});
+
+function ensureAuthenticated(req, res, next) {
+    if (req.session.passport) {
+        res.send({
+            username: req.session.passport.user.username,
+            name: req.session.passport.user.fullname
+        });
+        console.log('ensureAuthenticated');
+        return next();
+    } else {
+        res.send({
+          message: 'not authenticate',
+          code : -1
+        });
+        console.log('no ensureAuthenticated');
+        return next();
+    }
+}
 
 router.get('/', function(req, res) {
     if (req.session.hasOwnProperty('passport')) {
@@ -33,15 +53,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/home', function(req, res) {
-    if (req.session.hasOwnProperty('passport')) {
-        res.render('index', {
-            username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname
-        });
-    } else res.render('index', {
-        username: null,
-        name: null
-    });
+    res.render('index');
     logger.info("IP:" + req.clientIP + " GET /home route");
 });
 
@@ -65,15 +77,7 @@ router.get('/contact', function(req, res) {
 });
 //-----Graph session
 router.get('/graph', function(req, res) {
-    if (req.session.hasOwnProperty('passport')) {
-        res.render('graph', {
-            username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname,
-            qs: req.query
-        });
-    } else res.render('graph', {
-        username: null,
-        name: null,
+    res.render('graph', {
         qs: req.query
     });
     logger.info("IP:" + req.clientIP + " GET /graph route");
