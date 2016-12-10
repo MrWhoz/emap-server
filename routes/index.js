@@ -18,10 +18,13 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
     }
 }));
 // ============SESSION ===========
-router.get('/isLogged', ensureAuthenticated, function() {});
+router.get('/isLogged', ensureAuthenticated, function(req,res,next) {
+
+});
 
 function ensureAuthenticated(req, res, next) {
     if (req.session.passport) {
+      res.header("Access-Control-Allow-Origin", "*");
         res.send({
             username: req.session.passport.user.username,
             name: req.session.passport.user.fullname
@@ -30,8 +33,8 @@ function ensureAuthenticated(req, res, next) {
         return next();
     } else {
         res.send({
-          message: 'not authenticate',
-          code : -1
+            message: 'not authenticate',
+            code: -1
         });
         console.log('no ensureAuthenticated');
         return next();
@@ -39,16 +42,7 @@ function ensureAuthenticated(req, res, next) {
 }
 
 router.get('/', function(req, res) {
-    if (req.session.hasOwnProperty('passport')) {
-        logger.info("IP:" + req.clientIP + " GET /route and has session", req.session.passport);
-        res.render('index', {
-            username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname
-        });
-    } else res.render('index', {
-        username: null,
-        name: null
-    });
+    res.render('index');
     logger.info("IP:" + req.clientIP + " GET /route");
 });
 
@@ -64,15 +58,8 @@ router.get('/static', function(req, res) {
 
 //------------
 router.get('/contact', function(req, res) {
-    if (req.session.hasOwnProperty('passport')) {
-        res.render('contact', {
-            username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname
-        });
-    } else res.render('contact', {
-        username: null,
-        name: null
-    });
+    res.render('contact');
+
     logger.info("IP:" + req.clientIP + " GET /contact route");
 });
 //-----Graph session
@@ -100,31 +87,14 @@ router.get('/configmarkers', function(req, res) {
 
 /* GET Add Node page. */ //TODO :move all node function to route node
 router.get('/configmarkers/addnode', function(req, res) {
-    if (req.session.hasOwnProperty('passport')) {
-        res.render('addnode', {
-            username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname,
-            qs: req.query
-        });
-    } else res.render('addnode', {
-        username: null,
-        name: null,
+    res.render('addnode', {
         qs: req.query
     });
-
 });
 
 /* GET ConfigNode page. */ //TODO :move all node function to route node
 router.get('/configmarkers/confignode', function(req, res) {
-    if (req.session.hasOwnProperty('passport')) {
-        res.render('confignode', {
-            username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname,
-            qs: req.query
-        });
-    } else res.render('confignode', {
-        username: null,
-        name: null,
+    res.render('confignode', {
         qs: req.query
     });
 });

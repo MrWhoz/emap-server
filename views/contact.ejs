@@ -1,54 +1,56 @@
 <% layout('layout') -%>
-<link rel="stylesheet" href="/css/styleContact.css" type="text/css" />
+    <link rel="stylesheet" href="/css/styleContact.css" type="text/css" />
 
-<link rel="stylesheet" href="/css/normalizeContact.css" type="text/css" />
-<script type="text/javascript">
-window.onload = function () {
+    <link rel="stylesheet" href="/css/normalizeContact.css" type="text/css" />
+    <script type="text/javascript">
+        window.onload = function() {
 
-};
-</script>
-<div style="margin-top:80px"></div>
-<div class="container1" >
-  <div class="row1 header">
-    <h1>CONTACT US &nbsp;</h1>
-    <h3>Fill out the form below to learn more!</h3>
-  </div>
-  <div class="row1 body">
-    <div class="form">
-      <ul>
+        };
+    </script>
+    <div style="margin-top:80px"></div>
+    <div class="container1">
+        <div class="row1 header">
+            <h1>CONTACT US &nbsp;</h1>
+            <h3>Fill out the form below to learn more!</h3>
+        </div>
+        <div class="row1 body">
+            <div class="form">
+                <ul>
 
-        <li>
-          <p class="left" style="font-size: 160%">
-            <label for="first_name" class="slideInUp">first name</label>
-            <input type="text" name="first_name" placeholder="John" id="firstname"/>
-          </p>
-          <p class="pull-right">
-            <label for="last_name" style="font-size: 160%">last name</label>
-            <input id="lastname" type="text" name="last_name" placeholder="Smith" style="font-size: 160%"/>
-          </p>
-        </li>
+                    <li>
+                        <p class="left" style="font-size: 160%">
+                            <label for="first_name" class="slideInUp">first name</label>
+                            <input type="text" name="first_name" placeholder="John" id="firstname" />
+                        </p>
+                        <p class="pull-right">
+                            <label for="last_name" style="font-size: 160%">last name</label>
+                            <input id="lastname" type="text" name="last_name" placeholder="Smith" style="font-size: 160%" />
+                        </p>
+                    </li>
 
-        <li>
-          <p>
-            <label for="email" style="font-size: 160%">email <span class="req" id="validation">*</span></label>
-            <input type="email" id="to" name="email" placeholder="john.smith@gmail.com" style="font-size: 140%" />
-          </p>
-        </li>
-        <li><div class="divider"></div></li>
-        <li>
-          <label for="comments" style="font-size: 160%">comments</label>
-          <textarea id="content" cols="46" rows="6" name="comments" style="font-size: 160%"></textarea>
-        </li>
+                    <li>
+                        <p>
+                            <label for="email" style="font-size: 160%">email <span class="req" id="validation">*</span></label>
+                            <input type="email" id="to" name="email" placeholder="john.smith@gmail.com" style="font-size: 140%" />
+                        </p>
+                    </li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                    <li>
+                        <label for="comments" style="font-size: 160%">comments</label>
+                        <textarea id="content" cols="46" rows="6" name="comments" style="font-size: 160%"></textarea>
+                    </li>
 
-        <li style="font-size: 130%">
-          <input class="btn btn-submit" id="send_email" type="submit" style="color: #fbf2f2"  value="Submit" />
-          <small style="font-size: 130%">or press <strong>enter</strong></small>
-        </li>
+                    <li style="font-size: 130%">
+                        <input class="btn btn-submit" id="send_email" type="submit" style="color: #fbf2f2" value="Submit" />
+                        <small style="font-size: 130%">or press <strong>enter</strong></small>
+                    </li>
 
-      </ul>
+                </ul>
+            </div>
+            <span id="message" style="margin: 0 auto; font-size: 160%"></span>
+        </div>
+
     </div>
-     <span id="message" style="margin: 0 auto; font-size: 160%"></span>
-  </div>
-
-</div>
-<script src="js/contact.js"></script>
+    <script src="js/contact.js"></script>

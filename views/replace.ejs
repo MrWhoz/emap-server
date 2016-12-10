@@ -1,25 +1,25 @@
 <% layout('layout') -%>
-<script type="text/javascript">
-window.onload = function () {
+    <script type="text/javascript">
+        window.onload = function() {
+            var user = checkLogin();
+        };
+    </script>
+    <div style="margin:70px auto">
+        <div class="container">
+            <h2>Replacing Node: input</h2>
+            <p>The form below contains one input elements</p>
 
-};
-</script>
-<div style="margin:70px auto">
-<div class="container">
-  <h2>Replacing Node: input</h2>
-  <p>The form below contains one input elements</p>
+            <div class="form-group">
+                <label for="oldnodeid">Old NodeID:</label>
+                <input type="text" class="form-control" style="width: 50%" id="oldnodeid">
+            </div>
+            <div class="form-group">
+                <label for="lat">New NodeID</label>
+                <input type="text" class="form-control" style="width: 50%" id="newnodeid">
+            </div>
 
-    <div class="form-group">
-      <label for="oldnodeid">Old NodeID:</label>
-      <input type="text" class="form-control" style="width: 50%" id="oldnodeid">
+            <button class="btn btn-success" onclick="replacingnode()">Replace</button>
+
+        </div>
     </div>
-    <div class="form-group">
-      <label for="lat">New NodeID</label>
-      <input type="text" class="form-control" style="width: 50%" id="newnodeid">
-    </div>
-
-    <button class="btn btn-success" onclick="replacingnode()">Replace</button>
-
-</div>
-</div>
-<script src="js/replace.js"></script>
+    <script src="js/replace.js"></script>
