@@ -18,13 +18,13 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
     }
 }));
 // ============SESSION ===========
-router.get('/isLogged', ensureAuthenticated, function(req,res,next) {
+router.get('/isLogged', ensureAuthenticated, function(req, res, next) {
 
 });
 
 function ensureAuthenticated(req, res, next) {
     if (req.session.passport) {
-      res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Origin", "*");
         res.send({
             username: req.session.passport.user.username,
             name: req.session.passport.user.fullname
@@ -51,7 +51,8 @@ router.get('/home', function(req, res) {
     logger.info("IP:" + req.clientIP + " GET /home route");
 });
 
-router.get('/static', function(req, res) {
+router.get('/static', async function(req, res) {
+
     res.render('static');
     logger.info("IP:" + req.clientIP + " GET /static route");
 });

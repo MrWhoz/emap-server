@@ -14,7 +14,7 @@ async function addNode(data) {
     var duuid;
 
     if (data.data_id == null) {
-        var node = await r.db(dbName).table("nodeList").filter({
+        var node = await r.db(dbName).table('nodeList').filter({
             node_id: data.node_id,
         }).run(connection);
         node = await node.toArray();
@@ -39,7 +39,7 @@ async function addNode(data) {
         status: 1
     }
     console.log('add node', data);
-    let result = await r.db(dbName).table("nodeList").insert(data).run(connection);
+    let result = await r.db(dbName).table('nodeList').insert(data).run(connection);
     if (result) return result;
 }
 
@@ -83,7 +83,7 @@ async function addNodeData(nodeData) {
             bat: nodeData.s5
         }
     }
-    let result = await r.db(dbName).table("nodeData").insert(data).run(connection);
+    let result = await r.db(dbName).table('nodeData').insert(data).run(connection);
     if (result) return result;
 }
 
@@ -102,7 +102,7 @@ async function updateNode(data) {
 };
 
 async function changeNodeStatus(node_id, status) {
-    var result = await r.db(dbName).table("nodeList").filter({
+    var result = await r.db(dbName).table('nodeList').filter({
         node_id: node_id
     }).update({
         status: status
@@ -114,7 +114,7 @@ async function changeNodeStatus(node_id, status) {
 
 async function getNodeInfoByID(node_id) {
     var connection = await connect();
-    var node = await r.db(dbName).table("nodeList").filter({
+    var node = await r.db(dbName).table('nodeList').filter({
         node_id: node_id,
         status: 1
     }).run(connection);
@@ -123,7 +123,7 @@ async function getNodeInfoByID(node_id) {
 }
 async function getNodeList(status) {
     var connection = await connect();
-    var node = await r.db(dbName).table("nodeList").filter({
+    var node = await r.db(dbName).table('nodeList').filter({
         status: status
     }).run(connection);
     node = await node.toArray();
@@ -133,7 +133,7 @@ async function getNodeByIDStatus(node_id, status) {
     // TODO get lastest node
     var connection = await connect();
     console.log('this is ID :', node_id);
-    var node = await r.db(dbName).table("nodeList").filter({
+    var node = await r.db(dbName).table('nodeList').filter({
         node_id: node_id,
         status: status
     }).run(connection);
@@ -142,7 +142,7 @@ async function getNodeByIDStatus(node_id, status) {
 }
 async function getNodeInfoByPhone(phone) {
     var connection = await connect();
-    var node = await r.db(dbName).table("nodeList").filter({
+    var node = await r.db(dbName).table('nodeList').filter({
         phone: phone
     }).run(connection);
     node = await node.toArray();
@@ -158,7 +158,7 @@ async function getdataIDByNodeID(node_id) {
 async function getNodeDataByID(node_id) {
     var connection = await connect();
     let data_id = await getdataIDByNodeID(node_id);
-    var data = await r.db(dbName).table("nodeData").filter({
+    var data = await r.db(dbName).table('nodeData').filter({
         data_id: data_id
     }).orderBy('time').run(connection);
     data = await data.toArray();
@@ -166,6 +166,28 @@ async function getNodeDataByID(node_id) {
     return data || false;
 }
 
+async function getRecordCount() {
+  console.log('getRecordCount');
+    var connection = await connect();
+    console.log('getRecordCount 2');
+    var data = await r.db(dbName).table('nodeData').group(
+        [r.row('time').year(), r.row('time').month()]
+    ).count().run(connection);
+    console.log('getRecordCount 3');
+    data = await data.toArray();
+    return data || false;
+}
+
+async function getNodeCount() {
+    var connection = await connect();
+    console.log('getNodeCount');
+    var node = await r.db(dbName).table('nodeList').filter({status: 1}).group(
+        [r.row('time').year(), r.row('time').month()]
+    ).count().run(connection);
+    console.log('getNodeCount',node);
+    node = await node.toArray();
+    return node || false;
+}
 
 module.exports = {
     connect,
@@ -178,5 +200,7 @@ module.exports = {
     replaceNode,
     changeNodeStatus,
     getNodeByIDStatus,
-    getNodeList
+    getNodeList,
+    getRecordCount,
+    getNodeCount
 };

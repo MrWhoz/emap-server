@@ -2,8 +2,13 @@
     <script type="text/javascript">
         window.onload = function() {
             var user = checkLogin();
-            console.log(document.cookie);
+            console.log('this is cookie',document.cookie);
+            var data = getMonthlyRecord();
+            console.log('this is monthly records',data);
+            drawMonthlyChart(data);
         };
     </script>
-    <div style="font-size: 200%;margin-top:100px" class="flip">Stastic</div>
-    <p id="a">Cuong</p>
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <div style="font-size: 200%;margin-top:100px" class="flip">Monthly Records</div>
+<div id="container" style="min-width: 310px; height: 400px; margin: 20px auto"></div>
