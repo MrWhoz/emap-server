@@ -79,6 +79,7 @@
         </div>
     </div>
 
+
     <!--END FOOTER SECTION -->
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY LIBRARY -->
@@ -94,14 +95,14 @@
     <!-- Login Script -->
     <script src="/js/main.js"></script>
     <%- body %>
-        <div id="controlpanel" style="display: none; overflow-x: visible; overflow-y: visible; ">
-            <!-- <input id="addmarker" type=button value="Add Markers" data-toggle="modal" data-target="#myModalAddNode"> -->
-            <button style="height: 50px;width: 100px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
-            <button style="height: 50px;width: 100px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
-            <button style="height: 50px;width: 100px;" class="btn-default" id="nodeactive" data-toggle="modal" data-target="#myModal2"><i class="fa fa-list" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
-            <!--  <hr/>
-        <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p> -->
-        </div>
+    <div id="controlpanel" style="display: none; overflow-x: visible; overflow-y: visible; ">
+        <!-- <input id="addmarker" type=button value="Add Markers" data-toggle="modal" data-target="#myModalAddNode"> -->
+        <button style="height: 50px;width: 100px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" id="nodeactive" data-toggle="modal" data-target="#myModal2"><i class="fa fa-list" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <!--  <hr/>
+    <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p> -->
+    </div>
         <div id="footer">
             <div class="container">
                 <div class="row ">
@@ -132,8 +133,8 @@
                                 <p class="message">Already registered? <a href="#">Sign In</a></p>
                             </form>
                             <form class="login-form" action="/auth/login" method="post">
-                                <input type="text" class="form-control" name="username" />
-                                <input type="password" class="form-control" name="password" />
+                                <input type="text" class="form-control" name="username" placeholder="username"/>
+                                <input type="password" class="form-control" name="password" placeholder="password"/>
                                 <button type="submit">login</button>
                                 <p class="message">Not registered? <a href="#">Create an account</a></p>
                             </form>

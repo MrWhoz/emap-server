@@ -76,7 +76,7 @@ function drawMonthlyChart(data) {
                     zoomType: 'xy'
                 },
                 title: {
-                    text: 'Average monthly of added Nodes and Records'
+                    text: 'Monthly number of Nodes and Records'
                 },
                 subtitle: {
                     text: ''
