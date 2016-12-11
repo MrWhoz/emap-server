@@ -41,7 +41,14 @@
     <script type="text/javascript">
         window.onload = function() {
             var user = checkLogin();
-            console.log('this is the get user function result',user);
+            console.log('this is the get user function result', user);
+            console.log('location', window.location.href);
+            if (window.location.href.match('/') != null || window.location.href.match('/home') != null) {
+                if (user) {
+                    var $control = $("#controlpanel");
+                    $control.css("display", $control.css("display") === 'none' ? '' : 'none');
+                }
+            }
         };
     </script>
     <!-- NAV SECTION -->
@@ -85,14 +92,20 @@
     <!-- CUSTOM SCRIPT-->
     <!-- <script src="assets/js/custom.js"></script> -->
     <!-- Login Script -->
-    <script src="/js/login.js"></script>
+    <script src="/js/main.js"></script>
     <%- body %>
-
-
+        <div id="controlpanel" style="display: none; overflow-x: visible; overflow-y: visible; ">
+            <!-- <input id="addmarker" type=button value="Add Markers" data-toggle="modal" data-target="#myModalAddNode"> -->
+            <button style="height: 50px;width: 100px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+            <button style="height: 50px;width: 100px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+            <button style="height: 50px;width: 100px;" class="btn-default" id="nodeactive" data-toggle="modal" data-target="#myModal2"><i class="fa fa-list" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+            <!--  <hr/>
+        <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p> -->
+        </div>
         <div id="footer">
             <div class="container">
                 <div class="row ">
-                    © 2014 www.yourdomain.com | All Right Reserved
+                    © 2016 www.codingyourfuture.com | All Right Reserved
 
                 </div>
 

@@ -27,16 +27,15 @@ function ensureAuthenticated(req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.send({
             username: req.session.passport.user.username,
-            name: req.session.passport.user.fullname
+            name: req.session.passport.user.fullname,
+            code:1
         });
-        console.log('ensureAuthenticated');
         return next();
     } else {
         res.send({
             message: 'not authenticate',
             code: -1
         });
-        console.log('no ensureAuthenticated');
         return next();
     }
 }

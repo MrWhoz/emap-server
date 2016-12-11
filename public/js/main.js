@@ -42,12 +42,27 @@ function getMonthlyRecord() {
     });
     return mData;
 }
-
+function totalNode(data){
+  var sumNode = null;
+  var count = Object.keys(data.record).length;
+  for (var i = 0; i < count; i++) {
+      sumNode += Number(data.nodes[i].reduction);
+  }
+  return sumNode;
+}
+function totalRecord(data){
+  var sumRecord = null;
+  var count = Object.keys(data.record).length;
+  for (var i = 0; i < count; i++) {
+      sumRecord += Number(data.record[i].reduction);
+  }
+  return sumRecord;
+}
 function drawMonthlyChart(data) {
     var month = [];
     var record = [];
     var node = [];
-    count = Object.keys(data.record).length;
+    var count = Object.keys(data.record).length;
     console.log('count', count);
     for (var i = 0; i < count; i++) {
         month.push(data.record[i].group[1] + ' - ' + data.record[i].group[0]);
@@ -61,7 +76,7 @@ function drawMonthlyChart(data) {
                     zoomType: 'xy'
                 },
                 title: {
-                    text: 'Average Monthly Active Nodes and Records'
+                    text: 'Average monthly of added Nodes and Records'
                 },
                 subtitle: {
                     text: ''

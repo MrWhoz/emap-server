@@ -39,10 +39,13 @@
             //TODO: optimize this code
             var user = checkLogin();
             console.log('this is the get user function result',user);
-            var yourUl1 = document.getElementById("editbutton1");
-            yourUl1.style.display = yourUl1.style.display === 'none' ? '' : 'none';
-            var yourUl2 = document.getElementById("editbutton2");
-            yourUl2.style.display = yourUl2.style.display === 'none' ? '' : 'none';
+            if (user) {
+              var yourUl1 = document.getElementById("editbutton1");
+              yourUl1.style.display = yourUl1.style.display === 'none' ? '' : 'none';
+              var yourUl2 = document.getElementById("editbutton2");
+              yourUl2.style.display = yourUl2.style.display === 'none' ? '' : 'none';
+
+            }
             //-- create options
             var NodeID = [];
             var lat = [];

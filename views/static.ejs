@@ -2,13 +2,21 @@
     <script type="text/javascript">
         window.onload = function() {
             var user = checkLogin();
-            console.log('this is cookie',document.cookie);
+            console.log('this is cookie', document.cookie);
             var data = getMonthlyRecord();
-            console.log('this is monthly records',data);
+            console.log('this is monthly records', data);
+            var sumNode = totalNode(data);
+            var sumRecord = totalRecord(data);
+            document.getElementById("totalnode").innerHTML = 'Total Node: ' + sumNode;
+
+            document.getElementById("totalrecord").innerHTML = 'Total Record: ' + sumRecord;
             drawMonthlyChart(data);
         };
     </script>
     <script src="js/highcharts.js"></script>
     <script src="js/exporting.js"></script>
     <div style="font-size: 200%;margin-top:100px" class="flip">Monthly Records</div>
-<div id="container" style="min-width: 310px; height: 400px; margin: 20px auto"></div>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 20px auto"></div>
+
+    <div style="font-size: 200%;margin-top:100px" class="flip" id="totalnode"> </div>
+    <div style="font-size: 200%;margin-top:100px" class="flip" id="totalrecord"></div>

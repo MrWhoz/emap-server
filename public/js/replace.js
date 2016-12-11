@@ -6,5 +6,5 @@ var i = localStorage.getItem("temp");
     document.getElementById('oldnodeid').disabled = true;
     function replacingnode(){
       var newnodeid = document.getElementById("newnodeid").value;
-      window.location.replace("/node/replacenode?node="+array[0]+"&node_new="+newnodeid);
+      window.location.replace("/node/replace?node="+array[0]+"&node_new="+newnodeid);
     }
