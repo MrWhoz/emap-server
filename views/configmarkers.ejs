@@ -1,48 +1,22 @@
 <% layout('layout') -%>
+    <link rel="stylesheet" href="/css/styleGraph.css">
 
-    
-    
+    <div class="center">
+        <select name="sources" id="sources" class="custom-select sources" placeholder="Activity">
+            <option value="addnode">Add Node</option>
+            <option value="confignode">Config Node</option>
+        </select>
+    </div>
+    <div class="botContent">
+        <button class="btn btn-success" style="width: 100%; height: 50px;" onclick="action()">Ok</button>
+    </div>
 
-<link rel="stylesheet" href="css/styleGraph.css">
-<script type="text/javascript">
-window.onload = function () {
- 
-  <% if(temp!='nouser') {%>
-    console.log("<%=temp%>");
-    document.getElementById("user").innerHTML = "<%=temp%>";
-    $('#modalbox').attr('data-target','#myModal1');
-        document.getElementById("userprofile").innerHTML = "<%=temp%>" + " Profile";
-  <%} else{%>
-    console.log("error");
-  <%}%>
-};
-</script>
-  
-
-<div class="center">
-
-  <select name="sources" id="sources" class="custom-select sources" placeholder="Activity">
-    <option value="addnode">Add Node</option>
-    <option value="confignode">Config Node</option>
-    
-  </select>
-  </div>
-
-
-
-<div class="botContent">
- <button class="btn btn-success" style="width: 100%; height: 50px;" onclick="action()">Ok</button>
- </div>
-
-
-<script src="js/Graph.js"></script>
+    <script src="/js/Graph.js"></script>
     <script type="text/javascript">
-    	function action(){
-    		var e = document.getElementById("sources");
-    		var strUser = e.options[e.selectedIndex].value;
-    		// alert(strUser);
-    		window.location.href = "/configmarkers/"+strUser;
-    	}
+        function action() {
+            var e = document.getElementById("sources");
+            var strUser = e.options[e.selectedIndex].value;
+            // alert(strUser);
+            window.location.href = "/node/" + strUser;
+        }
     </script>
-    
- 

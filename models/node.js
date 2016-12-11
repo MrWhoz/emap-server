@@ -12,21 +12,19 @@ async function connect() {
 async function addNode(data) {
     var connection = await connect();
     var duuid;
-
     if (data.data_id == null) {
         var node = await r.db(dbName).table('nodeList').filter({
             node_id: data.node_id,
         }).run(connection);
         node = await node.toArray();
-        if (node[0]) {
-            return 'duplicated';
-        }
+        if (node[0]) return {
+            code: 0,
+            message: 'Node duplicated'
+        };
     }
-
     if (data.data_id) {
         duuid = data.data_id;
     } else duuid = uuid.v4();
-
     var data = {
         node_id: data.node_id,
         time: new Date(),
@@ -37,11 +35,18 @@ async function addNode(data) {
         phone: data.phone,
         data_id: duuid,
         status: 1
-    }
+    };
     console.log('add node', data);
     let result = await r.db(dbName).table('nodeList').insert(data).run(connection);
-    if (result) return result;
-}
+    if (result) return {
+        code: 1,
+        message: 'Add node successful'
+    }
+    else return {
+        code: 0,
+        message: 'Add node failure'
+    };
+};
 
 async function replaceNode(node_id_new, node_id_old) {
     var node_old = await getNodeInfoByID(node_id_old);
@@ -51,7 +56,6 @@ async function replaceNode(node_id_new, node_id_old) {
         if (node.status)
             await changeNodeStatus(node_id_new, 0);
         //
-        console.log('this is node old', node_old);
         let data = {
             node_id: node.node_id,
             phone: node.phone,
@@ -61,14 +65,17 @@ async function replaceNode(node_id_new, node_id_old) {
             },
             status: 1,
             data_id: node_old.data_id
-        }
-        console.log(data);
+        };
         let result = await addNode(data);
-        return 'ok';
-    } else return 'error';
+        return {
+            code: 1,
+            message: 'Replace node successful'
+        };
+    } else return {
+        code: 0,
+        message: 'Replace node failure'
+    };
 }
-
-// TODO: add sensor 4
 
 async function addNodeData(nodeData) {
     let node_info = await getNodeInfoByID(nodeData.node_id);
@@ -84,7 +91,14 @@ async function addNodeData(nodeData) {
         }
     }
     let result = await r.db(dbName).table('nodeData').insert(data).run(connection);
-    if (result) return result;
+    if (result) return {
+        code: 1,
+        message: 'Add node data successful'
+    }
+    else return {
+        code: 0,
+        message: 'Add node data failure'
+    };
 }
 
 async function updateNode(data) {
@@ -95,10 +109,19 @@ async function updateNode(data) {
             data.data_id = node.data_id;
             console.log(data);
             var nNode = await addNode(data);
-            if (nNode) return 'success';
-        } else return 'create update error';
+            if (nNode) return {
+                code: 1,
+                message: 'Update node successful'
+            };
+        } else return {
+            code: 0,
+            message: 'Update node failure'
+        };
     }
-    return 'error'
+    return {
+        code: 0,
+        message: 'Node not found'
+    }
 };
 
 async function changeNodeStatus(node_id, status) {
@@ -108,8 +131,14 @@ async function changeNodeStatus(node_id, status) {
         status: status
     }).run(connection);
     if (result) {
-        return 'success';
-    } else return 'error';
+        return {
+            code: 1,
+            message: 'Change node status node successful'
+        };
+    } else return {
+        code: 0,
+        message: 'Change node status node successful'
+    };
 }
 
 async function getNodeInfoByID(node_id) {
@@ -162,12 +191,11 @@ async function getNodeDataByID(node_id) {
         data_id: data_id
     }).orderBy('time').run(connection);
     data = await data.toArray();
-
     return data || false;
 }
 
 async function getRecordCount() {
-  console.log('getRecordCount');
+    console.log('getRecordCount');
     var connection = await connect();
     console.log('getRecordCount 2');
     var data = await r.db(dbName).table('nodeData').group(
@@ -181,10 +209,12 @@ async function getRecordCount() {
 async function getNodeCount() {
     var connection = await connect();
     console.log('getNodeCount');
-    var node = await r.db(dbName).table('nodeList').filter({status: 1}).group(
+    var node = await r.db(dbName).table('nodeList').filter({
+        status: 1
+    }).group(
         [r.row('time').year(), r.row('time').month()]
     ).count().run(connection);
-    console.log('getNodeCount',node);
+    console.log('getNodeCount', node);
     node = await node.toArray();
     return node || false;
 }

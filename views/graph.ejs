@@ -52,7 +52,7 @@
             var Nodeinfo;
             $.ajax({
                 type: "GET",
-                url: "/getinfo?list=1&status=1", // <-- Here
+                url: "/node/getinfo?list=1&status=1", // <-- Here
                 dataType: "json",
                 success: function(data) {
                     myVariable = data;
@@ -257,7 +257,7 @@
                 // Get node data
                 $.ajax({
                     type: "GET",
-                    url: "/getdata?id=" + node_id,
+                    url: "/node/getdata?id=" + node_id,
                     dataType: "json",
                     success: function(data) {
                         myVariable = data;
@@ -312,7 +312,7 @@
                 // Get node info
                 $.ajax({
                     type: "GET",
-                    url: "/getinfo?id=" + node_id,
+                    url: "/node/getinfo?id=" + node_id,
                     dataType: "json",
                     success: function(data) {
                         Nodeinfo = data;

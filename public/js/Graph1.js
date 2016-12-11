@@ -1,7 +1,7 @@
 
 
             var count;
-                
+
             var Node;
       function initMap(lat,lng,message) {
         var myLatLng = {lat: lat, lng: lng};
@@ -33,7 +33,7 @@
         }
 
 
-                
+
                 function drowchart(xaxis,co,dust,gas,temp,bat) {
                         // alert(xaxis);
                         $(function() {
@@ -136,7 +136,7 @@
 
                 $("#date").on("change", function() {
                     var node_temp =  document.getElementById("sources");
-                 
+
                     var t = node_temp.options[node_temp.selectedIndex].value;
                     var e = document.getElementById("date");
                     Node = t;
@@ -149,12 +149,12 @@
                     var bat = [];
                     $.ajax({
                         type: "GET",
-                        url: "/getdata?id=" + t,
+                        url: "/node/getdata?id=" + t,
                         dataType: "json",
                         success: function(data) {
                             var myVariable = data;
                             var count = Object.keys(myVariable).length;
-                            
+
                             t = myVariable[0].data_id;
                             console.log('this is dataid', myVariable[0].t);
                             for (var i = 0; i < count; i++) {
@@ -168,7 +168,7 @@
                             }
                             action(xaxis);
                         }
-                            
+
                     });
                     function action(xaxis){
                         var i = 0;
@@ -181,7 +181,7 @@
                             break;
                         }
                     }
-                    
+
                     var ngay = xaxis[j].getDate();
 
                     var thang = xaxis[j].getMonth();
@@ -220,8 +220,8 @@
                     // Drow new chart
                     drowchart(x1,co1,dust1,gas1,temp1,bat1,t);
                     }
-                    
-                    
+
+
                     });
                 function display(node_id) {
                     var co = [];
@@ -233,7 +233,7 @@
                     // Get node data
                     $.ajax({
                         type: "GET",
-                        url: "/getdata?id=" + node_id,
+                        url: "/node/getdata?id=" + node_id,
                         dataType: "json",
                         success: function(data) {
                             var myVariable = data;
@@ -288,7 +288,7 @@
                     // Get node info
                     $.ajax({
                         type: "GET",
-                        url: "/getinfo?id=" + node_id,
+                        url: "/node/getinfo?id=" + node_id,
                         dataType: "json",
                         success: function(data) {
                             Nodeinfo = data;
@@ -313,7 +313,7 @@
                         }
                     });
 
-                   
+
                     //Display node info
                     function InsertInfo(nodeid, phone, lat, lng) {
                         document.getElementById("NodeID").value = nodeid;
@@ -326,7 +326,7 @@
                         document.getElementById('Longitude').disabled = true;
                     }
 
-                    
+
                 }
                 // Check Node Input
                 function check(NodeIDList,Nodeint){
@@ -351,7 +351,7 @@
                     var Nodeint = parseInt(Node);
                     $.ajax({
                         type: "GET",
-                        url: "/getinfo?list=1&status=1", // <-- Here
+                        url: "/node/getinfo?list=1&status=1", // <-- Here
                         dataType: "json",
                         success: function(data) {
                             var myVariable = data;
@@ -361,21 +361,21 @@
                                 NodeList.push(Number(myVariable[i].node_id));
                             }
                             check(NodeList,Nodeint);
-                         
+
                         }
                     });
-                    
+
                 }
 
                 function EditNode(){
                     var lat = document.getElementById("Latitude").value;
                     var nodeid = document.getElementById("NodeID").value;
                     console.log(nodeid-1);
-                
+
                     if(nodeid-1<0){
-                        
+
                         alert("Empty Node");
-                        
+
                     }else{
                         $('#Latitude').removeAttr('disabled');
                         $('#Longitude').removeAttr('disabled');
@@ -394,7 +394,7 @@
                     console.log(lng);
                     $.ajax({
                       type: "POST",
-                      url: '/updatenode',
+                      url: '/node/updatenode',
                       data: {
                           'node_id': node_id,
                           'lat': lat,
@@ -428,7 +428,7 @@
                     var xaxis = [];
                     $.ajax({
                         type: "GET",
-                        url: "/getdata?id=" + node_id,
+                        url: "/node/getdata?id=" + node_id,
                         dataType: "json",
                         success: function(data) {
                             var myVariable = data;
@@ -436,7 +436,7 @@
                             // console.log(count);
                             data_id = myVariable[0].data_id;
                             console.log('this is dataid', myVariable[0].data_id);
-                          
+
                             co.push(Number(myVariable[count-1].data.co));
                             dust.push(Number(myVariable[count-1].data.dust));
                             temp.push(Number(myVariable[count-1].data.temp));
@@ -444,7 +444,7 @@
                             bat.push(Number(myVariable[count-1].data.bat));
                             var d = new Date(myVariable[count-1].time);
                             xaxis.push(d);
-                            
+
                             var lastdate = String(xaxis[0]).substring(0,25);
                             console.log(lastdate);
 
@@ -454,10 +454,10 @@
                                 + '<span style="font-weight:bold;">TEMP: </span>' + temp[0] +'°C' + '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">GAS: </span>' + gas[0] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">BATTERY: </span>' + bat[0]+'%' ;
-                                
+
                                 alert("Refresh done!");
                             }
-                            
-                            
+
+
                         });
                 }

@@ -18,7 +18,7 @@ app.controller('tabsController',function($scope,$ionicSlideBoxDelegate){
 });
 
 app.controller('AppCtrl', function($scope, $ionicModal) {
-  
+
   $scope.contacts = [
     { name: 'Gordon Freeman' },
     { name: 'Barney Calhoun' },
@@ -30,8 +30,8 @@ app.controller('AppCtrl', function($scope, $ionicModal) {
   }).then(function(modal) {
     $scope.modal = modal;
   });
-  
-  $scope.createContact = function(u) {        
+
+  $scope.createContact = function(u) {
     $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
     $scope.modal.hide();
   };
@@ -39,7 +39,7 @@ app.controller('AppCtrl', function($scope, $ionicModal) {
 });
 
 app.controller('AppCtrl1', function($scope, $ionicModal) {
-  
+
   $scope.contacts = [
     { name: 'Gordon Freeman' },
     { name: 'Barney Calhoun' },
@@ -51,8 +51,8 @@ app.controller('AppCtrl1', function($scope, $ionicModal) {
   }).then(function(modal) {
     $scope.modal = modal;
   });
-  
-  $scope.createContact = function(u) {        
+
+  $scope.createContact = function(u) {
     $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
     $scope.modal.hide();
   };
@@ -60,26 +60,26 @@ app.controller('AppCtrl1', function($scope, $ionicModal) {
 });
 
 app.controller('AppCtrl2', function($scope, $ionicModal) {
-  
+
 
   $ionicModal.fromTemplateUrl('templates/contact.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
-  
+
 
 });
 
 app.controller('MapCtrl', function($scope, $ionicModal) {
-  
+
 
   $ionicModal.fromTemplateUrl('templates/googlemap.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
-  
+
 
 });
 
@@ -100,8 +100,8 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
   var xaxis1 = [];
   $scope.getNodeid = function(infodata){
     $scope.news = [];
-    
-    
+
+
     $scope.value = infodata;
     temp = $scope.value;
     nodeid = temp.NodeID;
@@ -119,18 +119,18 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
     }else{
         $http({
           method:"GET",
-          url: "http://www.codingyourfuture.com/getdata?id="+nodeid
+          url: "http://www.codingyourfuture.com/node/getdata?id="+nodeid
         }).then(function(newsData){
             // angular.forEach(newsData.data, function(dates){
             //     $scope.dates.push(dates);
             // });
             // console.log($scope.dates);
-        
+
             $scope.news.push(newsData.data);
             var t=1;
             var tempdate;
               for(var j=0;j<$scope.news[0].length;j++){
-               
+
                   co.push(Number($scope.news[0][j].data.co));
                   dust.push(Number($scope.news[0][j].data.dust));
                   gas.push(Number($scope.news[0][j].data.gas));
@@ -146,13 +146,13 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
                       tempdate = $scope.news[0][j].time.substring(0,10);
                     }
                   }
-                  
-                  
-                  
+
+
+
                   t++;
                   z= j;
               }
-       
+
         });
         var alerPopup = $ionicPopup.alert({
           Title: 'Date',
@@ -161,12 +161,12 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
         alertPopup.then(function(res){
           console.log('Please choose date from dropdown options');
         });
-       
-        
+
+
       };
       z = j;
       console.log(z);
-      
+
     }
 
     $scope.selectedItemChanged = function(selectedItem){
@@ -193,7 +193,7 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
           dust1,
           gas1,
           temp1
-      ]; 
+      ];
     }
 });
 
@@ -208,7 +208,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
         id:$scope.lastarticleID
     }
 
-    $http.get('http://www.codingyourfuture.com/getinfo?list=1&status=1',{params: parameters}).success(function(items){
+    $http.get('http://www.codingyourfuture.com/node/getinfo?list=1&status=1',{params: parameters}).success(function(items){
 
         $scope.lastarticleID = items.lastID;
         angular.forEach(items, function(item){
@@ -219,7 +219,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
     });
   };
 
-  
+
 
   $scope.toggleLeft = function(){
     $ionicSideMenuDelegate.toggleLeft();
@@ -229,7 +229,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
     $scope.news = [];
     $http({
           method: "GET",
-          url: "http://www.codingyourfuture.com/getinfo?list=1&status=1"
+          url: "http://www.codingyourfuture.com/node/getinfo?list=1&status=1"
         }).then(function(newsData){
           angular.forEach(newsData.data, function(newsArticle){
               $scope.news.push(newsArticle);
@@ -240,8 +240,8 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
           $scope.$broadcast('scroll.refreshComplete');
         });
        // Stop the ion-refresher from spinning
-       
-    
+
+
   };
 
 
@@ -250,7 +250,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
 
   $http({
     method: "GET",
-    url: "http://www.codingyourfuture.com/getinfo?list=1&status=1"
+    url: "http://www.codingyourfuture.com/node/getinfo?list=1&status=1"
   }).then(function(newsData){
     angular.forEach(newsData.data, function(newsArticle){
         $scope.news.push(newsArticle);
@@ -297,4 +297,3 @@ app.run(function($ionicPlatform) {
     }
   });
 })
-

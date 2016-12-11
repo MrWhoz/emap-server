@@ -18,7 +18,7 @@ function call(){
 
 	function tableText(tableCell) {
     	var j;
-    	
+
     	var temp = tableCell.innerHTML;
     	var thenum = temp.replace( /^\D+/g, '');
     	var n1 = Number(thenum);
@@ -37,15 +37,15 @@ function call(){
     			return;
     		}
     	}
-    
-    	
+
+
 	}
 
   // function tabletext1
 
   function tableText1(tableCell) {
       var j;
-      
+
       var temp = tableCell.innerHTML;
       var thenum = temp.replace( /^\D+/g, '');
       var n1 = Number(thenum);
@@ -63,8 +63,8 @@ function call(){
           return;
         }
       }
-    
-      
+
+
   }
 
   //-------------------------------------
@@ -76,12 +76,12 @@ function call(){
     	}
     	console.log(arr);
     	localStorage.setItem("temp", arr);
-    	$.get("/configmarkers/confignode/update",
+    	$.get("/node/update",
                     {
                         data: arr
                     },
                     function (data) {
-                        location.href = "/configmarkers/confignode/update";
+                        location.href = "/node/update";
                     }
                 );
 	}
@@ -93,12 +93,13 @@ function call(){
     var table = document.getElementById("list");
     arr.push(table.rows[j].cells[0].innerHTML);
     localStorage.setItem("temp",arr);
-    $.get("/configmarkers/confignode/replace",
+    $.get("/node/replace",
                     {
                         data: arr
                     },
                     function (data) {
-                        location.href = "/configmarkers/confignode/replace";
+											console.log('gethere');
+                        location.href = "/node/replace";
                     }
                 );
   }

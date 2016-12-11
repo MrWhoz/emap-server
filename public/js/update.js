@@ -16,10 +16,9 @@ var i = localStorage.getItem("temp");
       var lng = document.getElementById("lng").value;
 
       var phone = document.getElementById("phone").value;
-      //window.location.replace("/updatenode?node="+nodeid+"&lat="+lat+"&lng="+lng+"&phone="+phone);
       $.ajax({
           type: "POST",
-          url: '/updatenode',
+          url: '/node/updatenode',
           data: {
               'node_id': node_id,
               'lat': lat,

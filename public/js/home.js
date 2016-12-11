@@ -10,7 +10,7 @@ var map;
 
         $.ajax({
             type: "GET",
-            url: "/getinfo?list=1&status=1", // <-- Here
+            url: "/node/getinfo?list=1&status=1", // <-- Here
             dataType: "json",
             success: function(data) {
 
@@ -192,7 +192,7 @@ var map;
                 //TODO
                 $.ajax({
                     type: "POST",
-                    url: '/initnew',
+                    url: '/node/initnew',
                     data: {
                         'node_id': nodeNumber,
                         'lat': lat,
@@ -224,5 +224,5 @@ var map;
 
 
         function configMarkers() {
-            window.location.href = "/configmarkers";
+            window.location.href = "/node/config";
         }
