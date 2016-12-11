@@ -13,14 +13,17 @@ router.post('/register', async function(req, res, next) {
     //TODO: post register
     console.log('get register post', req.body);
     var data = {
-        id: req.body.id,
+        id: req.body.username,
         password: req.body.password,
-        role: req.body.role,
+        role: 'customer',
         name: req.body.name,
         mail: req.body.mail,
         status: 'active'
     };
     var result = await user.register(data);
-    res.send(result);
+    res.render('success',{
+      message : 'Account Created'
+    });
 });
+
 module.exports = router;

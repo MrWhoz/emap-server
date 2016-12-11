@@ -93,7 +93,7 @@
     <!-- CUSTOM SCRIPT-->
     <!-- <script src="assets/js/custom.js"></script> -->
     <!-- Login Script -->
-    <script src="/js/main.js"></script>
+
     <%- body %>
 
         <div id="footer">
@@ -118,17 +118,19 @@
                     </div>
                     <div class="modal-body">
                         <div class="formlogin">
-                            <form class="register-form">
-                                <input type="text" placeholder="name" />
-                                <input type="password" placeholder="password" />
-                                <input type="text" placeholder="email address" />
-                                <button>create</button>
+                            <form class="register-form" action="/user/register" method="post">
+                                <input type="text" name="username" placeholder="Username" />
+                                <input type="password" name="password" placeholder="Password" />
+                                <input type="password2" placeholder="comfirm your passpord" />
+                                <input type="text" name="name" placeholder="Full name" />
+                                <input type="text" name="mail" placeholder="Email address" />
+                                <button type="submit">CREATE</button>
                                 <p class="message">Already registered? <a href="#">Sign In</a></p>
                             </form>
                             <form class="login-form" action="/auth/login" method="post">
-                                <input type="text" class="form-control" name="username" placeholder="username"/>
-                                <input type="password" class="form-control" name="password" placeholder="password"/>
-                                <button type="submit">login</button>
+                                <input type="text" class="form-control" name="username" placeholder="username" />
+                                <input type="password" class="form-control" name="password" placeholder="password" />
+                                <button type="submit">LOGIN</button>
                                 <p class="message">Not registered? <a href="#">Create an account</a></p>
                             </form>
                         </div>
@@ -234,8 +236,6 @@
                                 </tr>
                             </thead>
                             <tbody class="table-hover">
-
-
                             </tbody>
                         </table>
 
@@ -248,5 +248,6 @@
             </div>
         </div>
 </body>
+<script src="/js/main.js"></script>
 
 </html>
