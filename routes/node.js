@@ -76,8 +76,7 @@ router.get('/replace', function(req, res) {
         res.render('replace', {
             qs: req.query
         });
-    }
-    res.render('error', {
+    } else res.render('error', {
         code: 0,
         message: 'You are not authenticated'
     });

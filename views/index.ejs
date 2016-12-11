@@ -8,7 +8,14 @@
     <!-- <h3 style="padding-left: 20px; margin-top:20px;">My Google Maps Demo</h3> -->
     <div id="map" style="width: 100%"></div>
 
-
+    <div id="controlpanel" style="display: none; overflow-x: visible; overflow-y: visible; ">
+        <!-- <input id="addmarker" type=button value="Add Markers" data-toggle="modal" data-target="#myModalAddNode"> -->
+        <button style="height: 50px;width: 100px;" class="btn-default" id="addmarker" data-toggle="modal" data-target="#myModalAddNode"><i class="fa fa-plus" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" onclick="configMarkers();"><i class="fa fa-cog" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <button style="height: 50px;width: 100px;" class="btn-default" id="nodeactive" data-toggle="modal" data-target="#myModal2"><i class="fa fa-list" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
+        <!--  <hr/>
+    <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p> -->
+    </div>
     <!-- Add Nodeid and phone -->
     <div class="modal fade" id="myModalAddNode" role="dialog">
         <div class="modal-dialog">
