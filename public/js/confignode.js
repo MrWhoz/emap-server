@@ -1,7 +1,7 @@
 function call(){
 	var table = document.getElementById("list");
 	if (table != null) {
-    for (var i = 0; i < table.rows.length; i++) {
+    for (var i = 1; i < table.rows.length; i++) {
           // do update
           table.rows[i].cells[5].className = 'animation';
           table.rows[i].cells[6].className = 'animation';
@@ -18,10 +18,10 @@ function call(){
 
 	function tableText(tableCell) {
     	var j;
-
     	var temp = tableCell.innerHTML;
-    	var thenum = temp.replace( /^\D+/g, '');
-    	var n1 = Number(thenum);
+    	var thenum = temp.replace(/<\/?[^>]+(>|$)/g, "");
+      var thenum1 = thenum.replace( /^\D+/g, '');
+    	var n1 = Number(thenum1);
     	var n2;
     	console.log(n1);
 
@@ -45,10 +45,10 @@ function call(){
 
   function tableText1(tableCell) {
       var j;
-
       var temp = tableCell.innerHTML;
-      var thenum = temp.replace( /^\D+/g, '');
-      var n1 = Number(thenum);
+      var thenum = temp.replace(/<\/?[^>]+(>|$)/g, "");
+      var thenum1 = thenum.replace( /^\D+/g, '');
+      var n1 = Number(thenum1);
       var n2;
       console.log(n1);
 

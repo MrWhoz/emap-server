@@ -3,6 +3,8 @@
     <style type="text/css">
         .animation {
             cursor: pointer;
+            color:red;
+            text-decoration: underline;
         }
     </style>
     <link rel="stylesheet" href="/css/configStyle.css">
@@ -45,7 +47,7 @@
             function drowtable() {
                 for (var i = 0; i < NodeID.length; i++) {
                     var rows = "";
-                    rows += "<tr><td>" + NodeID[i] + "</td><td>" + lat[i] + "</td><td>" + lng[i] + "</td><td>" + phone[i] + "</td><td>" + "1" + "</td><td>" + "Update Node: " + NodeID[i] + "</td><td>" + "Replace Node: " + NodeID[i] + "</td></tr>";
+                    rows += "<tr><td>" + NodeID[i] + "</td><td>" + lat[i] + "</td><td>" + lng[i] + "</td><td>" + phone[i] + "</td><td>" + "1" + "</td><td>" + "Update Node" + '<span style="display:none">'+NodeID[i] + "</td><td>" + "Replace Node" + '<span style="display:none">'+NodeID[i] + "</td></tr>";
 
                     $(rows).appendTo("#list tbody");
                 }
