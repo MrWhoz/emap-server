@@ -1,0 +1,94 @@
+=== === === === === === === ===
+POST: /node/initnew
+data: {node_id,lat,lng,phone,status}
+Result:
+    case Success:
+{
+    code: 1,
+    message: 'Add node successful'
+}
+case Duplicated:
+    {
+        code: 0,
+        message: 'Node duplicated'
+    }
+case Failure:
+    {
+        code: 0,
+        message: 'Add node failure'
+    }
+=== === === === === === === === ===
+POST: /node/updatenode
+data: {node_id,lat,lng,phone}
+Result:
+case Success:
+  {
+    code: 1,
+    message: 'Update node successful'
+  }
+case Node not found:
+  {
+    code: 0,
+    message: 'Node not found'
+  }
+case Update failure:
+  {
+    code: 0,
+    message: 'Update node failure'
+  }
+=== === === === === === === === ===
+POST: /node/replacenode
+data: {node,node_new}
+Result:
+case Success:
+  {
+    code: 1,
+    message: 'Replace node successful'
+  }
+case replace failure:
+  {
+    code: 0,
+    message: 'Replace node failure'
+  }
+case node found:
+  {
+    code: 0,
+    message: 'Node not found'
+  }
+=== === === === === === === === ===
+GET: /node/getinfo?*query
+Ex: /node/getinfo?id=1&status=0
+    /node/getinfo?list=1&status=1
+Query:
+  id=*node ID* to get by ID
+  phone: *node phonenumber* to get by phone number
+  list=1 to get list
+  status=1 to get active node info recode, 0 for get all node info history
+Result:
+data:
+single node:{node_id,location:{lat,lng},phone,,time,data_id,status}
+list: array of {node_id,location:{lat,lng},phone,time,data_id,status}
+
+=== === === === === === === === ===
+GET: /node/getdata?*query
+Ex: /node/getdata?id=1
+Query:
+  id=*node ID* to get by ID
+Result:
+Array of {
+  data_id,
+  time,
+  data:{bat,co,dust,gas,temp},
+}
+=== === === === === === === === ===
+GET: /node/pushdata?*query
+Ex: /node/pushdata?node_id=1&s1=22&s2=33&s3=44&s4=55&s5=66
+Query:
+  node_id: node ID
+  s1,s2,s4,s5: value of each sensor
+Result:
+Array of {
+  data_id,
+  time,
+  data:{bat,co,dust,gas,temp},
+}

@@ -155,7 +155,8 @@ router.post('/updatenode', async function(req, res, next) {
         res.send(result)
     }
 });
-router.get('/add', async function(req, res, next) {
+
+router.get('/pushdata', async function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     let nodeData = {
         "node_id": req.query.node,

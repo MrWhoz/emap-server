@@ -67,13 +67,16 @@ async function replaceNode(node_id_new, node_id_old) {
             data_id: node_old.data_id
         };
         let result = await addNode(data);
-        return {
+        if (result) return {
             code: 1,
             message: 'Replace node successful'
-        };
+        } else return{
+          code:0,
+          message: 'Replace node failure'
+        }
     } else return {
         code: 0,
-        message: 'Replace node failure'
+        message: 'Node not found'
     };
 }
 
