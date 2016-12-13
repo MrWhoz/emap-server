@@ -17,6 +17,11 @@ case Failure:
         code: 0,
         message: 'Add node failure'
     }
+case not authenticated:
+  {
+      code: -1,
+      message: 'You are not authenticated'
+  }
 === === === === === === === === ===
 POST: /node/updatenode
 data: {node_id,lat,lng,phone}
@@ -36,6 +41,11 @@ case Update failure:
     code: 0,
     message: 'Update node failure'
   }
+case not authenticated:
+  {
+      code: -1,
+      message: 'You are not authenticated'
+  }
 === === === === === === === === ===
 POST: /node/replacenode
 data: {node,node_new}
@@ -54,6 +64,11 @@ case node found:
   {
     code: 0,
     message: 'Node not found'
+  }
+case not authenticated:
+  {
+      code: -1,
+      message: 'You are not authenticated'
   }
 === === === === === === === === ===
 GET: /node/getinfo?*query
