@@ -37,8 +37,9 @@ module.exports = function(passport) {
     router.get('/success', function(req, res) {
         console.log('success');
         res.send({
-            state: 'success',
-            username: req.session.passport.user
+            code: 1,
+            username: req.session.passport.user,
+            message: 'Login successful'
         });
     });
 
@@ -46,7 +47,7 @@ module.exports = function(passport) {
     router.get('/failure', function(req, res) {
         console.log('failure');
         res.send({
-            state: 'failure',
+            code: 0,
             user: null,
             message: "Invalid username or password"
         });

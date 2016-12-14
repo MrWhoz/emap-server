@@ -21,9 +21,14 @@ router.post('/register', async function(req, res, next) {
         status: 'active'
     };
     var result = await user.register(data);
-    res.render('success',{
-      message : 'Account Created'
-    });
+    if (result.code) {
+        res.render('success', {
+            message: 'Account Created'
+        });
+    } else res.render('error', {
+        message: result.message,
+        code: result.code
+    })
 });
 
 module.exports = router;

@@ -70,7 +70,7 @@ async function replaceNode(node_id_new, node_id_old) {
         if (result) return {
             code: 1,
             message: 'Replace node successful'
-        } else return{
+        }; else return{
           code:0,
           message: 'Replace node failure'
         }
