@@ -17,6 +17,7 @@ router.get('/monthlyrecord', async function(req, res, next) {
     var data = await node.getRecordCount();
     var nodes = await node.getNodeCount();
     console.log(data, nodes);
+    res.header("Access-Control-Allow-Origin", "*");
     res.send({
         record: data,
         'nodes': nodes
