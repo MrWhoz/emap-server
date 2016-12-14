@@ -17,6 +17,7 @@ router.get('/monthlyrecord', async function(req, res, next) {
     var data = await node.getRecordCount();
     var nodes = await node.getNodeCount();
     console.log(data, nodes);
+    res.header("Access-Control-Allow-Origin", "*");
     res.send({
         record: data,
         'nodes': nodes
@@ -85,6 +86,7 @@ router.get('/replace', function(req, res) {
 // ==============================
 // ==============================
 router.get('/replacenode', async function(req, res, next) {
+  //TODO: this
     if (req.query.node && req.query.node_new) {
         var result = await node.replaceNode(req.query.node_new, req.query.node);
     }
@@ -119,27 +121,31 @@ router.get('/getdata', async function(req, res, next) {
 
 // GET add node data /add?node=[node]&s1=[sensor1]&s2=[sensor2]&s3=[sensor3]
 router.post('/initnew', async function(req, res, next) {
-    // TODO : change get to post method, discuss about using device or web/app to config this
-    var lat = parseFloat(req.body.lat);
-    var lng = parseFloat(req.body.lng);
-    let data = {
-        node_id: req.body.node_id,
-        location: {
-            lat: lat,
-            lng: lng
-        },
-        phone: req.body.phone,
-        status: 0
-    };
-    logger.info("IP:" + req.clientIP + " GET /node/initnew: Node data", data);
-    let result = await node.addNode(data);
-    // res.send(result);
-    logger.info("IP:" + req.clientIP + " GET /node/initnew: init new node ", result);
-    res.send(result);
+    if (req.session.hasOwnProperty('passport')) {
+        var lat = parseFloat(req.body.lat);
+        var lng = parseFloat(req.body.lng);
+        let data = {
+            node_id: req.body.node_id,
+            location: {
+                lat: lat,
+                lng: lng
+            },
+            phone: req.body.phone,
+            status: 0
+        };
+        logger.info("IP:" + req.clientIP + " GET /node/initnew: Node data", data);
+        let result = await node.addNode(data);
+        // res.send(result);
+        logger.info("IP:" + req.clientIP + " GET /node/initnew: init new node ", result);
+        res.send(result);
+    } else res.send({
+        code: -1,
+        message: 'You are not authenticated'
+    })
 })
 
 router.post('/updatenode', async function(req, res, next) {
-    if (req.body.node_id) {
+    if (req.body.node_id && req.session.hasOwnProperty('passport')) {
         var lat = parseFloat(req.body.lat);
         var lng = parseFloat(req.body.lng);
         let data = {
@@ -152,10 +158,14 @@ router.post('/updatenode', async function(req, res, next) {
         }
         let result = await node.updateNode(data);
         logger.info("IP:" + req.clientIP + " GET /node/updatenode: Node data", data);
-        res.send(result)
-    }
+        res.send(result);
+    } else res.send({
+        code: -1,
+        message: 'You are not authenticated'
+    })
 });
-router.get('/add', async function(req, res, next) {
+
+router.get('/pushdata', async function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     let nodeData = {
         "node_id": req.query.node,
