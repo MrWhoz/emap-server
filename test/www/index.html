@@ -66,9 +66,9 @@
               </ion-refresher>
 
               <section class="list">
-                  <article class="item" ng-repeat = "newsArticle in news track by $index">
+                  <article class="item" ng-repeat = "newsArticle in news">
                     <a href="http://www.codingyourfuture.com/home" class="item item-avatar-left" ng-if="newsArticle.time">
-                      <img ng-src="http://www.blackroc.com/wp-content/uploads/2016/02/rfid-symbol.png">
+                      <img ng-src="https://maxcdn.icons8.com/Android_L/PNG/512/Industry/electrical_sensor-512.png">
                       <h2 class="noWhiteSpace">Node ID: {{newsArticle.node_id}}</h2>
                       <p class="noWhiteSpace">Location: </p>
                       <p class="noWhiteSpace" style="padding-left: 20px">Latitude: {{newsArticle.location.lat}}</p>
@@ -119,9 +119,9 @@
               </a>
             </ion-list>
             <ion-list>
-              <a class="item item-icon-left" href="http://www.codingyourfuture.com/stastic">
+              <a class="item item-icon-left" href="http://www.codingyourfuture.com/static">
                 <i class="icon ion-ios-paper"></i>
-                Stastic
+                Static
               </a>
             </ion-list>
             <ion-list>
@@ -172,9 +172,9 @@
         <!-- tab 2 -->
 
         <ion-tab title="Favorites" icon-on="ion-ios-pulse-strong" icon-off="ion-ios-pulse-strong">
-           <ion-content ng-controller="ExampleChart">
+           <ion-content >
             <ion-slide-box pager-click="navSlide(index)">
-              <ion-slide >
+              <ion-slide ng-controller="ExampleChart">
             
                
                   <div class="bar bar-header item-input-inset">
@@ -210,26 +210,25 @@
                         This is a line chart
                       </div>
                       <div class="item item-text-wrap">
-                          <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" legend="true" chart-series="series" options="{showTooltips: false}"></canvas>
+                          <canvas id="line" class="chart chart-line" chart-data="data1" chart-labels="labels1" legend="true" chart-series="series1" options="{showTooltips: false}" style="height: 250px"></canvas>
                       </div> 
                     </div>
-
-                    <div class="card">
-                      <div class="item item-divider">
-                        This is a bar chart
-                      </div>
-                      <div class="item item-text-wrap">
-                          <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" legend="true" chart-series="series" options="{showTooltips: false}"></canvas>
-                      </div> 
-                    </div>
-                   
                
 
               </ion-slide>
 
-              <ion-slide>
-              <div class="color-red">Stastic
-                </div>
+              <ion-slide ng-controller="StaticChart">
+                <div class="bar bar-header bar-dark">
+                <h1 class="title">Static</h1>
+            </div>
+             <h1 style="margin-top:60px">Monthly Records</h1>
+                <ion-list >
+                    <ion-item ng-repeat="doc in docs" style="padding-top: 60px">
+
+                        <h2 style="font-weight: bold;">Data Records: {{doc.reduction}}</h2>
+                        <p>Latest Update: {{doc.group[1]+"-"+doc.group[0]}}</p>
+                    </ion-item>
+                </ion-list>
               </ion-slide>
             </ion-slide-box>
          
@@ -238,7 +237,12 @@
 
        <!--  tab 3 -->
        <ion-tab title="Setting" icon-on="ion-gear-a" icon-off="ion-gear-a">
-        <ion-content>
+            <ion-content>
+          
+             
+              
+           
+
           <div class="list">
 
             <a class="item item-icon-left" href="https://mail.google.com">
@@ -277,8 +281,8 @@
 
           </div>
 
-
-        </ion-content>
+           </ion-content>
+    
         <script id="templates/modal.html" type="text/ng-template">
           <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive">

@@ -113,9 +113,6 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
         Title: 'Validation',
         template:'Only Number Allowed!'
       });
-      alertPopup.then(function(res){
-        console.log('Please enter valid number');
-      });
     }else{
         $http({
           method:"GET",
@@ -158,15 +155,11 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
           Title: 'Date',
           template:'Choose Date!'
         });
-        alertPopup.then(function(res){
-          console.log('Please choose date from dropdown options');
-        });
+        
 
 
       };
-      z = j;
-      console.log(z);
-
+ 
     }
 
     $scope.selectedItemChanged = function(selectedItem){
@@ -186,17 +179,53 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
           }
       }
       // console.log(x2[0].substring(11,19));
-      $scope.labels = x2;
-      $scope.series = ['CO','Dust','Gas','Temp'];
-      $scope.data = [
+      $scope.labels1 = x2;
+      $scope.series1 = ['CO','Dust','Gas','Temp'];
+      $scope.data1 = [
           co1,
           dust1,
           gas1,
           temp1
       ];
     }
+
+    
+
 });
 
+// static
+app.controller("StaticChart", function($scope,$http){
+    var numberdata = [];
+    var numbernode = []
+    var Sxaxis = [];
+    $scope.docs = [];
+    $scope.docs1 = [];
+    $scope.record = [];
+    $http({
+          method:"GET",
+          url: "http://www.codingyourfuture.com/node/monthlyrecord"
+        }).then(function(records){
+          $scope.docs = records.data.record;
+          $scope.docs1 = records.data.nodes;
+          var t = records.data.record.length;
+          for(var j=0;j< t;j++){
+            numberdata.push(Number(records.data.record[j].reduction));
+            numbernode.push(Number(records.data.nodes[j].reduction));
+            Sxaxis.push(records.data.record[j].group[1] + "-" + records.data.record[j].group[0]);
+          }
+          $scope.labels = Sxaxis;
+          $scope.series = ['Records', 'Nodes'];
+          $scope.data = [
+            numberdata,
+            numbernode
+          ];
+  
+          console.log($scope.docs);
+           console.log($scope.docs1);
+        });
+
+      
+});
 
 app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate,$ionicLoading,$compile){
 
@@ -234,7 +263,7 @@ app.controller('myNewsController', function($scope, $http,$ionicSideMenuDelegate
           angular.forEach(newsData.data, function(newsArticle){
               $scope.news.push(newsArticle);
           });
-          $scope.news.lastarticleID = newsData.data.lastID;
+          $scope.news.lastarticleID = newsData.data.length;
           console.log($scope.news.lastarticleID);
           $scope.lastarticleID = newsData.data.lastID;
           $scope.$broadcast('scroll.refreshComplete');
