@@ -1,3 +1,4 @@
+document.getElementById("contacttag").className = "active";
 $(document).ready(function(){
 
     // Validation E-mail

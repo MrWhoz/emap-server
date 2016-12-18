@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="/css/styleHomepage.css" type="text/css" />
 
 
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp5FCefvQbDVIoiuvnlEBRXm7jjEHUKSM&callback=initMap">
     </script>
 
@@ -15,6 +16,28 @@
         <button style="height: 50px;width: 100px;" class="btn-default" id="nodeactive" data-toggle="modal" data-target="#myModal2"><i class="fa fa-list" aria-hidden="true" style="font-size: 300%; color:black"></i></button>
         <!--  <hr/>
     <p style="text-align: left; font-size: 130%;" id="nodeactive" data-toggle="modal" data-target="#myModal2">Node Active: </p> -->
+    </div>
+    <div id="dropdownlist">
+        Chọn thông số: 
+        <select id="para">
+            <option value="none"></option>
+            <option value="CO">CO</option>
+            <option value="dust">Dust</option>
+            <option value="temp">Temp</option>
+            <option value="gas">Gas</option>
+        </select>
+        <hr/>
+        Description:<br/>
+        <div class="left">
+        <div class="greenbox"></div>
+        <div class="yellowbox"></div>
+        <div class="redbox"></div>
+        </div>
+        <div class="right">
+        <div class="textbox">Low</div>
+        <div class="textbox1">Medium</div>
+        <div class="textbox1">High</div>
+        </div>
     </div>
     <!-- Add Nodeid and phone -->
     <div class="modal fade" id="myModalAddNode" role="dialog">

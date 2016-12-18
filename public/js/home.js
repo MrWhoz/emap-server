@@ -1,13 +1,19 @@
 var map;
 var markers = [];
+var tempmarkers = [];
 var NodeID = [];
 var lat = [];
 var lng = [];
 var phone = [];
 var temp;
+var circle = [];
+var CoEveNumber = [];
+var DustEveNumber = [];
+var TempEveNumber = [];
+var GasEveNumber = [];
 // get data
 var nodeNumber;
-
+document.getElementById("hometag").className = "active";
 $.ajax({
     type: "GET",
     url: "/node/getinfo?list=1&status=1", // <-- Here
@@ -27,7 +33,6 @@ $.ajax({
         }
 
         temp = lat.length;
-        console.log(NodeID);
         // document.getElementById("nodeactive").innerHTML = '<i class="fa fa-list" aria-hidden="true"></i>' +'<span style="color:red;">Node Active:      </span>'  + '<a href="#">' + temp + '</a>' + '<span style="color:red;">' + "(" + '<i class="fa fa-hand-o-left" aria-hidden="true"></i>' + "Click here for Node Info" + ")" + '</span>';
         function call() {
             var table = document.getElementById("list");
@@ -67,7 +72,7 @@ $.ajax({
 });
 
 function initMap() {
-    var markers = [];
+ 
 
     // console.log(temp);
 
@@ -133,21 +138,21 @@ function addMarker(location, nodeid) {
     markers.push(marker);
     if (temp == 0) {
         for (var i = 0; i < markers.length; i++) {
-            var circle = new google.maps.Circle({
+            circle[i] = new google.maps.Circle({
                 map: map,
                 radius: 1200,
-                fillColor: '#AA0000'
+                fillColor: '#5EAEDC'
             });
-            circle.bindTo('center', markers[i], 'position');
+            circle[i].bindTo('center', markers[i], 'position');
         }
     } else {
         for (var i = temp; i < markers.length; i++) {
-            var circle = new google.maps.Circle({
+            circle[i] = new google.maps.Circle({
                 map: map,
                 radius: 1200,
-                fillColor: '#AA0000'
+                fillColor: '#5EAEDC'
             });
-            circle.bindTo('center', markers[i], 'position');
+            circle[i].bindTo('center', markers[i], 'position');
         }
     }
 
@@ -156,9 +161,10 @@ function addMarker(location, nodeid) {
 
 function addInfoWindow(marker, message) {
     var temp = "/graph?id=" + message;
+    var static = "/static";
 
     var infoWindow = new google.maps.InfoWindow({
-        content: "Node: " + message + '<br/>' + '<a href="' + temp + '">' + "View Graph" + '</a>' + '<br/>' + '<a href="#">' + "View Stastic" + '</a>'
+        content: "Node: " + message + '<br/>' + '<a href="' + temp + '">' + "View Graph" + '</a>' + '<br/>' + '<a href="' + static + '">' + "View Static" + '</a>'
             // stastic later----------------
     });
 
@@ -224,3 +230,394 @@ function stopAdd() {
 function configMarkers() {
     window.location.href = "/node/config";
 }
+
+function clearOverlays(){
+    for (var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+        circle[i].setMap(null);
+        
+    }
+    markers.length = 0;
+    
+}
+
+function drawCoMarkers(Enumber,lat,lng,i){
+    var lat_lng = {
+        lat: lat,
+        lng: lng
+    };
+    var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+
+    });
+    addInfoWindow(marker, i);
+    markers.push(marker);
+    var temp = markers.length;
+    if(Enumber < 220){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#65B853'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }else if(Enumber >= 220 && Enumber < 240){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#F9FF42'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }
+    else{
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: 'red'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }
+    
+    
+}
+
+// create Dust markers
+function drawDustMarkers(Enumber,lat,lng,i){
+    var lat_lng = {
+        lat: lat,
+        lng: lng
+    };
+    var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+
+    });
+    addInfoWindow(marker, i);
+    markers.push(marker);
+    var temp = markers.length;
+    if(Enumber < 0.3){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#65B853'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }else if(Enumber >= 0.3 && Enumber < 0.6){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#F9FF42'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }
+    else{
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: 'red'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }
+    
+    
+}
+
+// Draw Temp markers
+function drawTempMarkers(Enumber,lat,lng,i){
+    var lat_lng = {
+        lat: lat,
+        lng: lng
+    };
+    var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+
+    });
+    addInfoWindow(marker, i);
+    markers.push(marker);
+    var temp = markers.length;
+    if(Enumber < 32){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#65B853'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }else if(Enumber >= 32 && Enumber < 35){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#F9FF42'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }
+    else{
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: 'red'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }
+    
+    
+}
+
+// Draw gas markers
+function drawGasMarkers(Enumber,lat,lng,i){
+    var lat_lng = {
+        lat: lat,
+        lng: lng
+    };
+    var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+
+    });
+    addInfoWindow(marker, i);
+    markers.push(marker);
+    var temp = markers.length;
+    if(Enumber < 150){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#65B853'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }else if(Enumber >= 150 && Enumber < 250){
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: '#F9FF42'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }
+    else{
+        circle[temp-1] = new google.maps.Circle({
+                map: map,
+                radius: 1200,
+                fillColor: 'red'
+        });
+        circle[temp-1].bindTo('center', markers[temp-1], 'position');
+    }  
+}
+
+
+function getEverageCoNumber(i,lat,lng){
+    var co = [];
+    var xaxis = [];
+    var xtemp = [];
+    var j = 0;
+    var Numbers;
+    var Enumber;
+    var sum = 0;
+    var nodeid = i;
+    $.ajax({
+        type: "GET",
+        url: "/node/getdata?id=" + i, 
+        dataType: "json",
+        success: function(data) {
+            var myVariable = data;
+            var count = Object.keys(myVariable).length;
+            for (var i = 0; i < count; i++) {
+                co.push(Number(myVariable[i].data.co));
+                var d = new Date(myVariable[i].time);
+                xaxis.push(d);
+            }
+            var d = new Date(myVariable[count-1].time);
+            xtemp.push(d);
+            var ngay = xtemp[0].getDate();
+            var thang = xtemp[0].getMonth();
+            for(var t = 0; t < xaxis.length; t++){
+                if (xaxis[t].getDate() == ngay && xaxis[t].getMonth() == thang){
+                    j = t;
+                    Numbers = xaxis.length - j;
+                    break;
+                }
+            }
+            for(var i = j; i < xaxis.length; i ++){
+                sum = sum + co[i];
+            }
+            Enumber = parseInt(sum/Numbers);
+            CoEveNumber.push(Enumber);
+            drawCoMarkers(Enumber,lat,lng,nodeid);
+            console.log(CoEveNumber);
+            
+        }
+    });
+}
+
+// dust everage
+function getEverageDustNumber(i,lat,lng){
+    var dust = [];
+    var xaxis = [];
+    var xtemp = [];
+    var j = 0;
+    var Numbers;
+    var Enumber;
+    var sum = 0;
+    var nodeid = i;
+    $.ajax({
+        type: "GET",
+        url: "/node/getdata?id=" + i, 
+        dataType: "json",
+        success: function(data) {
+            var myVariable = data;
+            var count = Object.keys(myVariable).length;
+            for (var i = 0; i < count; i++) {
+                dust.push(Number(myVariable[i].data.dust));
+                var d = new Date(myVariable[i].time);
+                xaxis.push(d);
+            }
+            var d = new Date(myVariable[count-1].time);
+            xtemp.push(d);
+            console.log(xtemp);
+            var ngay = xtemp[0].getDate();
+            var thang = xtemp[0].getMonth();
+            for(var t = 0; t < xaxis.length; t++){
+                if (xaxis[t].getDate() == ngay && xaxis[t].getMonth() == thang){
+                    j = t;
+                    Numbers = xaxis.length - j;
+                    break;
+                }
+            }
+            for(var i = j; i < xaxis.length; i ++){
+                sum = sum + dust[i];
+            }
+            Enumber = (sum/Numbers);
+            DustEveNumber.push(Enumber);
+            drawDustMarkers(Enumber,lat,lng,nodeid);
+            console.log(DustEveNumber);
+            
+        }
+    });
+}
+
+// Temp everage 
+function getEverageTempNumber(i,lat,lng){
+    var temp = [];
+    var xaxis = [];
+    var xtemp = [];
+    var j = 0;
+    var Numbers;
+    var Enumber;
+    var sum = 0;
+    var nodeid = i;
+    $.ajax({
+        type: "GET",
+        url: "/node/getdata?id=" + i, 
+        dataType: "json",
+        success: function(data) {
+            var myVariable = data;
+            var count = Object.keys(myVariable).length;
+            for (var i = 0; i < count; i++) {
+                temp.push(Number(myVariable[i].data.temp));
+                var d = new Date(myVariable[i].time);
+                xaxis.push(d);
+            }
+            var d = new Date(myVariable[count-1].time);
+            xtemp.push(d);
+            var ngay = xtemp[0].getDate();
+            var thang = xtemp[0].getMonth();
+            for(var t = 0; t < xaxis.length; t++){
+                if (xaxis[t].getDate() == ngay && xaxis[t].getMonth() == thang){
+                    j = t;
+                    Numbers = xaxis.length - j;
+                    break;
+                }
+            }
+            for(var i = j; i < xaxis.length; i ++){
+                sum = sum + temp[i];
+            }
+            Enumber = (sum/Numbers);
+            TempEveNumber.push(Enumber);
+            drawTempMarkers(Enumber,lat,lng,nodeid);
+            console.log(TempEveNumber);
+            
+        }
+    });
+}
+
+// Gas everage
+function getEverageGasNumber(i,lat,lng){
+    var gas = [];
+    var xaxis = [];
+    var xtemp = [];
+    var j = 0;
+    var Numbers;
+    var Enumber;
+    var sum = 0;
+    var nodeid = i;
+    $.ajax({
+        type: "GET",
+        url: "/node/getdata?id=" + i, 
+        dataType: "json",
+        success: function(data) {
+            var myVariable = data;
+            var count = Object.keys(myVariable).length;
+            for (var i = 0; i < count; i++) {
+                gas.push(Number(myVariable[i].data.gas));
+                var d = new Date(myVariable[i].time);
+                xaxis.push(d);
+            }
+            var d = new Date(myVariable[count-1].time);
+            xtemp.push(d);
+            var ngay = xtemp[0].getDate();
+            var thang = xtemp[0].getMonth();
+            for(var t = 0; t < xaxis.length; t++){
+                if (xaxis[t].getDate() == ngay && xaxis[t].getMonth() == thang){
+                    j = t;
+                    Numbers = xaxis.length - j;
+                    break;
+                }
+            }
+            for(var i = j; i < xaxis.length; i ++){
+                sum = sum + gas[i];
+            }
+            Enumber = (sum/Numbers);
+            GasEveNumber.push(Enumber);
+            drawGasMarkers(Enumber,lat,lng,nodeid); 
+            console.log(GasEveNumber);
+            
+        }
+    });
+}
+
+
+$("#para").on("change", function() {
+    var para_temp = document.getElementById("para");
+    var para = para_temp.options[para_temp.selectedIndex].value;
+    
+    if(para == "CO"){
+        clearOverlays();
+        CoEveNumber = [];
+        for(var i = 0; i < NodeID.length; i ++){
+            getEverageCoNumber(NodeID[i],lat[i],lng[i]);
+        }
+    }
+    if(para == "dust"){
+        clearOverlays();
+        DustEveNumber = [];
+        for(var i = 1; i < NodeID.length; i ++){
+            getEverageDustNumber(NodeID[i],lat[i],lng[i]);
+        }
+    }
+    if(para == "temp"){
+        clearOverlays();
+        TempEveNumber = [];
+        for(var i = 1; i < NodeID.length; i ++){
+            getEverageTempNumber(NodeID[i],lat[i],lng[i]);
+        }
+    }
+    if(para == "gas"){
+        clearOverlays();
+        GasEveNumber = [];
+        for(var i = 1; i < NodeID.length; i ++){
+            getEverageGasNumber(NodeID[i],lat[i],lng[i]);
+        }
+    }
+    if(para == "none"){
+        window.location.href = '/home';
+    }
+
+});
