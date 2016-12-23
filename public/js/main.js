@@ -17,7 +17,7 @@ function checkLogin() {
             if (data.username) {
                 var strtmp = '<li data-toggle="modal" data-target="#myModal1" id="modalbox"> <a href="#">' + data.username + '</a></li>';
                 console.log(strtmp);
-                $("#name").html(data.name)
+                $("#name").html(data.name);
                 $("#navbar").append('<li data-toggle="modal" data-target="#myModal1" id="modalbox"> <a href="#">' + data.username + '</a></li>')
                 user = data;
                 document.cookie = data;

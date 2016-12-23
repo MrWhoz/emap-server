@@ -241,6 +241,9 @@ function clearOverlays(){
     
 }
 
+
+// TODO: Make a variable for field name CO, DUST, ....
+
 function drawCoMarkers(Enumber,lat,lng,i){
     var lat_lng = {
         lat: lat,
@@ -402,6 +405,7 @@ function drawGasMarkers(Enumber,lat,lng,i){
     }  
 }
 
+// Why need to call average for each field? and does average number help?
 
 function getEverageCoNumber(i,lat,lng){
     var co = [];
@@ -412,7 +416,7 @@ function getEverageCoNumber(i,lat,lng){
     var Enumber;
     var sum = 0;
     var nodeid = i;
-    $.ajax({
+    $.ajax({ 	// should we get 1 and store it at global variable? why call every time for this?
         type: "GET",
         url: "/node/getdata?id=" + i, 
         dataType: "json",
