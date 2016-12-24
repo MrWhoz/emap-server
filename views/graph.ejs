@@ -204,6 +204,20 @@
                 }
                 console.log(x1);
                 drowchart(x1, co1, dust1, gas1, temp1, bat1);
+                                socket.off('rdata');
+                socket.on('rdata', function(updateData) {
+                    console.log(data_id, '==', updateData.new_val.data_id);
+                    if (data_id === updateData.new_val.data_id) {
+                        console.log('get data', updateData.new_val.data);
+                        co1.push(Number(updateData.new_val.data.co));
+                        dust1.push(Number(updateData.new_val.data.dust));
+                        temp1.push(Number(updateData.new_val.data.temp));
+                        gas1.push(Number(updateData.new_val.data.gas));
+                        bat1.push(Number(updateData.new_val.data.bat));
+                        x.push(updateData.new_val.time);
+                        drowchart(x, co1, dust1, gas1, temp1, bat1);
+                    }
+                });
             }
 
             $("#date").on("change", function() {
@@ -253,6 +267,20 @@
 
                 // Drow new chart
                 drowchart(x1, co1, dust1, gas1, temp1, bat1);
+                                socket.off('rdata');
+                socket.on('rdata', function(updateData) {
+                    console.log(data_id, '==', updateData.new_val.data_id);
+                    if (data_id === updateData.new_val.data_id) {
+                        console.log('get data', updateData.new_val.data);
+                        co1.push(Number(updateData.new_val.data.co));
+                        dust1.push(Number(updateData.new_val.data.dust));
+                        temp1.push(Number(updateData.new_val.data.temp));
+                        gas1.push(Number(updateData.new_val.data.gas));
+                        bat1.push(Number(updateData.new_val.data.bat));
+                        x.push(updateData.new_val.time);
+                        drowchart(x, co1, dust1, gas1, temp1, bat1);
+                    }
+                });
 
             });
 
@@ -330,13 +358,13 @@
                     console.log(data_id, '==', updateData.new_val.data_id);
                     if (data_id === updateData.new_val.data_id) {
                         console.log('get data', updateData.new_val.data);
-                        co.push(Number(updateData.new_val.data.co));
-                        dust.push(Number(updateData.new_val.data.dust));
-                        temp.push(Number(updateData.new_val.data.temp));
-                        gas.push(Number(updateData.new_val.data.gas));
-                        bat.push(Number(updateData.new_val.data.bat));
-                        xaxis.push(updateData.new_val.time);
-                        drowchart(xaxis, co, dust, gas, temp, bat);
+                        co1.push(Number(updateData.new_val.data.co));
+                        dust1.push(Number(updateData.new_val.data.dust));
+                        temp1.push(Number(updateData.new_val.data.temp));
+                        gas1.push(Number(updateData.new_val.data.gas));
+                        bat1.push(Number(updateData.new_val.data.bat));
+                        x.push(updateData.new_val.time);
+                        drowchart(x, co1, dust1, gas1, temp1, bat1);
                     }
                 });
 
@@ -407,8 +435,8 @@
             </div>
             <button style="float: right; height: 30px;width: 50px; margin-right: 20%; display: none" class="btn-danger" id="editbutton1" onclick="EditConfirm()"><i class="fa fa-check-square" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
             <button style="float: right; height: 30px;width: 50px; margin-right: 15px;  display: none;" id="editbutton2" class="btn-success" onclick="EditNode()"><i class="fa fa-cog" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
-
-            <div style="clear: both;">
+            <!-- Realtime already and need refresh? ever tried look at the code? -->
+            <div style="clear: both;"> 
                 <button class="btn-danger" style="height: 30px;width: 50px; margin-left: 10%;" onclick="doRefresh()"><i class="fa fa-refresh" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
             </div>
         </div>
