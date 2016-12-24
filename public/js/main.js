@@ -62,12 +62,14 @@ function drawMonthlyChart(data) {
     var month = [];
     var record = [];
     var node = [];
+    var sumNode = 0;
     var count = Object.keys(data.record).length;
     console.log('count', count);
     for (var i = 0; i < count; i++) {
         month.push(data.record[i].group[1] + ' - ' + data.record[i].group[0]);
         record.push(Number(data.record[i].reduction));
-        node.push(Number(data.nodes[i].reduction));
+        sumNode += Number(data.nodes[i].reduction);
+        node.push(sumNode);
     }
     console.log(month, record);
     $(function() {

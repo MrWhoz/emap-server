@@ -17,7 +17,7 @@ router.get('/monthlyrecord', async function(req, res, next) {
     var data = await node.getRecordCount();
     var nodes = await node.getNodeCount();
     console.log(data, nodes);
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Origin', '*');
     res.send({
         record: data,
         'nodes': nodes
@@ -86,7 +86,7 @@ router.get('/replace', function(req, res) {
 // ==============================
 // ==============================
 router.get('/replacenode', async function(req, res, next) {
-  //TODO: this
+    //TODO: this
     if (req.query.node && req.query.node_new) {
         var result = await node.replaceNode(req.query.node_new, req.query.node);
     }
@@ -94,18 +94,21 @@ router.get('/replacenode', async function(req, res, next) {
 });
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
-
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Origin', '*');
     if (req.query.id) {
-        var data = await node.getNodeInfoByID(req.query.id);
+        if (req.query.status == 0) {
+            let status = parseInt(req.query.status);
+            var data = await node.getNodeByIDStatus(req.query.id, status);
+        } else
+            var data = await node.getNodeInfoByID(req.query.id);
         logger.info("IP:" + req.clientIP + " GET /node/getinfo: get node info by id:", req.query.id, data);
     } else if (req.query.phone) {
         var data = await node.getNodeInfoByPhone(req.query.phone);
         logger.info("IP:" + req.clientIP + " GET /node/getinfo: get node info by phone:", req.query.id, data);
     } else if (req.query.list) {
-        let status = parseInt(req.query.status)
+        let status = parseInt(req.query.status);
         var data = await node.getNodeList(status);
-        logger.info("IP:" + req.clientIP + " GET /node/getinfo: get list node info - number of nodes", data.length);
+        logger.info("IP:" + req.clientIP + " GET /node/getinfo: get list node info - number of nodes", data.length,'status: ', status);
     }
     res.send(data);
 });
