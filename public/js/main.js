@@ -43,12 +43,15 @@ function getMonthlyRecord() {
     return mData;
 }
 function totalNode(data){
-  var sumNode = null;
+  var sumNodes = null;
   var count = Object.keys(data.record).length;
+  console.log(data.nodes);
   for (var i = 0; i < count; i++) {
-      sumNode += Number(data.nodes[i].reduction);
+      if (data.nodes[i])
+        sumNodes += Number(data.nodes[i].reduction);
+      else sumNodes += 0;
   }
-  return sumNode;
+  return sumNodes;
 }
 function totalRecord(data){
   var sumRecord = null;
@@ -68,7 +71,9 @@ function drawMonthlyChart(data) {
     for (var i = 0; i < count; i++) {
         month.push(data.record[i].group[1] + ' - ' + data.record[i].group[0]);
         record.push(Number(data.record[i].reduction));
+        if (data.nodes[i])
         sumNode += Number(data.nodes[i].reduction);
+      else sumNode += 0;
         node.push(sumNode);
     }
     console.log(month, record);
