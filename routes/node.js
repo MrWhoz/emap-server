@@ -85,12 +85,17 @@ router.get('/replace', function(req, res) {
 // ===============API============
 // ==============================
 // ==============================
-router.get('/replacenode', async function(req, res, next) {
-    //TODO: this
-    if (req.query.node && req.query.node_new) {
-        var result = await node.replaceNode(req.query.node_new, req.query.node);
-    }
-    res.redirect('/node/confignode');
+router.post('/replacenode', async function(req, res, next) {
+    //=============================
+    if (req.session.hasOwnProperty('passport')) {
+      console.log('get here');
+      console.log(req.body.newNode, req.body.oldNode);
+      var result = await node.replaceNode(req.body.newNode, req.body.oldNode);
+        res.send(result);
+    } else res.send({
+        code: -1,
+        message: 'You are not authenticated'
+    })
 });
 // GET node/nodelist info, status 1 = active 0 = disable
 router.get('/getinfo', async function(req, res, next) {
