@@ -214,7 +214,15 @@
                         temp1.push(Number(updateData.new_val.data.temp));
                         gas1.push(Number(updateData.new_val.data.gas));
                         bat1.push(Number(updateData.new_val.data.bat));
-                        x.push(updateData.new_val.time);
+                        var d = new Date(updateData.new_val.time);
+                        x.push(d);
+                        
+                        document.getElementById("update").innerHTML = '<span style="font-weight:bold">' + "DATE: " + '</span>' + d + '<hr/>' +
+                            '<span style="font-weight:bold;">CO: </span>' + Number(updateData.new_val.data.co) + 'ppm' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">DUST: </span>' + Number(updateData.new_val.data.dust) + 'ppm' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">TEMP: </span>' + Number(updateData.new_val.data.temp) + '°C' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">GAS: </span>' + Number(updateData.new_val.data.gas) + 'ppm' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">BATTERY: </span>' + Number(updateData.new_val.data.bat) + '%';
                         drowchart(x, co1, dust1, gas1, temp1, bat1);
                     }
                 });
@@ -277,7 +285,14 @@
                         temp1.push(Number(updateData.new_val.data.temp));
                         gas1.push(Number(updateData.new_val.data.gas));
                         bat1.push(Number(updateData.new_val.data.bat));
-                        x.push(updateData.new_val.time);
+                        var d = new Date(updateData.new_val.time);
+                        x.push(d);
+                        document.getElementById("update").innerHTML = '<span style="font-weight:bold">' + "DATE: " + '</span>' + d + '<hr/>' +
+                            '<span style="font-weight:bold;">CO: </span>' + Number(updateData.new_val.data.co) + 'ppm' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">DUST: </span>' + Number(updateData.new_val.data.dust) + 'ppm' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">TEMP: </span>' + Number(updateData.new_val.data.temp) + '°C' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">GAS: </span>' + Number(updateData.new_val.data.gas) + 'ppm' + '<span style="padding-left:110px"></span>' +
+                            '<span style="font-weight:bold;">BATTERY: </span>' + Number(updateData.new_val.data.bat) + '%';
                         drowchart(x, co1, dust1, gas1, temp1, bat1);
                     }
                 });
@@ -436,9 +451,7 @@
             <button style="float: right; height: 30px;width: 50px; margin-right: 20%; display: none" class="btn-danger" id="editbutton1" onclick="EditConfirm()"><i class="fa fa-check-square" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
             <button style="float: right; height: 30px;width: 50px; margin-right: 15px;  display: none;" id="editbutton2" class="btn-success" onclick="EditNode()"><i class="fa fa-cog" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
             <!-- Realtime already and need refresh? ever tried look at the code? -->
-            <div style="clear: both;"> 
-                <button class="btn-danger" style="height: 30px;width: 50px; margin-left: 10%;" onclick="doRefresh()"><i class="fa fa-refresh" aria-hidden="true" style="font-size: 170%; color:black"></i></button>
-            </div>
+            
         </div>
 
         <div class="bot" style="clear: both;">
