@@ -1,6 +1,6 @@
 var user = require('../models/user.js');
 var LocalStrategy = require('passport-local').Strategy;
-
+var bcrypt   = require('bcrypt-nodejs');
 module.exports = function(passport) {
 
   passport.serializeUser(function(user, done) {
@@ -21,7 +21,7 @@ module.exports = function(passport) {
     },
         async function(username, password, done) {
             var existUser = await user.getUserById(username);
-            if (existUser.password == password) {
+            if (bcrypt.compareSync(password, existUser.password)) {
                 console.log('passsport login success');
                 return done(null, existUser);
             } else return done(null, false);
