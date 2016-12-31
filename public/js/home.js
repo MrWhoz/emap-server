@@ -161,10 +161,10 @@ function addMarker(location, nodeid) {
 
 function addInfoWindow(marker, message) {
     var temp = "/graph?id=" + message;
-    var static = "/static";
+    var statis = "/static";
 
     var infoWindow = new google.maps.InfoWindow({
-        content: "Node: " + message + '<br/>' + '<a href="' + temp + '">' + "View Graph" + '</a>' + '<br/>' + '<a href="' + static + '">' + "View Static" + '</a>'
+        content: "Node: " + message + '<br/>' + '<a href="' + temp + '">' + "View Graph" + '</a>' + '<br/>' + '<a href="' + statis + '">' + "View Statis" + '</a>'
             // stastic later----------------
     });
 
