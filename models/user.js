@@ -4,6 +4,7 @@ var dbName = config.rethinkdb.db;
 var connection = null;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var bcrypt   = require('bcrypt-nodejs');
 
 async function connect() {
     connection = await r.connect(config.rethinkdb);
@@ -29,9 +30,10 @@ async function register(user) {
             data: existmId
         };
     };
+    let password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
     var data = {
         username: user.id,
-        password: user.password,
+        password: password,
         role: user.role,
         fullname: user.name,
         status: user.status,
@@ -50,9 +52,10 @@ async function register(user) {
 async function update(user) {
     let connection = await connect();
     let existId = await getUserById(user.id);
+    let password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
     if (existId) {
         var update = await r.db(dbName).table('user').get(user.id).update({
-            password: user.password,
+            password: password,
             role: user.role,
             full_name: user.name,
             status: user.status,
