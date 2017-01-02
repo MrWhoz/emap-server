@@ -69,7 +69,7 @@
                                     borderWidth: 0
                                 },
                                 series: [{
-                                    name: 'CO(ppm)',
+                                    name: 'MQ07(CO_ppm)',
                                     data: co
                                 }, {
                                     name: 'TEMP(°C)',
@@ -78,7 +78,7 @@
                                     name: 'DUST(ppm)',
                                     data: dust
                                 }, {
-                                    name: 'GAS(ppm)',
+                                    name: 'MQ135(GAS_ppm)',
                                     data: gas
                                 }, {
                                     name: 'BATTERY(%)',
@@ -253,10 +253,10 @@
                             var lastdate = String(xaxis[count-1]).substring(0,25);
                             console.log(lastdate);
                             document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate + '<hr/>'
-                                + '<span style="font-weight:bold;">CO: </span>'+co[count-1] + 'ppm'+'<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">MQ07(CO): </span>'+co[count-1] + 'ppm'+'<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">DUST: </span>' + dust[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">TEMP: </span>' + temp[count-1] +'°C' + '<span style="padding-left:110px"></span>'
-                                + '<span style="font-weight:bold;">GAS: </span>' + gas[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">MQ135(GAS): </span>' + gas[count-1] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">BATTERY: </span>' + bat[count-1]+'%'
                                 ;
 
@@ -449,10 +449,10 @@
                             console.log(lastdate);
 
                             document.getElementById("update").innerHTML = '<span style="font-weight:bold">'+"DATE: "+'</span>' + lastdate+ '<hr/>'
-                                + '<span style="font-weight:bold;">CO: </span>'+co[0] + 'ppm'+'<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">MQ07(CO): </span>'+co[0] + 'ppm'+'<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">DUST: </span>' + dust[0] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">TEMP: </span>' + temp[0] +'°C' + '<span style="padding-left:110px"></span>'
-                                + '<span style="font-weight:bold;">GAS: </span>' + gas[0] +'ppm'+ '<span style="padding-left:110px"></span>'
+                                + '<span style="font-weight:bold;">MQ135(GAS): </span>' + gas[0] +'ppm'+ '<span style="padding-left:110px"></span>'
                                 + '<span style="font-weight:bold;">BATTERY: </span>' + bat[0]+'%' ;
 
                                 alert("Refresh done!");
