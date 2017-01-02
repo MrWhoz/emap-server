@@ -86,25 +86,24 @@ app.controller('MapCtrl', function($scope, $ionicModal) {
 
 // Chart js
 app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
+  var z;
+  var obj = {content:null};
+  var temp;
+  var nodeid;
+  var xaxis = [];
   var co = [];
   var dust =[];
   var gas = [];
   var nhietdo = [];
-  var xaxis = [];
-  var temp;
-  var nodeid;
-  var dates = [];
-  var z;
-  var obj = {content:null};
-  $scope.dates = [];
   var xaxis1 = [];
+  var tempid = -1;
   $scope.getNodeid = function(infodata){
-    $scope.news = [];
+  
 
 
     $scope.value = infodata;
     temp = $scope.value;
-    nodeid = temp.NodeID;
+    nodeid = temp.NodeID;  //get ID
     console.log(nodeid);
     var number = parseInt(nodeid);
     console.log(number);
@@ -118,14 +117,30 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
           method:"GET",
           url: "http://www.codingyourfuture.com/node/getdata?id="+nodeid
         }).then(function(newsData){
+            
+            
+            
+            var dates = [];
+            
+            
+            $scope.dates = [];
+            
             // angular.forEach(newsData.data, function(dates){
             //     $scope.dates.push(dates);
             // });
             // console.log($scope.dates);
-
+            $scope.news = [];
             $scope.news.push(newsData.data);
+            console.log($scope.news[0].length);
+            xaxis = [];
+            co = [];
+            dust =[];
+            gas = [];
+            nhietdo = [];
+            xaxis1 = [];
             var t=1;
             var tempdate;
+            
               for(var j=0;j<$scope.news[0].length;j++){
 
                   co.push(Number($scope.news[0][j].data.co));
@@ -168,7 +183,7 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
       var gas1 = [];
       var temp1 = [];
       var x2 = [];
-      $scope.calculatedValue = 'You selected number ' + selectedItem.modal;
+      // $scope.calculatedValue = 'You selected number ' + selectedItem.modal;
       for(var k = 0; k <= z; k++ ){
           if (xaxis[k] == selectedItem){
             co1.push(Number(co[k]));
@@ -180,12 +195,12 @@ app.controller("ExampleChart", function($scope,$http,$ionicPopup,$timeout){
       }
       // console.log(x2[0].substring(11,19));
       $scope.labels1 = x2;
-      $scope.series1 = ['CO','Dust','Gas','Temp'];
+      $scope.series1 = ['MQ07(CO)','Temp','Dust','MQ135(Gas)'];
       $scope.data1 = [
           co1,
+          temp1,
           dust1,
-          gas1,
-          temp1
+          gas1
       ];
     }
 
@@ -210,7 +225,6 @@ app.controller("StaticChart", function($scope,$http){
           var t = records.data.record.length;
           for(var j=0;j< t;j++){
             numberdata.push(Number(records.data.record[j].reduction));
-            numbernode.push(Number(records.data.nodes[j].reduction));
             Sxaxis.push(records.data.record[j].group[1] + "-" + records.data.record[j].group[0]);
           }
           $scope.labels = Sxaxis;
