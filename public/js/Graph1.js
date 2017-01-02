@@ -133,44 +133,7 @@
                     console.log(x1);
                     drowchart(x1,co1,dust1,gas1,temp1,bat1);
                 }
-
-                $("#date").on("change", function() {
-                    var node_temp =  document.getElementById("sources");
-
-                    var t = node_temp.options[node_temp.selectedIndex].value;
-                    var e = document.getElementById("date");
-                    Node = t;
-                    date = e.options[e.selectedIndex].value;
-                    var co = [];
-                    var dust = [];
-                    var gas = [];
-                    var temp = [];
-                    var xaxis = [];
-                    var bat = [];
-                    $.ajax({
-                        type: "GET",
-                        url: "/node/getdata?id=" + t,
-                        dataType: "json",
-                        success: function(data) {
-                            var myVariable = data;
-                            var count = Object.keys(myVariable).length;
-
-                            t = myVariable[0].data_id;
-                            console.log('this is dataid', myVariable[0].t);
-                            for (var i = 0; i < count; i++) {
-                                co.push(Number(myVariable[i].data.co));
-                                dust.push(Number(myVariable[i].data.dust));
-                                temp.push(Number(myVariable[i].data.temp));
-                                gas.push(Number(myVariable[i].data.gas));
-                                bat.push(Number(myVariable[i].data.bat));
-                                var d = new Date(myVariable[i].time);
-                                xaxis.push(d);
-                            }
-                            action(xaxis);
-                        }
-
-                    });
-                    function action(xaxis){
+                function action(xaxis){
                         var i = 0;
                         var j;
                     var long = xaxis.length;
@@ -219,7 +182,45 @@
 
                     // Drow new chart
                     drowchart(x1,co1,dust1,gas1,temp1,bat1,t);
-                    }
+                }
+
+                $("#date").on("change", function() {
+                    var node_temp =  document.getElementById("sources");
+
+                    var t = node_temp.options[node_temp.selectedIndex].value;
+                    var e = document.getElementById("date");
+                    Node = t;
+                    date = e.options[e.selectedIndex].value;
+                    var co = [];
+                    var dust = [];
+                    var gas = [];
+                    var temp = [];
+                    var xaxis = [];
+                    var bat = [];
+                    $.ajax({
+                        type: "GET",
+                        url: "/node/getdata?id=" + t,
+                        dataType: "json",
+                        success: function(data) {
+                            var myVariable = data;
+                            var count = Object.keys(myVariable).length;
+
+                            t = myVariable[0].data_id;
+                            console.log('this is dataid', myVariable[0].t);
+                            for (var i = 0; i < count; i++) {
+                                co.push(Number(myVariable[i].data.co));
+                                dust.push(Number(myVariable[i].data.dust));
+                                temp.push(Number(myVariable[i].data.temp));
+                                gas.push(Number(myVariable[i].data.gas));
+                                bat.push(Number(myVariable[i].data.bat));
+                                var d = new Date(myVariable[i].time);
+                                xaxis.push(d);
+                            }
+                            action(xaxis);
+                        }
+
+                    });
+                    
 
 
                     });
