@@ -9,15 +9,22 @@ The emap-server is created for collecting environment data from sensors node, ba
 ```
 npm install
 ```
-3. Install RethinkDB database from https://www.rethinkdb.com/
-4. Start RethinkDB and restore the backup data from https://github.com/MrWhoz/rethinkdb-backup (because the init DB table for the first time is not implemented yet, sorry for that inconvenience). And running command: ``` rethinkdb restore rethinkdb_dump_2016-12-06T21:50:32.tar.gz ```
-5. After successfully restore the DB, you can check the DB: localhost:8080
-6. Start the server: ``` node emap.js```
-7. Go to: localhost:8888
+3. Install RethinkDB database from the instruction on https://www.rethinkdb.com/
+4. Start RethinkDB and restore the backup data from https://github.com/MrWhoz/rethinkdb-backup (because the init DB table for the first time is not implemented yet, sorry for that inconvenience). And running command: 
+``` 
+rethinkdb restore rethinkdb_dump_2016-12-06T21:50:32.tar.gz 
+```
+5. After successfully restore the DB, you can check the DB: http://localhost:8080
+6. Start the server: 
+``` 
+node emap.js
+```
+7. Go to: http://localhost:8888
 --------------------------
 ## Node project:
 1. Clone the node part here: https://github.com/hpsony94/skynet_node
 2. Edit the servername in file arduino.ino
-3. Start and enjoy.
+3. Update the new code to the device.
+4. Start the device and enjoy.
 --------------------------
 username/password for login and editing node: xtungvo/abc123 
