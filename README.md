@@ -4,7 +4,7 @@ The emap-server is created for collecting environment data from sensors node, ba
 
 ## How to deploy:
 
-1. Clone or fork this project and install nodeJS (ofcourse).
+1. Clone or fork this project and install nodeJS (get from https://nodejs.org/en/).
 2. cd into the emap-server folder and run:
 ```
 npm install
