@@ -14,6 +14,10 @@ npm install
 5. After successfully restore the DB, you can check the DB: localhost:8080
 6. Start the server: ``` node emap.js```
 7. Go to: localhost:8888
-
+--------------------------
+## Node project:
+1. Clone the node part here: https://github.com/hpsony94/skynet_node
+2. Edit the servername in file arduino.ino
+3. Start and enjoy.
 --------------------------
 username/password for login and editing node: xtungvo/abc123 
